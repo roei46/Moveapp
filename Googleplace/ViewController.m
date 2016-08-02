@@ -276,7 +276,7 @@ static NSString const *kTerrainType = @"Terrain";
     NSURLSessionDataTask *postdata = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
         NSDictionary *result2 = [result objectForKey:@"results"];
-        BOOL mybool = '\0';
+        BOOL mybool = NO;
         
         for (NSString *string in [result2 valueForKey:@"googlid"] ) {
 
@@ -290,14 +290,7 @@ static NSString const *kTerrainType = @"Terrain";
                
 
             }
-            else{
-            
-            
-                mybool = NO;
-            
-            
-            
-            }
+         
 
             }
         if (mybool == YES) {

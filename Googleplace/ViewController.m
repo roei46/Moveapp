@@ -135,10 +135,9 @@ static NSString const *kTerrainType = @"Terrain";
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]delegate:nil delegateQueue:nil];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://movex.herokuapp.com/parse/classes/Test2"] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
     
-    
-    NSError *error;
     //use only in SET
-//    NSData *jsondata;
+  //  NSError *error;
+    //    NSData *jsondata;
     
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-type"];
     [request addValue:@"movexroei" forHTTPHeaderField:@"X-Parse-Application-Id"];
@@ -275,8 +274,10 @@ static NSString const *kTerrainType = @"Terrain";
     
     NSURLSessionDataTask *postdata = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        dispatch_async(dispatch_get_main_queue(), ^{
         NSDictionary *result2 = [result objectForKey:@"results"];
         BOOL mybool = NO;
+        
         
         for (NSString *string in [result2 valueForKey:@"googlid"] ) {
 
@@ -346,8 +347,9 @@ static NSString const *kTerrainType = @"Terrain";
                  }];
                 
             }
-        
-    }];
+            });
+        }];
+  
 
                 GMSCameraPosition *camera =
                 [GMSCameraPosition cameraWithLatitude:place.coordinate.latitude
@@ -375,16 +377,6 @@ static NSString const *kTerrainType = @"Terrain";
                     forControlEvents:UIControlEventValueChanged];
 
 
-
-
-            
-        
-        
-        
-            
-
-
-       
     
     
     

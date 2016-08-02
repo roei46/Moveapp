@@ -276,29 +276,46 @@ static NSString const *kTerrainType = @"Terrain";
     NSURLSessionDataTask *postdata = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
         NSDictionary *result2 = [result objectForKey:@"results"];
+        BOOL mybool = '\0';
         
         for (NSString *string in [result2 valueForKey:@"googlid"] ) {
-            dispatch_async(dispatch_get_main_queue(), ^{
 
-            if ([place.placeID isEqualToString:string]) {
-
-                UIAlertController *alert = [UIAlertController
-                                            alertControllerWithTitle:@"Alert"
-                                            message:nil
-                                            preferredStyle:UIAlertControllerStyleAlert];
+            if ([place.placeID isEqualToString:string])
+            {
 
                 
-                UIAlertAction *exist =
-                [UIAlertAction actionWithTitle:@"Place exist"
-                                         style:UIAlertActionStyleDefault
-                                       handler:nil];
-                [alert addAction:exist];
-                [self presentViewController:alert animated:YES completion:nil];
-
                 
+                
+                mybool = YES;
+               
 
             }
+            else{
             
+            
+                mybool = NO;
+            
+            
+            
+            }
+
+            }
+        if (mybool == YES) {
+            UIAlertController *alert = [UIAlertController
+                                        alertControllerWithTitle:@"Alert"
+                                        message:nil
+                                        preferredStyle:UIAlertControllerStyleAlert];
+            
+            
+            UIAlertAction *exist =
+            [UIAlertAction actionWithTitle:@"Place exist"
+                                     style:UIAlertActionStyleDefault
+                                   handler:nil];
+            [alert addAction:exist];
+            [self presentViewController:alert animated:YES completion:nil];
+
+        }
+        
             else {
 
                 PFObject *testObject = [PFObject objectWithClassName:@"Test2"];
@@ -336,8 +353,7 @@ static NSString const *kTerrainType = @"Terrain";
                  }];
                 
             }
-            });
-        }
+        
     }];
 
                 GMSCameraPosition *camera =

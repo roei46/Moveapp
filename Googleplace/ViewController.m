@@ -278,8 +278,10 @@ static NSString const *kTerrainType = @"Terrain";
         NSDictionary *result2 = [result objectForKey:@"results"];
         
         for (NSString *string in [result2 valueForKey:@"googlid"] ) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+
             if ([place.placeID isEqualToString:string]) {
-                
+
                 UIAlertController *alert = [UIAlertController
                                             alertControllerWithTitle:@"Alert"
                                             message:nil
@@ -293,11 +295,11 @@ static NSString const *kTerrainType = @"Terrain";
                 [alert addAction:exist];
                 [self presentViewController:alert animated:YES completion:nil];
 
+                
 
             }
             
             else {
-            
 
                 PFObject *testObject = [PFObject objectWithClassName:@"Test2"];
                 testObject[@"Address"] = place.name;
@@ -329,8 +331,15 @@ static NSString const *kTerrainType = @"Terrain";
                          
                          [self presentViewController:alert animated:YES completion:nil];
                      }
+                
+
                  }];
-                dispatch_async(dispatch_get_main_queue(), ^{ 
+                
+            }
+            });
+        }
+    }];
+
                 GMSCameraPosition *camera =
                 [GMSCameraPosition cameraWithLatitude:place.coordinate.latitude
                                             longitude:place.coordinate.longitude
@@ -356,15 +365,17 @@ static NSString const *kTerrainType = @"Terrain";
                               action:@selector(didChangeSwitcher)
                     forControlEvents:UIControlEventValueChanged];
 
-            });
+
 
 
             
-            }
-        }
+        
+        
+        
+            
 
 
-       }];
+       
     
     
     

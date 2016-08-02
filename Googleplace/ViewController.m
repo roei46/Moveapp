@@ -276,9 +276,10 @@ static NSString const *kTerrainType = @"Terrain";
     NSURLSessionDataTask *postdata = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
         NSDictionary *result2 = [result objectForKey:@"results"];
-       
+        
         for (NSString *string in [result2 valueForKey:@"googlid"] ) {
             if ([place.placeID isEqualToString:string]) {
+                
                 UIAlertController *alert = [UIAlertController
                                             alertControllerWithTitle:@"Alert"
                                             message:nil
@@ -290,11 +291,14 @@ static NSString const *kTerrainType = @"Terrain";
                                          style:UIAlertActionStyleDefault
                                        handler:nil];
                 [alert addAction:exist];
+                [self presentViewController:alert animated:YES completion:nil];
+
 
             }
-            else{
             
+            else {
             
+
                 PFObject *testObject = [PFObject objectWithClassName:@"Test2"];
                 testObject[@"Address"] = place.name;
                 testObject[@"googlid"] = place.placeID;
@@ -326,6 +330,7 @@ static NSString const *kTerrainType = @"Terrain";
                          [self presentViewController:alert animated:YES completion:nil];
                      }
                  }];
+                dispatch_async(dispatch_get_main_queue(), ^{ 
                 GMSCameraPosition *camera =
                 [GMSCameraPosition cameraWithLatitude:place.coordinate.latitude
                                             longitude:place.coordinate.longitude
@@ -351,14 +356,16 @@ static NSString const *kTerrainType = @"Terrain";
                               action:@selector(didChangeSwitcher)
                     forControlEvents:UIControlEventValueChanged];
 
+            });
 
-            
-            
+
             
             }
-
         }
-           }];
+
+
+       }];
+    
     
     
   [postdata resume];

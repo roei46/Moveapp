@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		69ECEADDE8EEB29D34CA5DE3 /* libPods-Googleplace.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16307259C197F3DEF75BCD67 /* libPods-Googleplace.a */; };
 		C435CDB61D4691F6002F9095 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CDB51D4691F6002F9095 /* main.m */; };
 		C435CDB91D4691F6002F9095 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CDB81D4691F6002F9095 /* AppDelegate.m */; };
 		C435CDBC1D4691F6002F9095 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CDBB1D4691F6002F9095 /* ViewController.m */; };
@@ -35,6 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		16307259C197F3DEF75BCD67 /* libPods-Googleplace.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Googleplace.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A3A9C0D10D9A88847F4526B /* Pods-Googleplace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Googleplace.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Googleplace/Pods-Googleplace.debug.xcconfig"; sourceTree = "<group>"; };
+		BA2024B2B3D0E70F033142B4 /* Pods-Googleplace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Googleplace.release.xcconfig"; path = "Pods/Target Support Files/Pods-Googleplace/Pods-Googleplace.release.xcconfig"; sourceTree = "<group>"; };
 		C435CDB11D4691F6002F9095 /* Googleplace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Googleplace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C435CDB51D4691F6002F9095 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C435CDB71D4691F6002F9095 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -58,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69ECEADDE8EEB29D34CA5DE3 /* libPods-Googleplace.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A5481BD25786A776D2F3397E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7A3A9C0D10D9A88847F4526B /* Pods-Googleplace.debug.xcconfig */,
+				BA2024B2B3D0E70F033142B4 /* Pods-Googleplace.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		C435CDA81D4691F5002F9095 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +99,8 @@
 				C435CDCD1D4691F6002F9095 /* GoogleplaceTests */,
 				C435CDD81D4691F6002F9095 /* GoogleplaceUITests */,
 				C435CDB21D4691F6002F9095 /* Products */,
+				A5481BD25786A776D2F3397E /* Pods */,
+				FC2D9E020B56F861E55521B7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -140,6 +156,14 @@
 			path = GoogleplaceUITests;
 			sourceTree = "<group>";
 		};
+		FC2D9E020B56F861E55521B7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				16307259C197F3DEF75BCD67 /* libPods-Googleplace.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -147,9 +171,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C435CDDE1D4691F6002F9095 /* Build configuration list for PBXNativeTarget "Googleplace" */;
 			buildPhases = (
+				AC7C00DE46ACAF32409616E5 /* [CP] Check Pods Manifest.lock */,
 				C435CDAD1D4691F5002F9095 /* Sources */,
 				C435CDAE1D4691F5002F9095 /* Frameworks */,
 				C435CDAF1D4691F5002F9095 /* Resources */,
+				1F904C6C4FB66469B3688213 /* [CP] Embed Pods Frameworks */,
+				86791B1BDD91B4902CEBB786 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -267,6 +294,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1F904C6C4FB66469B3688213 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Googleplace/Pods-Googleplace-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		86791B1BDD91B4902CEBB786 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Googleplace/Pods-Googleplace-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AC7C00DE46ACAF32409616E5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C435CDAD1D4691F5002F9095 /* Sources */ = {
@@ -414,6 +489,7 @@
 		};
 		C435CDDF1D4691F6002F9095 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A3A9C0D10D9A88847F4526B /* Pods-Googleplace.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Googleplace/Info.plist;
@@ -425,6 +501,7 @@
 		};
 		C435CDE01D4691F6002F9095 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA2024B2B3D0E70F033142B4 /* Pods-Googleplace.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Googleplace/Info.plist;
@@ -501,6 +578,7 @@
 				C435CDE01D4691F6002F9095 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C435CDE11D4691F6002F9095 /* Build configuration list for PBXNativeTarget "GoogleplaceTests" */ = {
 			isa = XCConfigurationList;
@@ -509,6 +587,7 @@
 				C435CDE31D4691F6002F9095 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C435CDE41D4691F6002F9095 /* Build configuration list for PBXNativeTarget "GoogleplaceUITests" */ = {
 			isa = XCConfigurationList;
@@ -517,6 +596,7 @@
 				C435CDE61D4691F6002F9095 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

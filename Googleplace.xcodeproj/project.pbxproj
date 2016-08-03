@@ -16,6 +16,8 @@
 		C435CDC41D4691F6002F9095 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C435CDC21D4691F6002F9095 /* LaunchScreen.storyboard */; };
 		C435CDCF1D4691F6002F9095 /* GoogleplaceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CDCE1D4691F6002F9095 /* GoogleplaceTests.m */; };
 		C435CDDA1D4691F6002F9095 /* GoogleplaceUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CDD91D4691F6002F9095 /* GoogleplaceUITests.m */; };
+		C437F68F1D51272600FAC6D2 /* ServerProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = C437F68E1D51272600FAC6D2 /* ServerProtocol.m */; };
+		C437F6921D5127F500FAC6D2 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C437F6911D5127F500FAC6D2 /* DatabaseManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,10 @@
 		C435CDD51D4691F6002F9095 /* GoogleplaceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleplaceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C435CDD91D4691F6002F9095 /* GoogleplaceUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleplaceUITests.m; sourceTree = "<group>"; };
 		C435CDDB1D4691F6002F9095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C437F68D1D51272600FAC6D2 /* ServerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerProtocol.h; sourceTree = "<group>"; };
+		C437F68E1D51272600FAC6D2 /* ServerProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerProtocol.m; sourceTree = "<group>"; };
+		C437F6901D5127F500FAC6D2 /* DatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
+		C437F6911D5127F500FAC6D2 /* DatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +132,10 @@
 				C435CDC21D4691F6002F9095 /* LaunchScreen.storyboard */,
 				C435CDC51D4691F6002F9095 /* Info.plist */,
 				C435CDB41D4691F6002F9095 /* Supporting Files */,
+				C437F68D1D51272600FAC6D2 /* ServerProtocol.h */,
+				C437F68E1D51272600FAC6D2 /* ServerProtocol.m */,
+				C437F6901D5127F500FAC6D2 /* DatabaseManager.h */,
+				C437F6911D5127F500FAC6D2 /* DatabaseManager.m */,
 			);
 			path = Googleplace;
 			sourceTree = "<group>";
@@ -348,8 +358,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C437F68F1D51272600FAC6D2 /* ServerProtocol.m in Sources */,
 				C435CDBC1D4691F6002F9095 /* ViewController.m in Sources */,
 				C435CDB91D4691F6002F9095 /* AppDelegate.m in Sources */,
+				C437F6921D5127F500FAC6D2 /* DatabaseManager.m in Sources */,
 				C435CDB61D4691F6002F9095 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

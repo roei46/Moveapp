@@ -12,10 +12,10 @@
 #import "ServerProtocol.h"
 #import "DatabaseManager.h"
 static CGFloat kSearchBarHeight = 44.0f;
-static NSString const *kNormalType = @"Normal";
-static NSString const *kSatelliteType = @"Satellite";
-static NSString const *kHybridType = @"Hybrid";
-static NSString const *kTerrainType = @"Terrain";
+static NSString const *kNormalType = @"N";//@"Normal";
+static NSString const *kSatelliteType = @"S";//@"Satellite";
+static NSString const *kHybridType = @"H";//@"Hybrid";
+static NSString const *kTerrainType = @"T";//@"Terrain";
 
 @interface ViewController ()<GMSAutocompleteTableDataSourceDelegate,
                              UISearchDisplayDelegate>
@@ -74,18 +74,22 @@ static NSString const *kTerrainType = @"Terrain";
 }
 
 - (void)showmap:(id)sender {
-  self.navigationItem.rightBarButtonItem = nil;
-
-  UIBarButtonItem *back =
-      [[UIBarButtonItem alloc] initWithTitle:@"Back"
-                                       style:UIBarButtonItemStylePlain
-                                      target:self
-                                      action:nil];
-
-  self.navigationItem.backBarButtonItem = back;
+//  self.navigationItem.rightBarButtonItem = nil;
+//
+//  UIBarButtonItem *back =
+//      [[UIBarButtonItem alloc] initWithTitle:@"Back"
+//                                       style:UIBarButtonItemStylePlain
+//                                      target:self
+//                                      action:nil];
+//
+//    back.width = 100;
+//  self.navigationController.navigationItem.backBarButtonItem = back;
+//    self.navigationController.navigationItem.hidesBackButton = NO;
   //    [self showViewController:<#(nonnull UIViewController *)#>
   //    sender:<#(nullable id)#> animated:YES completion:nil];
 
+    ViewController *vc = [[ViewController alloc]init];
+    
   _mapView.settings.compassButton = YES;
   _mapView.settings.myLocationButton = YES;
   CLLocation *myLocation = _mapView.myLocation;
@@ -102,20 +106,21 @@ static NSString const *kTerrainType = @"Terrain";
   NSArray *types = @[ kNormalType, kSatelliteType, kHybridType, kTerrainType ];
 
   _switcher = [[UISegmentedControl alloc] initWithItems:types];
-  _switcher.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin |
-                               UIViewAutoresizingFlexibleWidth |
-                               UIViewAutoresizingFlexibleBottomMargin;
+//  _switcher.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin |
+//                               UIViewAutoresizingFlexibleWidth |
+//                               UIViewAutoresizingFlexibleBottomMargin;
   _switcher.selectedSegmentIndex = 0;
-  _switcher.translatesAutoresizingMaskIntoConstraints = YES;
-  self.navigationItem.titleView = _switcher;
+//  _switcher.translatesAutoresizingMaskIntoConstraints = YES;
+  vc.navigationItem.titleView = _switcher;
 
   _mapView.settings.compassButton = YES;
   _mapView.settings.myLocationButton = YES;
 
-  self.view = _mapView;
+  vc.view = _mapView;
   dispatch_async(dispatch_get_main_queue(), ^{
     _mapView.myLocationEnabled = YES;
   });
+    [self.navigationController showViewController:vc sender:self];
 
   NSURLSession *session =
       [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration

@@ -15,10 +15,28 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="oag-Si-FxG"/>
+                    <connections>
+                        <segue destination="Ck5-p1-JVa" kind="push" identifier="map" id="f9D-Yf-bMe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="662" y="204"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="xMh-Og-Zlm">
+            <objects>
+                <viewController id="Ck5-p1-JVa" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wwv-Nv-GFv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="3OI-P9-ydS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kFa-nG-MO8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1088" y="212"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uGa-6J-m5e">

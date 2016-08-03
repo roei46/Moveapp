@@ -75,26 +75,17 @@
 
           NSDictionary *result = [self deserialize:data];
 
-         // dispatch_async(dispatch_get_main_queue(), ^{
-            NSDictionary *result2 = [result objectForKey:@"results"];
-            NSArray *googleids = [result2 valueForKey:@"googleid"];
+          dispatch_async(dispatch_get_main_queue(), ^{
+              NSMutableArray<NSString *> *googleids = [result valueForKeyPath:@"results.googlid"];
+             
             NSInteger exists = [googleids indexOfObject:place.placeID];
 
-            if (exists != NSNotFound) {
+           
               if (callback) {
-                callback(YES);
+                callback(exists!=NSNotFound);
               }
 
-            }
-
-            else {
-              [self.databaseManager addPlace:place
-                                    callback:^(BOOL found){
-
-                                    }];
-            }
-
-         // });
+         });
         }];
 
   [postdata resume];

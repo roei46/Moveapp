@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="662" y="204"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="xMh-Og-Zlm">
             <objects>
-                <viewController id="Ck5-p1-JVa" sceneMemberID="viewController">
+                <viewController id="Ck5-p1-JVa" customClass="MapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wwv-Nv-GFv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -37,6 +37,20 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kFa-nG-MO8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1088" y="212"/>
+        </scene>
+        <!--Addinformation Viewcontroller-->
+        <scene sceneID="sFe-EO-Q8w">
+            <objects>
+                <viewController storyboardIdentifier="AddinformationViewcontroller" id="EFf-zC-R4R" customClass="AddinformationViewcontroller" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="elN-Bt-GkD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u6o-xH-Ggu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1566" y="222"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uGa-6J-m5e">

@@ -11,11 +11,12 @@
 #import "ViewController.h"
 #import "ServerProtocol.h"
 #import "DatabaseManager.h"
+#import "MapViewController.h"
 static CGFloat kSearchBarHeight = 44.0f;
-static NSString const *kNormalType = @"N";//@"Normal";
-static NSString const *kSatelliteType = @"S";//@"Satellite";
-static NSString const *kHybridType = @"H";//@"Hybrid";
-static NSString const *kTerrainType = @"T";//@"Terrain";
+static NSString const *kNormalType = @"Normal";
+static NSString const *kSatelliteType = @"Satellite";
+static NSString const *kHybridType = @"Hybrid";
+static NSString const *kTerrainType = @"Terrain";
 
 @interface ViewController ()<GMSAutocompleteTableDataSourceDelegate,
                              UISearchDisplayDelegate>
@@ -41,7 +42,9 @@ static NSString const *kTerrainType = @"T";//@"Terrain";
                                        style:UIBarButtonItemStylePlain
                                       target:self
                                       action:@selector(showmap:)];
-
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0 green:0.24 blue:0.45 alpha:1];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    self.navigationItem.title = @"Moveinfo";
   self.edgesForExtendedLayout =
       UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight;
 
@@ -73,164 +76,29 @@ static NSString const *kTerrainType = @"T";//@"Terrain";
   [self.view addSubview:_resultView];
 }
 
-- (void)showmap:(id)sender {
-//  self.navigationItem.rightBarButtonItem = nil;
-//
-//  UIBarButtonItem *back =
-//      [[UIBarButtonItem alloc] initWithTitle:@"Back"
-//                                       style:UIBarButtonItemStylePlain
-//                                      target:self
-//                                      action:nil];
-//
-//    back.width = 100;
-//  self.navigationController.navigationItem.backBarButtonItem = back;
-//    self.navigationController.navigationItem.hidesBackButton = NO;
-  //    [self showViewController:<#(nonnull UIViewController *)#>
-  //    sender:<#(nullable id)#> animated:YES completion:nil];
 
-    ViewController *vc = [[ViewController alloc]init];
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+
     
-  _mapView.settings.compassButton = YES;
-  _mapView.settings.myLocationButton = YES;
-  CLLocation *myLocation = _mapView.myLocation;
+    NSLog(@"prepareForSegue: %@", segue.identifier);
 
-  GMSCameraPosition *camera =
-      [GMSCameraPosition cameraWithLatitude:myLocation.coordinate.latitude
-                                  longitude:myLocation.coordinate.longitude
-                                       zoom:10];
-  _mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
-  _Marker = [[GMSMarker alloc] init];
-  _Marker.position = CLLocationCoordinate2DMake(
-      myLocation.coordinate.latitude, myLocation.coordinate.longitude);
-  _Marker.map = _mapView;
-  NSArray *types = @[ kNormalType, kSatelliteType, kHybridType, kTerrainType ];
-
-  _switcher = [[UISegmentedControl alloc] initWithItems:types];
-//  _switcher.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin |
-//                               UIViewAutoresizingFlexibleWidth |
-//                               UIViewAutoresizingFlexibleBottomMargin;
-  _switcher.selectedSegmentIndex = 0;
-//  _switcher.translatesAutoresizingMaskIntoConstraints = YES;
-  vc.navigationItem.titleView = _switcher;
-
-  _mapView.settings.compassButton = YES;
-  _mapView.settings.myLocationButton = YES;
-
-  vc.view = _mapView;
-  dispatch_async(dispatch_get_main_queue(), ^{
-    _mapView.myLocationEnabled = YES;
-  });
-    [self.navigationController showViewController:vc sender:self];
-
-  NSURLSession *session =
-      [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration
-                                                 defaultSessionConfiguration]
-                                    delegate:nil
-                               delegateQueue:nil];
-  NSMutableURLRequest *request = [NSMutableURLRequest
-       requestWithURL:
-           [NSURL
-               URLWithString:@"https://movex.herokuapp.com/parse/classes/Test2"]
-          cachePolicy:NSURLRequestUseProtocolCachePolicy
-      timeoutInterval:60.0];
-
-  // use only in SET
-  //  NSError *error;
-  //    NSData *jsondata;
-
-  [request addValue:@"application/json" forHTTPHeaderField:@"Content-type"];
-  [request addValue:@"movexroei" forHTTPHeaderField:@"X-Parse-Application-Id"];
-
-  // use only in SET
-  //    [request setHTTPBody:jsondata];
-  [request setHTTPMethod:@"GET"];
-
-  NSLog(@"%@", request);
-
-  NSURLSessionDataTask *postdata = [session
-      dataTaskWithRequest:request
-        completionHandler:^(NSData *data, NSURLResponse *response,
-                            NSError *error) {
-          NSDictionary *result =
-              [NSJSONSerialization JSONObjectWithData:data
-                                              options:kNilOptions
-                                                error:&error];
-          NSArray *jsonResult2 = [result objectForKey:@"results"];
-          NSLog(@"test : %@", jsonResult2);
-          for (NSDictionary *dic in jsonResult2) {
-            NSString *placeID = [dic valueForKey:@"googlid"];
-            placesclient = [[GMSPlacesClient alloc] init];
-
-            [placesclient lookUpPlaceID:placeID
-                               callback:^(GMSPlace *place, NSError *error) {
-                                 if (error != nil) {
-                                   NSLog(@"Place Details error %@",
-                                         [error localizedDescription]);
-                                   return;
-                                 }
-                                 if (place != nil) {
-                                   GMSMarker *marker = [[GMSMarker alloc] init];
-                                   marker.position = CLLocationCoordinate2DMake(
-                                       place.coordinate.latitude,
-                                       place.coordinate.longitude);
-                                   marker.title = place.name;
-                                   marker.map = _mapView;
-
-                                 } else {
-                                   NSLog(@"No place details for %@", placeID);
-                                 }
-                               }];
-
-            NSLog(@" place id : %@", placeID);
-          }
-
-        }];
-
-  [postdata resume];
-
-  [_switcher addTarget:self
-                action:@selector(didChangeSwitcher)
-      forControlEvents:UIControlEventValueChanged];
+    if ([segue.identifier isEqualToString:@"map"]) {
+  MapViewController *vc = (MapViewController *)segue.destinationViewController;
+    
+    
+    }
+    
+    
 }
 
-//- (NSArray *)jsonResult2{
-//
-//    NSURLSession *session = [NSURLSession
-//    sessionWithConfiguration:[NSURLSessionConfiguration
-//    defaultSessionConfiguration]delegate:nil delegateQueue:nil];
-//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL
-//    URLWithString:@"https://movex.herokuapp.com/parse/classes/Test2"]
-//    cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-//    NSURL *url =[NSURL
-//    URLWithString:@"https://movex.herokuapp.com/parse/classes/Test2"];
-//
-//
-//    NSError *error;
-//    NSData *jsondata = [NSData dataWithContentsOfURL:url];
-//
-//    [request addValue:@"application/json" forHTTPHeaderField:@"Content-type"];
-//    [request addValue:@"movexroei"
-//    forHTTPHeaderField:@"X-Parse-Application-Id"];
-//
-//
-//    //useonly in SET
-//    //    [request setHTTPBody:jsondata];
-//    [request setHTTPMethod:@"GET"];
-//
-//    NSLog(@"%@",request);
-//
-//
-//        NSDictionary *result = [NSJSONSerialization
-//        JSONObjectWithData:jsondata options:kNilOptions error:&error];
-//        NSArray *jsonResult2 =[result objectForKey:@"results"];
-//        NSLog(@"test : %@" , jsonResult2);
-//
-//
-//
-//        return jsonResult2;
-//
-//
-//}
+- (void)showmap:(id)sender {
+    
+    [self performSegueWithIdentifier:@"map" sender:sender];
+
+    
+}
+
 
 #pragma mark - UISearchDisplayDelegate
 
@@ -349,64 +217,6 @@ static NSString const *kTerrainType = @"T";//@"Terrain";
 
   
 }
-//  PFObject *testObject = [PFObject objectWithClassName:@"Test2"];
-//  testObject[@"Address"] = place.name;
-//  testObject[@"googlid"] = place.placeID;
-//
-//  [testObject
-//
-//      saveInBackgroundWithBlock:^(BOOL succeeded, NSError *_Nullable error) {
-//        UIAlertController *alert = [UIAlertController
-//            alertControllerWithTitle:@"Alert"
-//                             message:nil
-//                      preferredStyle:UIAlertControllerStyleAlert];
-//        if (succeeded == YES) {
-//          UIAlertAction *ok =
-//              [UIAlertAction actionWithTitle:@"Upload succeeded!"
-//                                       style:UIAlertActionStyleDefault
-//                                     handler:nil];
-//          [alert addAction:ok];
-//
-//          [self presentViewController:alert animated:YES completion:nil];
-//        }
-//
-//        else {
-//          UIAlertAction *failed =
-//              [UIAlertAction actionWithTitle:@"Upload failed!"
-//                                       style:UIAlertActionStyleDefault
-//                                     handler:nil];
-//          [alert addAction:failed];
-//
-//          [self presentViewController:alert animated:YES completion:nil];
-//        }
-//      }];
-
-//  GMSCameraPosition *camera =
-//      [GMSCameraPosition cameraWithLatitude:place.coordinate.latitude
-//                                  longitude:place.coordinate.longitude
-//                                       zoom:10];
-//  _mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
-//  _Marker = [[GMSMarker alloc] init];
-//  _Marker.position = CLLocationCoordinate2DMake(place.coordinate.latitude,
-//                                                place.coordinate.longitude);
-//  _Marker.map = _mapView;
-//  NSArray *types = @[ kNormalType, kSatelliteType, kHybridType, kTerrainType
-//  ];
-//
-//  _switcher = [[UISegmentedControl alloc] initWithItems:types];
-//  _switcher.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin |
-//                               UIViewAutoresizingFlexibleWidth |
-//                               UIViewAutoresizingFlexibleBottomMargin;
-//  _switcher.selectedSegmentIndex = 0;
-//  _switcher.translatesAutoresizingMaskIntoConstraints = YES;
-//  self.navigationItem.titleView = _switcher;
-//
-//  self.view = _mapView;
-//
-//  [_switcher addTarget:self
-//                action:@selector(didChangeSwitcher)
-//      forControlEvents:UIControlEventValueChanged];
-//}
 - (void)didChangeSwitcher {
   NSString *title =
       [_switcher titleForSegmentAtIndex:_switcher.selectedSegmentIndex];

@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+#import "AddinformationViewcontroller.h"
+#import "MapViewController.h"
+#import <GoogleMaps/GoogleMaps.h>
+#import <Parse/Parse.h>
+#import "ViewController.h"
+#import "ServerProtocol.h"
+#import "DatabaseManager.h"
+#import "MapViewController.h"
+
 @interface AddinformationViewcontroller : UIViewController
+@property(nonatomic, strong) NSString *Address;
+@property(nonatomic, strong) CLLocationCoordinate2DMake *longt;
+@property(nonatomic, strong) CLLocationCoordinate2DMake *lat;
+
 
 @end

@@ -158,8 +158,13 @@ static NSString const *kTerrainType = @"Terrain";
 - (void) mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker{
     mapView.selectedMarker = nil;
 
-    NSLog(@" Taped on marker : %@", marker);
-   AddinformationViewcontroller  *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddinformationViewcontroller"];
+    NSLog(@" Taped on marker : %@", marker.title);
+ AddinformationViewcontroller  *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddinformationViewcontroller"];
+    NSLog(@" Taped on marker : %@", marker.userData);
+
+   destViewController.Address = marker.title;
+    
+    
     [self.navigationController pushViewController:destViewController animated:YES];
 
 }

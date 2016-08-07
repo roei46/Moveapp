@@ -43,8 +43,9 @@ static NSString const *kTerrainType = @"Terrain";
                                       target:self
                                       action:@selector(showmap:)];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0 green:0.24 blue:0.45 alpha:1];
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    self.navigationItem.title = @"Moveinfo";
+   self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    self
+    .title  = @"Move-in-fo";
   self.edgesForExtendedLayout =
       UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight;
 

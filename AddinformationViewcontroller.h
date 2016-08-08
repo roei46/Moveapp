@@ -19,8 +19,12 @@
 
 @interface AddinformationViewcontroller : UIViewController
 @property(nonatomic, strong) NSString *Address;
-@property(nonatomic, strong) CLLocationCoordinate2DMake *longt;
-@property(nonatomic, strong) CLLocationCoordinate2DMake *lat;
+@property (nonatomic, assign) double dbllatitude;
+@property (nonatomic, assign) double dbllongitude;
+
+
+
+
 
 
 @end

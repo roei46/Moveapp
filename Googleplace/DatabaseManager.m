@@ -12,10 +12,12 @@
 @implementation DatabaseManager
 
 
+
 -(void)addPlace:(GMSPlace *)place callback:(DatabaseChanged)callback{
     PFObject *testObject = [PFObject objectWithClassName:@"Test2"];
     testObject[@"Address"] = place.name;
     testObject[@"googlid"] = place.placeID;
+   // testObject[@"Apartment"] =;
     
     [testObject
      

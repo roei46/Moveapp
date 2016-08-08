@@ -161,8 +161,15 @@ static NSString const *kTerrainType = @"Terrain";
     NSLog(@" Taped on marker : %@", marker.title);
  AddinformationViewcontroller  *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddinformationViewcontroller"];
     NSLog(@" Taped on marker : %@", marker.userData);
+    
+    
 
    destViewController.Address = marker.title;
+    CLLocationCoordinate2D coordinate = marker.position;
+    destViewController.dbllatitude = coordinate.latitude;
+    destViewController.dbllongitude = coordinate.longitude;
+
+
     
     
     [self.navigationController pushViewController:destViewController animated:YES];

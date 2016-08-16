@@ -14,7 +14,7 @@
 #import "DatabaseManager.h"
 #import "MapViewController.h"
 #import "AddinformationViewcontroller.h"
-static CGFloat kSearchBarHeight = 44.0f;
+//static CGFloat kSearchBarHeight = 44.0f;
 static NSString const *kNormalType = @"Normal";
 static NSString const *kSatelliteType = @"Satellite";
 static NSString const *kHybridType = @"Hybrid";
@@ -22,8 +22,13 @@ static NSString const *kTerrainType = @"Terrain";
 
 
 
-@interface MapViewController ()<GMSMapViewDelegate>
+@interface MapViewController ()<GMSMapViewDelegate ,UITableViewDelegate ,UITableViewDataSource>
 @property (nonatomic, strong) GMSMarker * selectedMarker;
+@property (weak, nonatomic) IBOutlet UITableView *tblView;
+@property(strong, nonatomic) NSMutableString *DBid;
+@property(strong, nonatomic) NSArray *arrHeader;
+
+
 
 @end
 
@@ -33,41 +38,69 @@ static NSString const *kTerrainType = @"Terrain";
     GMSMarker *_Marker;
     GMSPlacesClient *placesclient;
     UISegmentedControl *_switcher;
-
+    NSArray *jsonResult2;
+    NSDictionary *appResult;
+    //NSArray *arrHeader;
 
 }
 
 
 - (void)viewDidLoad {
+    
+    
+    self.title = _Address;
+
+    self.tblView.delegate = self;
+    self.tblView.dataSource = self;
+
+
+    [self.view addSubview:_tblView];
+    
     [super viewDidLoad];
-    _mapView.settings.compassButton = YES;
-    _mapView.settings.myLocationButton = YES;
-    CLLocation *myLocation = _mapView.myLocation;
+    self.navigationItem.rightBarButtonItem =
+    [[UIBarButtonItem alloc] initWithTitle:@"Add"
+                                     style:UIBarButtonItemStylePlain
+                                    target:self
+                                    action:@selector(showmap:)];
+
     
-    GMSCameraPosition *camera =
-    [GMSCameraPosition cameraWithLatitude:myLocation.coordinate.latitude
-                                longitude:myLocation.coordinate.longitude
-                                     zoom:10];
-    _mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
-    _Marker = [[GMSMarker alloc] init];
-    _Marker.position = CLLocationCoordinate2DMake(
-                                                  myLocation.coordinate.latitude, myLocation.coordinate.longitude);
-    _Marker.map = _mapView;
-    NSArray *types = @[ kNormalType, kSatelliteType, kHybridType, kTerrainType ];
     
-    _switcher = [[UISegmentedControl alloc] initWithItems:types];
     
-    _switcher.selectedSegmentIndex = 0;
-    _mapView.delegate = self;
-   self.view = _mapView;
     
-    _mapView.settings.compassButton = YES;
-    _mapView.settings.myLocationButton = YES;
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        _mapView.myLocationEnabled = YES;
-    });
     
+    
+    
+    
+    
+//    _mapView.settings.compassButton = YES;
+//    _mapView.settings.myLocationButton = YES;
+//    CLLocation *myLocation = _mapView.myLocation;
+//    
+//    GMSCameraPosition *camera =
+//    [GMSCameraPosition cameraWithLatitude:myLocation.coordinate.latitude
+//                                longitude:myLocation.coordinate.longitude
+//                                     zoom:10];
+//    _mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+//    _Marker = [[GMSMarker alloc] init];
+//    _Marker.position = CLLocationCoordinate2DMake(
+//                                                  myLocation.coordinate.latitude, myLocation.coordinate.longitude);
+//    _Marker.map = _mapView;
+//    NSArray *types = @[ kNormalType, kSatelliteType, kHybridType, kTerrainType ];
+//    
+//    _switcher = [[UISegmentedControl alloc] initWithItems:types];
+//    
+//    _switcher.selectedSegmentIndex = 0;
+//    _mapView.delegate = self;
+//   self.view = _mapView;
+//    
+//    _mapView.settings.compassButton = YES;
+//    _mapView.settings.myLocationButton = YES;
+//    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        _mapView.myLocationEnabled = YES;
+//    });
+//    
     NSURLSession *session =
     [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration
                                             defaultSessionConfiguration]
@@ -101,33 +134,38 @@ static NSString const *kTerrainType = @"Terrain";
                                           [NSJSONSerialization JSONObjectWithData:data
                                                                           options:kNilOptions
                                                                             error:&error];
-                                          NSArray *jsonResult2 = [result objectForKey:@"results"];
+                                          jsonResult2 = [result objectForKey:@"results"];
                                           NSLog(@"test : %@", jsonResult2);
-                                          for (NSDictionary *dic in jsonResult2) {
-                                              NSString *placeID = [dic valueForKey:@"googlid"];
-                                              placesclient = [[GMSPlacesClient alloc] init];
+                                          for (NSDictionary *addname in jsonResult2) {
+                                              if ([[addname valueForKey:@"Address"] isEqualToString:_Address]) {
+                                                  appResult = addname[@"apartmentsDict"];
+                                                      //for (NSDictionary *dictionary in appResult) {
+                                                          
+                                                          _arrHeader=[appResult allKeys];
+                                                      NSLog(@"%@",_arrHeader);
+                                                  
+                                                  
+                                                  NSSortDescriptor* sortOrder = [NSSortDescriptor sortDescriptorWithKey: @"self" ascending: YES];
+                                                  _arrHeader =  (NSMutableArray *)[_arrHeader sortedArrayUsingDescriptors: [NSArray arrayWithObject: sortOrder]];
+                                                  
+                                                  
+                                                  [_tblView reloadData];
+
+                                                  
+                                                      
+                                                  }
+                                                  
+                                                  
+
+                                                  
+//                                                  _arrHeader = addname[@"apartments"];
+//                                                 NSLog(@"arr :%@", _arrHeader);
+//                                                  NSLog(@"arr :%lu", (unsigned long)_arrHeader.count);
+
+                                            //  }
                                               
-                                              [placesclient lookUpPlaceID:placeID
-                                                                 callback:^(GMSPlace *place, NSError *error) {
-                                                                     if (error != nil) {
-                                                                         NSLog(@"Place Details error %@",
-                                                                               [error localizedDescription]);
-                                                                         return;
-                                                                     }
-                                                                     if (place != nil) {
-                                                                         GMSMarker *marker = [[GMSMarker alloc] init];
-                                                                         marker.position = CLLocationCoordinate2DMake(
-                                                                                                                      place.coordinate.latitude,
-                                                                                                                      place.coordinate.longitude);
-                                                                         marker.title = place.name;
-                                                                         marker.map = _mapView;
-                                                                         
-                                                                     } else {
-                                                                         NSLog(@"No place details for %@", placeID);
-                                                                     }
-                                                                 }];
-                                              
-                                              NSLog(@" place id : %@", placeID);
+                                          
+                                          
                                           }
                                           
                                       }];
@@ -137,7 +175,68 @@ static NSString const *kTerrainType = @"Terrain";
     [_switcher addTarget:self
                   action:@selector(didChangeSwitcher)
         forControlEvents:UIControlEventValueChanged];
+    
+    
+
+    
 }
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+
+    NSLog(@"numberofsec called arr : %lu" ,(unsigned long)_arrHeader.count);
+    return [_arrHeader count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    NSLog(@"titleForHeaderInSection called :%@" ,[_arrHeader objectAtIndex:section]);
+
+
+    
+    return [_arrHeader objectAtIndex:section];
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{    NSLog(@"numberOfRowsInSection called :%lu" , (unsigned long)appResult.count);
+
+    return [appResult[_arrHeader[section]] count];
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+
+    
+    cell.textLabel.text = appResult[_arrHeader [indexPath.section]][indexPath.row];
+    
+    return cell;
+    
+    
+    
+}
+
+
+- (void)showmap:(id)sender {
+    
+    _mapView.selectedMarker = nil;
+    
+    MapViewController  *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddinformationViewcontroller"];
+    
+    
+    
+    destViewController.Address = _Address;
+    
+    
+    
+    [self.navigationController pushViewController:destViewController animated:YES];
+    
+    
+    }
+
 - (void)didChangeSwitcher {
     NSString *title =
     [_switcher titleForSegmentAtIndex:_switcher.selectedSegmentIndex];
@@ -154,27 +253,7 @@ static NSString const *kTerrainType = @"Terrain";
 
 
     
-    
-- (void) mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker{
-    mapView.selectedMarker = nil;
 
-    NSLog(@" Taped on marker : %@", marker.title);
- AddinformationViewcontroller  *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddinformationViewcontroller"];
-    NSLog(@" Taped on marker : %@", marker.userData);
-    
-    
-
-   destViewController.Address = marker.title;
-    CLLocationCoordinate2D coordinate = marker.position;
-    destViewController.dbllatitude = coordinate.latitude;
-    destViewController.dbllongitude = coordinate.longitude;
-
-
-    
-    
-    [self.navigationController pushViewController:destViewController animated:YES];
-
-}
 
 
 

@@ -44,6 +44,7 @@ preparation before navigation
 */
 
 - (IBAction)upload:(id)sender {
+    
   NSURLSession *session =
       [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration
                                                  defaultSessionConfiguration]

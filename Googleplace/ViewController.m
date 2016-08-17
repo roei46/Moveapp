@@ -12,31 +12,24 @@
 #import "ViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
-//static CGFloat kSearchBarHeight = 44.0f;
+// static CGFloat kSearchBarHeight = 44.0f;
 static NSString const *kNormalType = @"Normal";
 static NSString const *kSatelliteType = @"Satellite";
 static NSString const *kHybridType = @"Hybrid";
 static NSString const *kTerrainType = @"Terrain";
 
-@interface ViewController () <GMSAutocompleteTableDataSourceDelegate,
-                              GMSAutocompleteViewControllerDelegate,
-                              GMSAutocompleteResultsViewControllerDelegate,
-                                GMSMapViewDelegate,
-                              UISearchDisplayDelegate>
+@interface ViewController () <GMSAutocompleteResultsViewControllerDelegate,
+                              GMSMapViewDelegate>
 
 @property(weak, nonatomic) IBOutlet GMSMapView *mapview;
-@property (weak, nonatomic) IBOutlet UILabel *infoLabel;
-
+@property(weak, nonatomic) IBOutlet UILabel *infoLabel;
 
 @end
 
 @implementation ViewController {
   UISegmentedControl *_switcher;
-  // UISearchBar *_searchBar;
-  // UISearchDisplayController *_searchDisplayController;
   GMSAutocompleteTableDataSource *_tableDataSource;
   GMSAutocompleteResultsViewController *_acViewController;
-    
 
   UITextView *_resultView;
   UISearchController *searchController;
@@ -47,6 +40,7 @@ static NSString const *kTerrainType = @"Terrain";
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+
   self.navigationItem.rightBarButtonItem =
       [[UIBarButtonItem alloc] initWithTitle:@"Show map"
                                        style:UIBarButtonItemStylePlain
@@ -82,264 +76,241 @@ static NSString const *kTerrainType = @"Terrain";
     searchController.modalPresentationStyle = UIModalPresentationFullScreen;
   }
   self.definesPresentationContext = YES;
-[self.view addSubview:searchController.searchBar];
-    _mapview.delegate = self;
-    _mapview.settings.compassButton = YES;
-    _mapview.settings.myLocationButton = YES;
-    
+  [self.view addSubview:searchController.searchBar];
+  _mapview.delegate = self;
+  _mapview.settings.compassButton = YES;
+  _mapview.settings.myLocationButton = YES;
 
-    
-//      NSArray *types = @[ kNormalType, kSatelliteType, kHybridType, kTerrainType
-//      ];
-//    
-//      _switcher = [[UISegmentedControl alloc] initWithItems:types];
-//      _switcher.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin |
-//                                   UIViewAutoresizingFlexibleWidth |
-//                                   UIViewAutoresizingFlexibleBottomMargin;
-//      _switcher.selectedSegmentIndex = 0;
-//      _switcher.translatesAutoresizingMaskIntoConstraints = YES;
-//      self.navigationItem.titleView = _switcher;
-//    
-   //self.view = _mapview;
-    
-//      [_switcher addTarget:self
-//                    action:@selector(didChangeSwitcher)
-//          forControlEvents:UIControlEventValueChanged];
-//    
-//      [self.navigationController setNavigationBarHidden:NO];
-    
-    
-    
-//    NSURLSession *session =
-//    [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration
-//                                            defaultSessionConfiguration]
-//                                  delegate:nil
-//                             delegateQueue:nil];
-//    NSMutableURLRequest *request = [NSMutableURLRequest
-//                                    requestWithURL:
-//                                    [NSURL
-//                                     URLWithString:@"https://movex.herokuapp.com/parse/classes/Test2"]
-//                                    cachePolicy:NSURLRequestUseProtocolCachePolicy
-//                                    timeoutInterval:60.0];
-//    
-//    // use only in SET
-//    //  NSError *error;
-//    //    NSData *jsondata;
-//    
-//    [request addValue:@"application/json" forHTTPHeaderField:@"Content-type"];
-//    [request addValue:@"movexroei" forHTTPHeaderField:@"X-Parse-Application-Id"];
-//    
-//    // use only in SET
-//    //    [request setHTTPBody:jsondata];
-//    [request setHTTPMethod:@"GET"];
-//    
-//    NSLog(@"%@", request);
-//    
-//    NSURLSessionDataTask *postdata = [session
-//                                      dataTaskWithRequest:request
-//                                      completionHandler:^(NSData *data, NSURLResponse *response,
-//                                                          NSError *error) {
-//                                          NSDictionary *result =
-//                                          [NSJSONSerialization JSONObjectWithData:data
-//                                                                          options:kNilOptions
-//                                                                            error:&error];
-//                                          NSArray *jsonResult2 = [result objectForKey:@"results"];
-//                                          NSLog(@"test : %@", jsonResult2);
-//                                          for (NSDictionary *dic in jsonResult2) {
-//                                              NSString *placeID = [dic valueForKey:@"googlid"];
-//                                              placesclient = [[GMSPlacesClient alloc] init];
-//                                              
-//                                              [placesclient lookUpPlaceID:placeID
-//                                                                 callback:^(GMSPlace *place, NSError *error) {
-//                                                                     if (error != nil) {
-//                                                                         NSLog(@"Place Details error %@",
-//                                                                               [error localizedDescription]);
-//                                                                         return;
-//                                                                     }
-//                                                                     if (place != nil) {
-//                                                                         GMSMarker *marker = [[GMSMarker alloc] init];
-//                                                                         marker.position = CLLocationCoordinate2DMake(
-//                                                                                                                      place.coordinate.latitude,
-//                                                                                                                      place.coordinate.longitude);
-//                                                                         marker.title = place.name;
-//                                                                         marker.map = _mapview;
-//                                                                         
-//                                                                     } else {
-//                                                                         NSLog(@"No place details for %@", placeID);
-//                                                                     }
-//                                                                 }];
-//                                              
-//                                              NSLog(@" place id : %@", placeID);
-//                                          }
-//                                          
-//                                      }];
-//    
-//    [postdata resume];
-//
-//    
-//    
-//    
-//    
-//    
-//    
-    
+  //      NSArray *types = @[ kNormalType, kSatelliteType, kHybridType,
+  //      kTerrainType
+  //      ];
+  //
+  //      _switcher = [[UISegmentedControl alloc] initWithItems:types];
+  //      _switcher.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin |
+  //                                   UIViewAutoresizingFlexibleWidth |
+  //                                   UIViewAutoresizingFlexibleBottomMargin;
+  //      _switcher.selectedSegmentIndex = 0;
+  //      _switcher.translatesAutoresizingMaskIntoConstraints = YES;
+  //      self.navigationItem.titleView = _switcher;
+  //
+  // self.view = _mapview;
 
-  //  _searchBar = [[UISearchBar alloc]
-  //      initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width,
-  //                               kSearchBarHeight)];
+  //      [_switcher addTarget:self
+  //                    action:@selector(didChangeSwitcher)
+  //          forControlEvents:UIControlEventValueChanged];
+  //
+  //      [self.navigationController setNavigationBarHidden:NO];
 
+  //    NSURLSession *session =
+  //    [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration
+  //                                            defaultSessionConfiguration]
+  //                                  delegate:nil
+  //                             delegateQueue:nil];
+  //    NSMutableURLRequest *request = [NSMutableURLRequest
+  //                                    requestWithURL:
+  //                                    [NSURL
+  //                                     URLWithString:@"https://movex.herokuapp.com/parse/classes/Test2"]
+  //                                    cachePolicy:NSURLRequestUseProtocolCachePolicy
+  //                                    timeoutInterval:60.0];
   //
-  //  _tableDataSource = [[GMSAutocompleteTableDataSource alloc] init];
-  //  _tableDataSource.delegate = self;
+  //    // use only in SET
+  //    //  NSError *error;
+  //    //    NSData *jsondata;
   //
-  //  _searchDisplayController =
-  //      [[UISearchDisplayController alloc] initWithSearchBar:_searchBar
-  //                                        contentsController:self];
-  //  _searchDisplayController.searchResultsDataSource = _tableDataSource;
-  //  _searchDisplayController.searchResultsDelegate = _tableDataSource;
-  //  _searchDisplayController.delegate = self;
-  //  _searchDisplayController.displaysSearchBarInNavigationBar = NO;
+  //    [request addValue:@"application/json"
+  //    forHTTPHeaderField:@"Content-type"];
+  //    [request addValue:@"movexroei"
+  //    forHTTPHeaderField:@"X-Parse-Application-Id"];
   //
-  //  _resultView = [[UITextView alloc]
-  //      initWithFrame:CGRectMake(0, kSearchBarHeight,
-  //      self.view.bounds.size.width,
-  //                               self.view.bounds.size.width -
-  //                               kSearchBarHeight)];
-  //  _resultView.autoresizingMask =
-  //      UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-  //  _resultView.editable = NO;
+  //    // use only in SET
+  //    //    [request setHTTPBody:jsondata];
+  //    [request setHTTPMethod:@"GET"];
   //
-  // // [_mapview addSubview:_searchBar];
-  //  [_mapview addSubview:_resultView];
+  //    NSLog(@"%@", request);
+  //
+  //    NSURLSessionDataTask *postdata = [session
+  //                                      dataTaskWithRequest:request
+  //                                      completionHandler:^(NSData *data,
+  //                                      NSURLResponse *response,
+  //                                                          NSError *error) {
+  //                                          NSDictionary *result =
+  //                                          [NSJSONSerialization
+  //                                          JSONObjectWithData:data
+  //                                                                          options:kNilOptions
+  //                                                                            error:&error];
+  //                                          NSArray *jsonResult2 = [result
+  //                                          objectForKey:@"results"];
+  //                                          NSLog(@"test : %@", jsonResult2);
+  //                                          for (NSDictionary *dic in
+  //                                          jsonResult2) {
+  //                                              NSString *placeID = [dic
+  //                                              valueForKey:@"googlid"];
+  //                                              placesclient =
+  //                                              [[GMSPlacesClient alloc]
+  //                                              init];
+  //
+  //                                              [placesclient
+  //                                              lookUpPlaceID:placeID
+  //                                                                 callback:^(GMSPlace
+  //                                                                 *place,
+  //                                                                 NSError
+  //                                                                 *error) {
+  //                                                                     if
+  //                                                                     (error
+  //                                                                     != nil)
+  //                                                                     {
+  //                                                                         NSLog(@"Place
+  //                                                                         Details
+  //                                                                         error
+  //                                                                         %@",
+  //                                                                               [error localizedDescription]);
+  //                                                                         return;
+  //                                                                     }
+  //                                                                     if
+  //                                                                     (place
+  //                                                                     != nil)
+  //                                                                     {
+  //                                                                         GMSMarker
+  //                                                                         *marker
+  //                                                                         =
+  //                                                                         [[GMSMarker
+  //                                                                         alloc]
+  //                                                                         init];
+  //                                                                         marker.position
+  //                                                                         =
+  //                                                                         CLLocationCoordinate2DMake(
+  //                                                                                                                      place.coordinate.latitude,
+  //                                                                                                                      place.coordinate.longitude);
+  //                                                                         marker.title
+  //                                                                         =
+  //                                                                         place.name;
+  //                                                                         marker.map
+  //                                                                         =
+  //                                                                         _mapview;
+  //
+  //                                                                     } else
+  //                                                                     {
+  //                                                                         NSLog(@"No
+  //                                                                         place
+  //                                                                         details
+  //                                                                         for
+  //                                                                         %@",
+  //                                                                         placeID);
+  //                                                                     }
+  //                                                                 }];
+  //
+  //                                              NSLog(@" place id : %@",
+  //                                              placeID);
+  //                                          }
+  //
+  //                                      }];
+  //
+  //    [postdata resume];
+  //
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated ];
-    
-    GMSCameraPosition *camera =
-    [GMSCameraPosition cameraWithLatitude:32.0808800
-                                longitude:34.7805700
-                                     zoom:10];
-    self.mapview.camera= camera;
-    
-    _Marker = [[GMSMarker alloc] init];
-    _Marker.position = CLLocationCoordinate2DMake(32.0808800,
-                                                  34.7805700);
-    _Marker.map=self.mapview;
-    _mapview.delegate = self;
+  GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:32.0808800
+                                                          longitude:34.7805700
+                                                               zoom:10];
+  self.mapview.camera = camera;
+  //
+  //  _Marker = [[GMSMarker alloc] init];
+  //  _Marker.position = CLLocationCoordinate2DMake(32.0808800, 34.7805700);
+  //  _Marker.map = self.mapview;
+  //  _mapview.delegate = self;
 
-    
-    [self.mapview addSubview:_infoLabel];
+  [self.mapview addSubview:_infoLabel];
 
-    NSURLSession *session =
-    [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration
-                                            defaultSessionConfiguration]
-                                  delegate:nil
-                             delegateQueue:nil];
-    NSMutableURLRequest *request = [NSMutableURLRequest
-                                    requestWithURL:
-                                    [NSURL
-                                     URLWithString:@"https://movex.herokuapp.com/parse/classes/Test2"]
-                                    cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                    timeoutInterval:60.0];
-    
-    // use only in SET
-    //  NSError *error;
-    //    NSData *jsondata;
-    
-    [request addValue:@"application/json" forHTTPHeaderField:@"Content-type"];
-    [request addValue:@"movexroei" forHTTPHeaderField:@"X-Parse-Application-Id"];
-    
-    // use only in SET
-    //    [request setHTTPBody:jsondata];
-    [request setHTTPMethod:@"GET"];
-    
-    NSLog(@"%@", request);
-    
-    NSURLSessionDataTask *postdata = [session
-                                      dataTaskWithRequest:request
-                                      completionHandler:^(NSData *data, NSURLResponse *response,
-                                                          NSError *error) {
-                                          NSDictionary *result =
-                                          [NSJSONSerialization JSONObjectWithData:data
-                                                                          options:kNilOptions
-                                                                            error:&error];
-                                          NSArray *jsonResult2 = [result objectForKey:@"results"];
-                                          NSLog(@"test : %@", jsonResult2);
-                                          for (NSDictionary *dic in jsonResult2) {
-                                              NSString *placeID = [dic valueForKey:@"googlid"];
-                                              placesclient = [[GMSPlacesClient alloc] init];
-                                              
-                                              [placesclient lookUpPlaceID:placeID
-                                                                 callback:^(GMSPlace *place, NSError *error) {
-                                                                     if (error != nil) {
-                                                                         NSLog(@"Place Details error %@",
-                                                                               [error localizedDescription]);
-                                                                         return;
-                                                                     }
-                                                                     if (place != nil) {
-                                                                         GMSMarker *marker = [[GMSMarker alloc] init];
-                                                                         marker.position = CLLocationCoordinate2DMake(
-                                                                                                                      place.coordinate.latitude,
-                                                                                                                      place.coordinate.longitude);
-                                                                         marker.title = place.name;
-                                                                         marker.map = _mapview;
-                                                                         
+  NSURLSession *session =
+      [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration
+                                                 defaultSessionConfiguration]
+                                    delegate:nil
+                               delegateQueue:nil];
+  NSMutableURLRequest *request = [NSMutableURLRequest
+       requestWithURL:
+           [NSURL
+               URLWithString:@"https://movex.herokuapp.com/parse/classes/Test2"]
+          cachePolicy:NSURLRequestUseProtocolCachePolicy
+      timeoutInterval:60.0];
 
-                                                                     } else {
-                                                                         NSLog(@"No place details for %@", placeID);
-                                                                     }
-                                                                 }];
-                                              NSLog(@" place id : %@", placeID);
-                                          }
-                                          
-                                      }];
-    
-    [postdata resume];
-    
-    
-    
+  // use only in SET
+  //  NSError *error;
+  //    NSData *jsondata;
 
+  [request addValue:@"application/json" forHTTPHeaderField:@"Content-type"];
+  [request addValue:@"movexroei" forHTTPHeaderField:@"X-Parse-Application-Id"];
 
+  // use only in SET
+  //    [request setHTTPBody:jsondata];
+  [request setHTTPMethod:@"GET"];
+
+  NSLog(@"%@", request);
+
+  NSURLSessionDataTask *postdata = [session
+      dataTaskWithRequest:request
+        completionHandler:^(NSData *data, NSURLResponse *response,
+                            NSError *error) {
+          NSDictionary *result =
+              [NSJSONSerialization JSONObjectWithData:data
+                                              options:kNilOptions
+                                                error:&error];
+          NSArray *jsonResult2 = [result objectForKey:@"results"];
+          NSLog(@"test : %@", jsonResult2);
+          for (NSDictionary *dic in jsonResult2) {
+            NSString *placeID = [dic valueForKey:@"googlid"];
+            placesclient = [[GMSPlacesClient alloc] init];
+
+            [placesclient lookUpPlaceID:placeID
+                               callback:^(GMSPlace *place, NSError *error) {
+                                 if (error != nil) {
+                                   NSLog(@"Place Details error %@",
+                                         [error localizedDescription]);
+                                   return;
+                                 }
+                                 if (place != nil) {
+                                   GMSMarker *marker = [[GMSMarker alloc] init];
+                                   marker.position = CLLocationCoordinate2DMake(
+                                       place.coordinate.latitude,
+                                       place.coordinate.longitude);
+                                   marker.title = place.name;
+                                   marker.map = _mapview;
+
+                                 } else {
+                                   NSLog(@"No place details for %@", placeID);
+                                 }
+                               }];
+            NSLog(@" place id : %@", placeID);
+          }
+
+        }];
+
+  [postdata resume];
 }
 
-
-
-
-- (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
-    [mapView setSelectedMarker:marker];
-    _infoLabel.text = marker.title;
-    return YES;
-
+- (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker {
+  [mapView setSelectedMarker:marker];
+  _infoLabel.text = marker.title;
+  return YES;
 }
 
-- (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker{
-    
-    
-  //  [self performSegueWithIdentifier:@"map" sender:self ];
-    
-    
-    mapView.selectedMarker = nil;
-    
-        NSLog(@" Taped on marker : %@", marker.title);
-     MapViewController  *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MapViewController"];
-        NSLog(@" Taped on marker : %@", marker.userData);
-    
-    
-    
-       destViewController.Address = marker.title;
-      
-    
-    
-        [self.navigationController pushViewController:destViewController animated:YES];
+- (void)mapView:(GMSMapView *)mapView
+    didTapInfoWindowOfMarker:(GMSMarker *)marker {
 
+  mapView.selectedMarker = nil;
 
-    
+  NSLog(@" Taped on marker : %@", marker.title);
+  MapViewController *destViewController = [self.storyboard
+      instantiateViewControllerWithIdentifier:@"MapViewController"];
+  NSLog(@" Taped on marker : %@", marker.userData);
+
+  destViewController.Address = marker.title;
+
+  [self.navigationController pushViewController:destViewController
+                                       animated:YES];
 }
-
-
-
 
 #pragma mark - GMSAutocompleteResultsViewControllerDelegate
 
@@ -347,6 +318,97 @@ static NSString const *kTerrainType = @"Terrain";
             (GMSAutocompleteResultsViewController *)resultsController
  didAutocompleteWithPlace:(GMSPlace *)place {
   // Display the results and dismiss the search controller.
+  ServerProtocol *serverProtocol = [[ServerProtocol alloc] init];
+  [serverProtocol
+      isPlaceExist:place
+          callback:^(BOOL exist) {
+
+            if (exist) {
+              UIAlertController *alert = [UIAlertController
+                  alertControllerWithTitle:@"Alert"
+                                   message:nil
+                            preferredStyle:UIAlertControllerStyleAlert];
+
+              UIAlertAction *exist =
+                  [UIAlertAction actionWithTitle:@"Place exist"
+                                           style:UIAlertActionStyleDefault
+                                         handler:nil];
+              [alert addAction:exist];
+              [self presentViewController:alert animated:YES completion:nil];
+            } else {
+
+              UIAlertController *alert = [UIAlertController
+                  alertControllerWithTitle:@"Alert"
+                                   message:@"Do you wand to add this address?"
+                            preferredStyle:UIAlertControllerStyleAlert];
+
+              UIAlertAction *yes = [UIAlertAction
+                  actionWithTitle:@"yes"
+                            style:UIAlertActionStyleDefault
+                          handler:^(UIAlertAction *action) {
+
+                            DatabaseManager *databaseManager =
+                                [[DatabaseManager alloc] init];
+
+                            [databaseManager
+                                addPlace:place
+                                callback:^(BOOL found) {
+                                  if (found) {
+
+                                    UIAlertController *alert = [UIAlertController
+                                        alertControllerWithTitle:@"Alert"
+                                                         message:nil
+                                                  preferredStyle:
+                                                      UIAlertControllerStyleAlert];
+
+                                    UIAlertAction *failed = [UIAlertAction
+                                        actionWithTitle:@"Address uploaded!"
+                                                  style:
+                                                      UIAlertActionStyleDefault
+                                                handler:nil];
+                                    [alert addAction:failed];
+
+                                    [self presentViewController:alert
+                                                       animated:YES
+                                                     completion:nil];
+                                    [self.navigationController loadView];
+                                  }
+                                  UIAlertController *alert = [UIAlertController
+                                      alertControllerWithTitle:@"Alert"
+                                                       message:nil
+                                                preferredStyle:
+                                                    UIAlertControllerStyleAlert];
+
+                                  [self presentViewController:alert
+                                                     animated:YES
+                                                   completion:nil];
+
+                                  UIAlertAction *failed = [UIAlertAction
+                                      actionWithTitle:@"Upload failed"
+                                                style:UIAlertActionStyleDefault
+                                              handler:nil];
+                                  [alert addAction:failed];
+
+                                  [self presentViewController:alert
+                                                     animated:YES
+                                                   completion:nil];
+
+                                }];
+
+                          }];
+              [alert addAction:yes];
+
+              UIAlertAction *cancel =
+                  [UIAlertAction actionWithTitle:@"cancel"
+                                           style:UIAlertActionStyleDefault
+                                         handler:nil];
+              [alert addAction:cancel];
+
+              [self presentViewController:alert animated:YES completion:nil];
+            }
+
+          }];
+
   [searchController setActive:NO];
 }
 
@@ -370,84 +432,6 @@ static NSString const *kTerrainType = @"Terrain";
   [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
-
-
-
-
-
-#pragma mark - GMSAutocompleteTableDataSourceDelegate
-
-- (void)tableDataSource:(GMSAutocompleteTableDataSource *)tableDataSource
-    didAutocompleteWithPlace:(GMSPlace *)place {
-
-  ServerProtocol *serverProtocol = [[ServerProtocol alloc] init];
-  [serverProtocol
-      isPlaceExist:place
-          callback:^(BOOL exist) {
-
-            if (exist) {
-              UIAlertController *alert = [UIAlertController
-                  alertControllerWithTitle:@"Alert"
-                                   message:nil
-                            preferredStyle:UIAlertControllerStyleAlert];
-
-              UIAlertAction *exist =
-                  [UIAlertAction actionWithTitle:@"Place exist"
-                                           style:UIAlertActionStyleDefault
-                                         handler:nil];
-              [alert addAction:exist];
-              [self presentViewController:alert animated:YES completion:nil];
-            } else {
-              DatabaseManager *databaseManager = [[DatabaseManager alloc] init];
-              [databaseManager
-                  addPlace:place
-                  callback:^(BOOL found) {
-
-                    if (found) {
-                      UIAlertController *alert = [UIAlertController
-                          alertControllerWithTitle:@"Alert"
-                                           message:nil
-                                    preferredStyle:UIAlertControllerStyleAlert];
-                      UIAlertAction *ok = [UIAlertAction
-                          actionWithTitle:@"Upload succeeded!"
-                                    style:UIAlertActionStyleDefault
-                                  handler:nil];
-                      [alert addAction:ok];
-
-                      [self presentViewController:alert
-                                         animated:YES
-                                       completion:nil];
-                    }
-                    UIAlertController *alert = [UIAlertController
-                        alertControllerWithTitle:@"Alert"
-                                         message:nil
-                                  preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction *ok =
-                        [UIAlertAction actionWithTitle:@"Upload succeeded!"
-                                                 style:UIAlertActionStyleDefault
-                                               handler:nil];
-                    [alert addAction:ok];
-
-                    [self presentViewController:alert
-                                       animated:YES
-                                     completion:nil];
-
-                    UIAlertAction *failed =
-                        [UIAlertAction actionWithTitle:@"Upload failed!"
-                                                 style:UIAlertActionStyleDefault
-                                               handler:nil];
-                    [alert addAction:failed];
-
-                    [self presentViewController:alert
-                                       animated:YES
-                                     completion:nil];
-
-                  }];
-            }
-
-          }];
- 
-}
 - (void)didChangeSwitcher {
   NSString *title =
       [_switcher titleForSegmentAtIndex:_switcher.selectedSegmentIndex];
@@ -461,7 +445,6 @@ static NSString const *kTerrainType = @"Terrain";
     _mapview.mapType = kGMSTypeTerrain;
   }
 }
-
 
 - (IBAction)onLaunchClicked:(id)sender {
   GMSAutocompleteViewController *acController =

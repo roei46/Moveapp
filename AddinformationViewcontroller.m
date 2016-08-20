@@ -21,7 +21,10 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-  NSLog(@"this : %@", _Address);
+  NSLog(@"this address: %@", _Address);
+
+  NSLog(@"this id: %@", _googleId);
+
   //  NSLog(@"this : %f ,%f" , _dbllatitude,_dbllongitude);
 
   self.title = _Address;
@@ -32,19 +35,57 @@
   // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little
-preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (IBAction)upload:(id)sender {
-    
+  //                            DatabaseManager *databaseManager =
+  //                                [[DatabaseManager alloc] init];
+  //
+  //                            [databaseManager
+  //                                addPlace:place
+  //                                callback:^(BOOL found) {
+  //                                  if (found) {
+  //
+  //                                    UIAlertController *alert =
+  //                                    [UIAlertController
+  //                                        alertControllerWithTitle:@"Alert"
+  //                                                         message:nil
+  //                                                  preferredStyle:
+  //                                                      UIAlertControllerStyleAlert];
+  //
+  //                                    UIAlertAction *failed = [UIAlertAction
+  //                                        actionWithTitle:@"Address uploaded!"
+  //                                                  style:
+  //                                                      UIAlertActionStyleDefault
+  //                                                handler:nil];
+  //                                    [alert addAction:failed];
+  //
+  //                                    [self presentViewController:alert
+  //                                                       animated:YES
+  //                                                     completion:nil];
+  //                                    [self.navigationController loadView];
+  //                                  }
+  //                                  UIAlertController *alert =
+  //                                  [UIAlertController
+  //                                      alertControllerWithTitle:@"Alert"
+  //                                                       message:nil
+  //                                                preferredStyle:
+  //                                                    UIAlertControllerStyleAlert];
+  //
+  //                                  [self presentViewController:alert
+  //                                                     animated:YES
+  //                                                   completion:nil];
+  //
+  //                                  UIAlertAction *failed = [UIAlertAction
+  //                                      actionWithTitle:@"Upload failed"
+  //                                                style:UIAlertActionStyleDefault
+  //                                              handler:nil];
+  //                                  [alert addAction:failed];
+  //
+  //                                  [self presentViewController:alert
+  //                                                     animated:YES
+  //                                                   completion:nil];
+  //
+  //                                }];
+
   NSURLSession *session =
       [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration
                                                  defaultSessionConfiguration]
@@ -63,93 +104,260 @@ preparation before navigation
   [request setHTTPMethod:@"GET"];
 
   NSLog(@"request : %@", request);
+  NSLog(@"this id: %hhd", _working);
+  dispatch_group_t group = dispatch_group_create();
+  dispatch_queue_t _myQueue =
+      dispatch_queue_create("com.cocoafactory.DispatchGroupExample", 0);
+  if (_working) {
 
-  NSURLSessionDataTask *postdata = [session
-      dataTaskWithRequest:request
-        completionHandler:^(NSData *data, NSURLResponse *response,
-                            NSError *error) {
+    dispatch_group_async(group, _myQueue, ^{
 
-          NSDictionary *dic =
-              [NSJSONSerialization JSONObjectWithData:data
-                                              options:kNilOptions
-                                                error:&error];
+      NSLog(@" first q ");
 
-          NSArray *resultarr = [dic valueForKey:@"results"];
+      DatabaseManager *databaseManager = [[DatabaseManager alloc] init];
 
-          NSLog(@"test : %@", dic);
-          for (NSDictionary *addname in resultarr) {
-            if ([[addname valueForKey:@"Address"] isEqualToString:_Address]) {
-              _DBid = [addname valueForKey:@"objectId"];
-              NSLog(@"placeid :%@", _DBid);
-              break;
+      [databaseManager
+          addPlace:_Address
+           placeId:_googleId
+          callback:^(BOOL found) {
+            if (found) {
+
+              UIAlertController *alert = [UIAlertController
+                  alertControllerWithTitle:@"Alert"
+                                   message:nil
+                            preferredStyle:UIAlertControllerStyleAlert];
+
+              UIAlertAction *failed = [UIAlertAction
+                  actionWithTitle:@"Address uploaded!"
+                            style:UIAlertActionStyleDefault
+                          handler:^(UIAlertAction *action) {
+                            MapViewController *destViewController =
+                                [self.storyboard
+                                    instantiateViewControllerWithIdentifier:
+                                        @"MapViewController"];
+
+                            destViewController.Address = _Address;
+
+                            [self.navigationController
+                                pushViewController:destViewController
+                                          animated:YES];
+                          }];
+
+              [alert addAction:failed];
+
+              [self presentViewController:alert animated:YES completion:nil];
+              [self.navigationController loadView];
             }
-          }
+            UIAlertController *alert = [UIAlertController
+                alertControllerWithTitle:@"Alert"
+                                 message:nil
+                          preferredStyle:UIAlertControllerStyleAlert];
 
-          PFQuery *query = [PFQuery queryWithClassName:@"Test2"];
-          [query
-              getObjectInBackgroundWithId:_DBid
-                                    block:^(PFObject *item, NSError *error) {
-                                      [item addObject:_Apartment.text
-                                               forKey:@"apartments"];
+            [self presentViewController:alert animated:YES completion:nil];
 
-                                      NSMutableDictionary *dict =
-                                          [item objectForKey:@"apartmentsDict"];
+            UIAlertAction *failed =
+                [UIAlertAction actionWithTitle:@"Upload failed"
+                                         style:UIAlertActionStyleDefault
+                                       handler:nil];
+            [alert addAction:failed];
 
-                                      if (![dict
-                                              objectForKey:_Apartment.text]) {
-                                        [dict setObject:[NSMutableArray array]
-                                                 forKey:_Apartment.text];
-                                      }
-                                      [[dict objectForKey:_Apartment.text]
-                                          addObject:_Feedback.text];
+            [self presentViewController:alert animated:YES completion:nil];
 
-                                      [item setObject:dict
-                                               forKey:@"apartmentsDict"];
+          }];
 
-                                      [item saveInBackgroundWithBlock:^(
-                                                BOOL succeeded,
-                                                NSError *_Nullable error) {
-                                        if (error) {
-                                          UIAlertController *alert = [UIAlertController
-                                              alertControllerWithTitle:@"Alert"
-                                                               message:nil
-                                                        preferredStyle:
-                                                            UIAlertControllerStyleAlert];
-                                          NSLog(@"error happened:%@", error);
-                                          UIAlertAction *failed = [UIAlertAction
-                                              actionWithTitle:@"Upload failed!"
-                                                        style:
-                                                            UIAlertActionStyleDefault
-                                                      handler:nil];
-                                          [alert addAction:failed];
+    });
+    dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
 
-                                          [self presentViewController:alert
-                                                             animated:YES
-                                                           completion:nil];
-                                        } else {
-                                          UIAlertController *alert = [UIAlertController
-                                              alertControllerWithTitle:@"Alert"
-                                                               message:nil
-                                                        preferredStyle:
-                                                            UIAlertControllerStyleAlert];
+    NSURLSessionDataTask *postdata = [session
+        dataTaskWithRequest:request
+          completionHandler:^(NSData *data, NSURLResponse *response,
+                              NSError *error) {
 
-                                          UIAlertAction *ok = [UIAlertAction
-                                              actionWithTitle:
-                                                  @"Upload succeeded!"
-                                                        style:
-                                                            UIAlertActionStyleDefault
-                                                      handler:nil];
-                                          [alert addAction:ok];
+            NSDictionary *dic =
+                [NSJSONSerialization JSONObjectWithData:data
+                                                options:kNilOptions
+                                                  error:&error];
 
-                                          [self presentViewController:alert
-                                                             animated:YES
-                                                           completion:nil];
+            NSArray *resultarr = [dic valueForKey:@"results"];
+
+            NSLog(@"test : %@", resultarr);
+
+            for (NSDictionary *addname in resultarr) {
+              if ([[addname valueForKey:@"Address"] isEqualToString:_Address]) {
+                _DBid = [addname valueForKey:@"objectId"];
+                NSLog(@"placeid :%@", _DBid);
+                break;
+              }
+            }
+
+            NSLog(@" second q ");
+
+            PFQuery *query = [PFQuery queryWithClassName:@"Test2"];
+            [query
+                getObjectInBackgroundWithId:_DBid
+                                      block:^(PFObject *item, NSError *error) {
+
+                                        [item addObject:_Apartment.text
+                                                 forKey:@"apartments"];
+
+                                        NSMutableDictionary *dict = [item
+                                            objectForKey:@"apartmentsDict"];
+
+                                        if (![dict
+                                                objectForKey:_Apartment.text]) {
+                                          [dict setObject:[NSMutableArray array]
+                                                   forKey:_Apartment.text];
                                         }
+                                        [[dict objectForKey:_Apartment.text]
+                                            addObject:_Feedback.text];
+
+                                        [item setObject:dict
+                                                 forKey:@"apartmentsDict"];
+
+                                        [item saveInBackgroundWithBlock:^(
+                                                  BOOL succeeded,
+                                                  NSError *_Nullable error) {
+                                          if (error) {
+                                            UIAlertController *alert = [UIAlertController
+                                                alertControllerWithTitle:
+                                                    @"Alert"
+                                                                 message:nil
+                                                          preferredStyle:
+                                                              UIAlertControllerStyleAlert];
+                                            NSLog(@"error happened:%@", error);
+                                            UIAlertAction *failed = [UIAlertAction
+                                                actionWithTitle:
+                                                    @"Upload failed!!!"
+                                                          style:
+                                                              UIAlertActionStyleDefault
+                                                        handler:nil];
+                                            [alert addAction:failed];
+
+                                            [self presentViewController:alert
+                                                               animated:YES
+                                                             completion:nil];
+                                          } else {
+                                            UIAlertController *alert = [UIAlertController
+                                                alertControllerWithTitle:
+                                                    @"Alert"
+                                                                 message:nil
+                                                          preferredStyle:
+                                                              UIAlertControllerStyleAlert];
+
+                                            UIAlertAction *ok = [UIAlertAction
+                                                actionWithTitle:
+                                                    @"Upload succeeded!"
+                                                          style:
+                                                              UIAlertActionStyleDefault
+                                                        handler:nil];
+                                            [alert addAction:ok];
+
+                                            [self presentViewController:alert
+                                                               animated:YES
+                                                             completion:nil];
+                                          }
+                                        }];
                                       }];
-                                    }];
 
-        }];
+          }];
 
-  [postdata resume];
+    [postdata resume];
+
+  } else {
+    NSURLSessionDataTask *postdata = [session
+        dataTaskWithRequest:request
+          completionHandler:^(NSData *data, NSURLResponse *response,
+                              NSError *error) {
+
+            NSDictionary *dic =
+                [NSJSONSerialization JSONObjectWithData:data
+                                                options:kNilOptions
+                                                  error:&error];
+
+            NSArray *resultarr = [dic valueForKey:@"results"];
+
+            NSLog(@"test : %@", resultarr);
+
+            for (NSDictionary *addname in resultarr) {
+              if ([[addname valueForKey:@"Address"] isEqualToString:_Address]) {
+                _DBid = [addname valueForKey:@"objectId"];
+                NSLog(@"placeid :%@", _DBid);
+                break;
+              }
+            }
+
+            NSLog(@" second q ");
+
+            PFQuery *query = [PFQuery queryWithClassName:@"Test2"];
+            [query
+                getObjectInBackgroundWithId:_DBid
+                                      block:^(PFObject *item, NSError *error) {
+
+                                        [item addObject:_Apartment.text
+                                                 forKey:@"apartments"];
+
+                                        NSMutableDictionary *dict = [item
+                                            objectForKey:@"apartmentsDict"];
+
+                                        if (![dict
+                                                objectForKey:_Apartment.text]) {
+                                          [dict setObject:[NSMutableArray array]
+                                                   forKey:_Apartment.text];
+                                        }
+                                        [[dict objectForKey:_Apartment.text]
+                                            addObject:_Feedback.text];
+
+                                        [item setObject:dict
+                                                 forKey:@"apartmentsDict"];
+
+                                        [item saveInBackgroundWithBlock:^(
+                                                  BOOL succeeded,
+                                                  NSError *_Nullable error) {
+                                          if (error) {
+                                            UIAlertController *alert = [UIAlertController
+                                                alertControllerWithTitle:
+                                                    @"Alert"
+                                                                 message:nil
+                                                          preferredStyle:
+                                                              UIAlertControllerStyleAlert];
+                                            NSLog(@"error happened:%@", error);
+                                            UIAlertAction *failed = [UIAlertAction
+                                                actionWithTitle:
+                                                    @"Upload failed!!!"
+                                                          style:
+                                                              UIAlertActionStyleDefault
+                                                        handler:nil];
+                                            [alert addAction:failed];
+
+                                            [self presentViewController:alert
+                                                               animated:YES
+                                                             completion:nil];
+                                          } else {
+                                            UIAlertController *alert = [UIAlertController
+                                                alertControllerWithTitle:
+                                                    @"Alert"
+                                                                 message:nil
+                                                          preferredStyle:
+                                                              UIAlertControllerStyleAlert];
+
+                                            UIAlertAction *ok = [UIAlertAction
+                                                actionWithTitle:
+                                                    @"Upload succeeded!"
+                                                          style:
+                                                              UIAlertActionStyleDefault
+                                                        handler:nil];
+                                            [alert addAction:ok];
+
+                                            [self presentViewController:alert
+                                                               animated:YES
+                                                             completion:nil];
+                                          }
+                                        }];
+                                      }];
+
+          }];
+
+    [postdata resume];
+  }
 }
 @end

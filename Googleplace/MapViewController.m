@@ -99,20 +99,44 @@
               _arrHeader = (NSMutableArray *)[_arrHeader
                   sortedArrayUsingDescriptors:[NSArray
                                                   arrayWithObject:sortOrder]];
+                break;
 
-              [_tblView reloadData];
             }
+              dispatch_async(dispatch_get_main_queue(), ^{
+                  [self.tblView reloadData];
+              });
+
           }
-
         }];
-
-  [postdata resume];
+    [postdata resume];
 }
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
   NSLog(@"numberofsec called arr : %lu", (unsigned long)_arrHeader.count);
-  return [_arrHeader count];
+//    if (_arrHeader !=0) {
+//        
+//        self.tblView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+//        return [_arrHeader count];
+//
+//        
+//    }else{
+//    UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+//    
+//    messageLabel.text = @"The are no feedbacks! please fuck your home owner now! do it!";
+//    messageLabel.textColor = [UIColor blackColor];
+//    messageLabel.numberOfLines = 0;
+//    messageLabel.textAlignment = NSTextAlignmentCenter;
+//    messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
+//    [messageLabel sizeToFit];
+//    
+//    self.tblView.backgroundView = messageLabel;
+//    self.tblView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        return 0;
+     return [_arrHeader count];
+
+
 }
 
 - (NSString *)tableView:(UITableView *)tableView
@@ -139,6 +163,9 @@ titleForHeaderInSection:(NSInteger)section {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                   reuseIdentifier:CellIdentifier];
   }
+    
+   
+    
 
   cell.textLabel.text = appResult[_arrHeader[indexPath.section]][indexPath.row];
 
@@ -149,10 +176,12 @@ titleForHeaderInSection:(NSInteger)section {
 
   _mapView.selectedMarker = nil;
 
-  MapViewController *destViewController = [self.storyboard
+  AddinformationViewcontroller *destViewController = [self.storyboard
       instantiateViewControllerWithIdentifier:@"AddinformationViewcontroller"];
 
   destViewController.Address = _Address;
+    destViewController.working = NO;
+    
 
   [self.navigationController pushViewController:destViewController
                                        animated:YES];

@@ -14,5 +14,8 @@
 
 typedef void (^DatabaseChanged)(BOOL found);
 
--(void)addPlace:(GMSPlace *)place  callback:(DatabaseChanged)callback;
+//-(void)addPlace:(GMSPlace *)place  callback:(DatabaseChanged)callback;
+- (void)addPlace:(NSString *)placeName
+         placeId:(NSString *)placeId
+        callback:(DatabaseChanged)callback;
 @end

@@ -19,10 +19,11 @@
 
 @interface AddinformationViewcontroller : UIViewController
 @property(nonatomic, strong) NSString *Address;
-//@property (nonatomic, assign) double dbllatitude;
-//@property (nonatomic, assign) double dbllongitude;
+@property(nonatomic, strong) NSString *googleId;
 @property (strong, nonatomic) IBOutlet UITextField *Apartment;
 @property (strong, nonatomic) IBOutlet UITextField *Feedback;
+@property (nonatomic, assign) BOOL working;
+
 
 
 

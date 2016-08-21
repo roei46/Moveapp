@@ -37,78 +37,14 @@
 - (void)viewDidLoad {
 
   self.title = _Address;
+    self.navigationItem.rightBarButtonItem =
+    [[UIBarButtonItem alloc] initWithTitle:@"Add"
+                                     style:UIBarButtonItemStylePlain
+                                    target:self
+                                    action:@selector(addInfo:)];
 
-  self.tblView.delegate = self;
-  self.tblView.dataSource = self;
 
-  [self.view addSubview:_tblView];
-
-  [super viewDidLoad];
-  self.navigationItem.rightBarButtonItem =
-      [[UIBarButtonItem alloc] initWithTitle:@"Add"
-                                       style:UIBarButtonItemStylePlain
-                                      target:self
-                                      action:@selector(showmap:)];
-
-  NSURLSession *session =
-      [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration
-                                                 defaultSessionConfiguration]
-                                    delegate:nil
-                               delegateQueue:nil];
-  NSMutableURLRequest *request = [NSMutableURLRequest
-       requestWithURL:
-           [NSURL
-               URLWithString:@"https://movex.herokuapp.com/parse/classes/Test2"]
-          cachePolicy:NSURLRequestUseProtocolCachePolicy
-      timeoutInterval:60.0];
-
-  // use only in SET
-  //  NSError *error;
-  //    NSData *jsondata;
-
-  [request addValue:@"application/json" forHTTPHeaderField:@"Content-type"];
-  [request addValue:@"movexroei" forHTTPHeaderField:@"X-Parse-Application-Id"];
-
-  // use only in SET
-  //    [request setHTTPBody:jsondata];
-  [request setHTTPMethod:@"GET"];
-
-  NSLog(@"%@", request);
-
-  NSURLSessionDataTask *postdata = [session
-      dataTaskWithRequest:request
-        completionHandler:^(NSData *data, NSURLResponse *response,
-                            NSError *error) {
-          NSDictionary *result =
-              [NSJSONSerialization JSONObjectWithData:data
-                                              options:kNilOptions
-                                                error:&error];
-          jsonResult2 = [result objectForKey:@"results"];
-          NSLog(@"test : %@", jsonResult2);
-          for (NSDictionary *addname in jsonResult2) {
-            if ([[addname valueForKey:@"Address"] isEqualToString:_Address]) {
-              appResult = addname[@"apartmentsDict"];
-              // for (NSDictionary *dictionary in appResult) {
-
-              _arrHeader = [appResult allKeys];
-              NSLog(@"%@", _arrHeader);
-
-              NSSortDescriptor *sortOrder =
-                  [NSSortDescriptor sortDescriptorWithKey:@"self"
-                                                ascending:YES];
-              _arrHeader = (NSMutableArray *)[_arrHeader
-                  sortedArrayUsingDescriptors:[NSArray
-                                                  arrayWithObject:sortOrder]];
-                break;
-
-            }
-              dispatch_async(dispatch_get_main_queue(), ^{
-                  [self.tblView reloadData];
-              });
-
-          }
-        }];
-    [postdata resume];
+  
 }
 
 
@@ -172,7 +108,82 @@ titleForHeaderInSection:(NSInteger)section {
   return cell;
 }
 
-- (void)showmap:(id)sender {
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.tblView.delegate = self;
+    self.tblView.dataSource = self;
+    
+    [self.view addSubview:_tblView];
+    
+    
+    NSURLSession *session =
+    [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration
+                                            defaultSessionConfiguration]
+                                  delegate:nil
+                             delegateQueue:nil];
+    NSMutableURLRequest *request = [NSMutableURLRequest
+                                    requestWithURL:
+                                    [NSURL
+                                     URLWithString:@"https://movex.herokuapp.com/parse/classes/Test2"]
+                                    cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                    timeoutInterval:60.0];
+    
+    // use only in SET
+    //  NSError *error;
+    //    NSData *jsondata;
+    
+    [request addValue:@"application/json" forHTTPHeaderField:@"Content-type"];
+    [request addValue:@"movexroei" forHTTPHeaderField:@"X-Parse-Application-Id"];
+    
+    // use only in SET
+    //    [request setHTTPBody:jsondata];
+    [request setHTTPMethod:@"GET"];
+    
+    NSLog(@"%@", request);
+    
+    NSURLSessionDataTask *postdata = [session
+                                      dataTaskWithRequest:request
+                                      completionHandler:^(NSData *data, NSURLResponse *response,
+                                                          NSError *error) {
+                                          NSDictionary *result =
+                                          [NSJSONSerialization JSONObjectWithData:data
+                                                                          options:kNilOptions
+                                                                            error:&error];
+                                          jsonResult2 = [result objectForKey:@"results"];
+                                          NSLog(@"test : %@", jsonResult2);
+                                          for (NSDictionary *addname in jsonResult2) {
+                                              if ([[addname valueForKey:@"Address"] isEqualToString:_Address]) {
+                                                  appResult = addname[@"apartmentsDict"];
+                                                  // for (NSDictionary *dictionary in appResult) {
+                                                  
+                                                  _arrHeader = [appResult allKeys];
+                                                  NSLog(@"%@", _arrHeader);
+                                                  
+                                                  NSSortDescriptor *sortOrder =
+                                                  [NSSortDescriptor sortDescriptorWithKey:@"self"
+                                                                                ascending:YES];
+                                                  _arrHeader = (NSMutableArray *)[_arrHeader
+                                                                                  sortedArrayUsingDescriptors:[NSArray
+                                                                                                               arrayWithObject:sortOrder]];
+                                                  break;
+                                                  
+                                              }
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  [self.tblView reloadData];
+                                              });
+                                              
+                                          }
+                                      }];
+    [postdata resume];
+
+    
+    
+    
+    
+}
+
+- (void)addInfo:(id)sender {
 
   _mapView.selectedMarker = nil;
 

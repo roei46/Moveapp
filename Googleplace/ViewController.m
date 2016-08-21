@@ -6,13 +6,13 @@
 //  Copyright © 2016 Roei Baruch. All rights reserved.
 //
 
+#import "AddinformationViewcontroller.h"
 #import "DatabaseManager.h"
 #import "MapViewController.h"
 #import "ServerProtocol.h"
 #import "ViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
-#import "AddinformationViewcontroller.h"
 // static CGFloat kSearchBarHeight = 44.0f;
 static NSString const *kNormalType = @"Normal";
 static NSString const *kSatelliteType = @"Satellite";
@@ -42,11 +42,6 @@ static NSString const *kTerrainType = @"Terrain";
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-//  self.navigationItem.rightBarButtonItem =
-//      [[UIBarButtonItem alloc] initWithTitle:@"Show map"
-//                                       style:UIBarButtonItemStylePlain
-//                                      target:self
-//                                      action:@selector(showmap:)];
   self.navigationController.navigationBar.barTintColor =
       [UIColor colorWithRed:0 green:0.24 blue:0.45 alpha:1];
   self.navigationController.navigationBar.titleTextAttributes =
@@ -170,6 +165,7 @@ static NSString const *kTerrainType = @"Terrain";
                                        place.coordinate.latitude,
                                        place.coordinate.longitude);
                                    marker.title = place.name;
+                                   marker.snippet = @"Push to see feedbacks";
                                    marker.map = _mapview;
 
                                  } else {
@@ -240,69 +236,86 @@ static NSString const *kTerrainType = @"Terrain";
                   actionWithTitle:@"yes"
                             style:UIAlertActionStyleDefault
                           handler:^(UIAlertAction *action) {
-                              
-                              
-                              AddinformationViewcontroller *destViewController = [self.storyboard
-                                                                       instantiateViewControllerWithIdentifier:@"AddinformationViewcontroller"];
-                              
-                              destViewController.Address = place.name;
-                              destViewController.googleId = place.placeID;
-                              destViewController.working = YES;
-                              
-                              [self.navigationController pushViewController:destViewController
-                                                                   animated:YES];
 
-                              
-                              
-                              
+                            AddinformationViewcontroller *destViewController =
+                                [self.storyboard
+                                    instantiateViewControllerWithIdentifier:
+                                        @"AddinformationViewcontroller"];
 
-//                            DatabaseManager *databaseManager =
-//                                [[DatabaseManager alloc] init];
-//
-//                            [databaseManager
-//                                addPlace:place
-//                                callback:^(BOOL found) {
-//                                  if (found) {
-//
-//                                    UIAlertController *alert = [UIAlertController
-//                                        alertControllerWithTitle:@"Alert"
-//                                                         message:nil
-//                                                  preferredStyle:
-//                                                      UIAlertControllerStyleAlert];
-//
-//                                    UIAlertAction *failed = [UIAlertAction
-//                                        actionWithTitle:@"Address uploaded!"
-//                                                  style:
-//                                                      UIAlertActionStyleDefault
-//                                                handler:nil];
-//                                    [alert addAction:failed];
-//
-//                                    [self presentViewController:alert
-//                                                       animated:YES
-//                                                     completion:nil];
-//                                    [self.navigationController loadView];
-//                                  }
-//                                  UIAlertController *alert = [UIAlertController
-//                                      alertControllerWithTitle:@"Alert"
-//                                                       message:nil
-//                                                preferredStyle:
-//                                                    UIAlertControllerStyleAlert];
-//
-//                                  [self presentViewController:alert
-//                                                     animated:YES
-//                                                   completion:nil];
-//
-//                                  UIAlertAction *failed = [UIAlertAction
-//                                      actionWithTitle:@"Upload failed"
-//                                                style:UIAlertActionStyleDefault
-//                                              handler:nil];
-//                                  [alert addAction:failed];
-//
-//                                  [self presentViewController:alert
-//                                                     animated:YES
-//                                                   completion:nil];
-//
-//                                }];
+                            destViewController.Address = place.name;
+                            destViewController.googleId = place.placeID;
+                            destViewController.working = YES;
+
+                            [self.navigationController
+                                pushViewController:destViewController
+                                          animated:YES];
+
+                            //                            DatabaseManager
+                            //                            *databaseManager =
+                            //                                [[DatabaseManager
+                            //                                alloc] init];
+                            //
+                            //                            [databaseManager
+                            //                                addPlace:place
+                            //                                callback:^(BOOL
+                            //                                found) {
+                            //                                  if (found) {
+                            //
+                            //                                    UIAlertController
+                            //                                    *alert =
+                            //                                    [UIAlertController
+                            //                                        alertControllerWithTitle:@"Alert"
+                            //                                                         message:nil
+                            //                                                  preferredStyle:
+                            //                                                      UIAlertControllerStyleAlert];
+                            //
+                            //                                    UIAlertAction
+                            //                                    *failed =
+                            //                                    [UIAlertAction
+                            //                                        actionWithTitle:@"Address
+                            //                                        uploaded!"
+                            //                                                  style:
+                            //                                                      UIAlertActionStyleDefault
+                            //                                                handler:nil];
+                            //                                    [alert
+                            //                                    addAction:failed];
+                            //
+                            //                                    [self
+                            //                                    presentViewController:alert
+                            //                                                       animated:YES
+                            //                                                     completion:nil];
+                            //                                    [self.navigationController
+                            //                                    loadView];
+                            //                                  }
+                            //                                  UIAlertController
+                            //                                  *alert =
+                            //                                  [UIAlertController
+                            //                                      alertControllerWithTitle:@"Alert"
+                            //                                                       message:nil
+                            //                                                preferredStyle:
+                            //                                                    UIAlertControllerStyleAlert];
+                            //
+                            //                                  [self
+                            //                                  presentViewController:alert
+                            //                                                     animated:YES
+                            //                                                   completion:nil];
+                            //
+                            //                                  UIAlertAction
+                            //                                  *failed =
+                            //                                  [UIAlertAction
+                            //                                      actionWithTitle:@"Upload
+                            //                                      failed"
+                            //                                                style:UIAlertActionStyleDefault
+                            //                                              handler:nil];
+                            //                                  [alert
+                            //                                  addAction:failed];
+                            //
+                            //                                  [self
+                            //                                  presentViewController:alert
+                            //                                                     animated:YES
+                            //                                                   completion:nil];
+                            //
+                            //                                }];
 
                           }];
               [alert addAction:yes];
@@ -355,16 +368,8 @@ static NSString const *kTerrainType = @"Terrain";
   }
 }
 
-//- (IBAction)onLaunchClicked:(id)sender {
-//  GMSAutocompleteViewController *acController =
-//      [[GMSAutocompleteViewController alloc] init];
-//  acController.delegate = self;
-//  [self presentViewController:acController animated:YES completion:nil];
-//}
-
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
 }
 
 @end

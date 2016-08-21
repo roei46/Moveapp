@@ -127,7 +127,7 @@
                                    message:nil
                             preferredStyle:UIAlertControllerStyleAlert];
 
-              UIAlertAction *failed = [UIAlertAction
+              UIAlertAction *uploaded = [UIAlertAction
                   actionWithTitle:@"Address uploaded!"
                             style:UIAlertActionStyleDefault
                           handler:^(UIAlertAction *action) {
@@ -143,7 +143,7 @@
                                           animated:YES];
                           }];
 
-              [alert addAction:failed];
+              [alert addAction:uploaded];
 
               [self presentViewController:alert animated:YES completion:nil];
               [self.navigationController loadView];
@@ -249,7 +249,22 @@
                                                     @"Upload succeeded!"
                                                           style:
                                                               UIAlertActionStyleDefault
-                                                        handler:nil];
+                                                                 handler:^(UIAlertAction *action) {
+                                                                     MapViewController *destViewController =
+                                                                     [self.storyboard
+                                                                      instantiateViewControllerWithIdentifier:
+                                                                      @"MapViewController"];
+                                                                     
+                                                                     destViewController.Address = _Address;
+                                                                     
+                                                                     [self.navigationController
+                                                                      pushViewController:destViewController
+                                                                      animated:YES];
+                                                                 }];
+
+                                              
+                                              
+                                              
                                             [alert addAction:ok];
 
                                             [self presentViewController:alert
@@ -345,7 +360,20 @@
                                                     @"Upload succeeded!"
                                                           style:
                                                               UIAlertActionStyleDefault
-                                                        handler:nil];
+                                                                 handler:^(UIAlertAction *action) {
+                                                                     MapViewController *destViewController =
+                                                                     [self.storyboard
+                                                                      instantiateViewControllerWithIdentifier:
+                                                                      @"MapViewController"];
+                                                                     
+                                                                     destViewController.Address = _Address;
+                                                                     
+                                                                     [self.navigationController
+                                                                      pushViewController:destViewController
+                                                                      animated:YES];
+                                                                 }];
+                                              
+
                                             [alert addAction:ok];
 
                                             [self presentViewController:alert

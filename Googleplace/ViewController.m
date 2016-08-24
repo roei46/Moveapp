@@ -44,8 +44,10 @@ static NSString const *kTerrainType = @"Terrain";
 
   self.navigationController.navigationBar.barTintColor =
       [UIColor colorWithRed:0 green:0.24 blue:0.45 alpha:1];
-  self.navigationController.navigationBar.titleTextAttributes =
-      @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+  self.navigationController.navigationBar.titleTextAttributes = @{
+    NSForegroundColorAttributeName : [UIColor whiteColor],
+    NSFontAttributeName : [UIFont fontWithName:@"Bodoni 72 Smallcaps" size:21]
+  };
   self.title = @"Move-in-fo";
   self.edgesForExtendedLayout =
       UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight;
@@ -105,11 +107,7 @@ static NSString const *kTerrainType = @"Terrain";
                                                           longitude:34.7805700
                                                                zoom:10];
   self.mapview.camera = camera;
-  //
-  //  _Marker = [[GMSMarker alloc] init];
-  //  _Marker.position = CLLocationCoordinate2DMake(32.0808800, 34.7805700);
-  //  _Marker.map = self.mapview;
-  //  _mapview.delegate = self;
+  self.mapview.padding = UIEdgeInsetsMake(0, 0, 15, 0);
 
   [self.mapview addSubview:_infoLabel];
 
@@ -215,7 +213,7 @@ static NSString const *kTerrainType = @"Terrain";
 
             if (exist) {
               UIAlertController *alert = [UIAlertController
-                  alertControllerWithTitle:@"Alert"
+                  alertControllerWithTitle:nil
                                    message:nil
                             preferredStyle:UIAlertControllerStyleAlert];
 
@@ -228,7 +226,7 @@ static NSString const *kTerrainType = @"Terrain";
             } else {
 
               UIAlertController *alert = [UIAlertController
-                  alertControllerWithTitle:@"Alert"
+                  alertControllerWithTitle:nil
                                    message:@"Do you wand to add this address?"
                             preferredStyle:UIAlertControllerStyleAlert];
 
@@ -250,78 +248,11 @@ static NSString const *kTerrainType = @"Terrain";
                                 pushViewController:destViewController
                                           animated:YES];
 
-                            //                            DatabaseManager
-                            //                            *databaseManager =
-                            //                                [[DatabaseManager
-                            //                                alloc] init];
-                            //
-                            //                            [databaseManager
-                            //                                addPlace:place
-                            //                                callback:^(BOOL
-                            //                                found) {
-                            //                                  if (found) {
-                            //
-                            //                                    UIAlertController
-                            //                                    *alert =
-                            //                                    [UIAlertController
-                            //                                        alertControllerWithTitle:@"Alert"
-                            //                                                         message:nil
-                            //                                                  preferredStyle:
-                            //                                                      UIAlertControllerStyleAlert];
-                            //
-                            //                                    UIAlertAction
-                            //                                    *failed =
-                            //                                    [UIAlertAction
-                            //                                        actionWithTitle:@"Address
-                            //                                        uploaded!"
-                            //                                                  style:
-                            //                                                      UIAlertActionStyleDefault
-                            //                                                handler:nil];
-                            //                                    [alert
-                            //                                    addAction:failed];
-                            //
-                            //                                    [self
-                            //                                    presentViewController:alert
-                            //                                                       animated:YES
-                            //                                                     completion:nil];
-                            //                                    [self.navigationController
-                            //                                    loadView];
-                            //                                  }
-                            //                                  UIAlertController
-                            //                                  *alert =
-                            //                                  [UIAlertController
-                            //                                      alertControllerWithTitle:@"Alert"
-                            //                                                       message:nil
-                            //                                                preferredStyle:
-                            //                                                    UIAlertControllerStyleAlert];
-                            //
-                            //                                  [self
-                            //                                  presentViewController:alert
-                            //                                                     animated:YES
-                            //                                                   completion:nil];
-                            //
-                            //                                  UIAlertAction
-                            //                                  *failed =
-                            //                                  [UIAlertAction
-                            //                                      actionWithTitle:@"Upload
-                            //                                      failed"
-                            //                                                style:UIAlertActionStyleDefault
-                            //                                              handler:nil];
-                            //                                  [alert
-                            //                                  addAction:failed];
-                            //
-                            //                                  [self
-                            //                                  presentViewController:alert
-                            //                                                     animated:YES
-                            //                                                   completion:nil];
-                            //
-                            //                                }];
-
                           }];
               [alert addAction:yes];
 
               UIAlertAction *cancel =
-                  [UIAlertAction actionWithTitle:@"cancel"
+                  [UIAlertAction actionWithTitle:@"No"
                                            style:UIAlertActionStyleDefault
                                          handler:nil];
               [alert addAction:cancel];

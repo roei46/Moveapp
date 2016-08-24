@@ -19,7 +19,7 @@
 		C437F68F1D51272600FAC6D2 /* ServerProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = C437F68E1D51272600FAC6D2 /* ServerProtocol.m */; };
 		C437F6921D5127F500FAC6D2 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C437F6911D5127F500FAC6D2 /* DatabaseManager.m */; };
 		C437F6951D529EEF00FAC6D2 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C437F6941D529EEF00FAC6D2 /* MapViewController.m */; };
-		C43A6EBE1D69DDD9003CD761 /* icono_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C43A6EBD1D69DDD7003CD761 /* icono_home.png */; };
+		C48321571D6DDEBC00008B32 /* cover.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C48321561D6DDEBC00008B32 /* cover.jpeg */; };
 		C4F14E081D554348003F182F /* AddinformationViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F14E071D554348003F182F /* AddinformationViewcontroller.m */; };
 /* End PBXBuildFile section */
 
@@ -66,7 +66,7 @@
 		C437F6911D5127F500FAC6D2 /* DatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
 		C437F6931D529EEF00FAC6D2 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		C437F6941D529EEF00FAC6D2 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
-		C43A6EBD1D69DDD7003CD761 /* icono_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icono_home.png; sourceTree = "<group>"; };
+		C48321561D6DDEBC00008B32 /* cover.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cover.jpeg; sourceTree = "<group>"; };
 		C4F14E061D554348003F182F /* AddinformationViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddinformationViewcontroller.h; path = ../AddinformationViewcontroller.h; sourceTree = "<group>"; };
 		C4F14E071D554348003F182F /* AddinformationViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddinformationViewcontroller.m; path = ../AddinformationViewcontroller.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,7 +153,7 @@
 		C435CDB41D4691F6002F9095 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C43A6EBD1D69DDD7003CD761 /* icono_home.png */,
+				C48321561D6DDEBC00008B32 /* cover.jpeg */,
 				C4F14E061D554348003F182F /* AddinformationViewcontroller.h */,
 				C4F14E071D554348003F182F /* AddinformationViewcontroller.m */,
 				C435CDB51D4691F6002F9095 /* main.m */,
@@ -297,7 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C435CDC41D4691F6002F9095 /* LaunchScreen.storyboard in Resources */,
-				C43A6EBE1D69DDD9003CD761 /* icono_home.png in Resources */,
+				C48321571D6DDEBC00008B32 /* cover.jpeg in Resources */,
 				C435CDC11D4691F6002F9095 /* Assets.xcassets in Resources */,
 				C435CDBF1D4691F6002F9095 /* Main.storyboard in Resources */,
 			);

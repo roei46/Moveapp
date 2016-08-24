@@ -18,13 +18,17 @@
 @interface MapViewController () <GMSMapViewDelegate, UITableViewDelegate,
                                  UITableViewDataSource>
 @property(nonatomic, strong) GMSMarker *selectedMarker;
-@property(weak, nonatomic) IBOutlet UITableView *tblView;
+@property(strong, nonatomic) IBOutlet UITableView *tblView;
 @property(strong, nonatomic) NSMutableString *DBid;
 @property(strong, nonatomic) NSArray *arrHeader;
+
+
+
 
 @end
 
 @implementation MapViewController {
+
 
   GMSMapView *_mapView;
   GMSMarker *_Marker;
@@ -32,9 +36,13 @@
   UISegmentedControl *_switcher;
   NSArray *jsonResult2;
   NSDictionary *appResult;
+    UIRefreshControl *refreshControl;
+    NSMutableArray *expandedCells;
+
 }
 
 - (void)viewDidLoad {
+    self.automaticallyAdjustsScrollViewInsets = NO;
 
   self.title = _Address;
     self.navigationItem.rightBarButtonItem =
@@ -42,9 +50,48 @@
                                      style:UIBarButtonItemStylePlain
                                     target:self
                                     action:@selector(addInfo:)];
+    
+    
+    refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.backgroundColor = [UIColor purpleColor];
+    refreshControl.tintColor = [UIColor whiteColor];
+    [refreshControl addTarget:self
+                            action:@selector(getLatestLoans)
+                  forControlEvents:UIControlEventValueChanged];
+    
+
+}
 
 
-  
+
+
+- (void)reloadData
+{
+    // Reload table data
+    [self.tblView reloadData];
+    
+    // End the refreshing
+    if (refreshControl) {
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MMM d, h:mm a"];
+        NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
+                                                                    forKey:NSForegroundColorAttributeName];
+        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+        refreshControl.attributedTitle = attributedTitle;
+        
+        [refreshControl endRefreshing];
+    }
+}
+
+
+-(void)getLatestLoans{
+    
+    
+    [refreshControl endRefreshing];
+    
+    
 }
 
 
@@ -70,16 +117,20 @@
 //    self.tblView.backgroundView = messageLabel;
 //    self.tblView.separatorStyle = UITableViewCellSeparatorStyleNone;
 //        return 0;
-     return [_arrHeader count];
-
+//       
+//    }
+   // return [_arrHeader count];
+    
+    if ([_arrHeader count] == 0) {
+        return 1; // a single cell to report no data
+    }
+    return [_arrHeader count];
 
 }
 
 - (NSString *)tableView:(UITableView *)tableView
 titleForHeaderInSection:(NSInteger)section {
-  NSLog(@"titleForHeaderInSection called :%@",
-        [_arrHeader objectAtIndex:section]);
-
+ 
   return [_arrHeader objectAtIndex:section];
 }
 
@@ -98,14 +149,40 @@ titleForHeaderInSection:(NSInteger)section {
   if (cell == nil) {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                   reuseIdentifier:CellIdentifier];
+      
   }
-    
    
     
 
   cell.textLabel.text = appResult[_arrHeader[indexPath.section]][indexPath.row];
 
   return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([expandedCells containsObject:indexPath])
+    {
+        [expandedCells removeObject:indexPath];
+    }
+    else
+    {
+        [expandedCells addObject:indexPath];
+    }
+    [self.tblView beginUpdates];
+    [self.tblView endUpdates];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([expandedCells containsObject:indexPath])
+    {
+        return 180; //It's not necessary a constant, though
+    }
+    else
+    {
+        return 44; //Again not necessary a constant
+    }
 }
 
 
@@ -179,8 +256,6 @@ titleForHeaderInSection:(NSInteger)section {
 
     
     
-    
-    
 }
 
 - (void)addInfo:(id)sender {
@@ -198,20 +273,13 @@ titleForHeaderInSection:(NSInteger)section {
                                        animated:YES];
 }
 
+
+
+
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little
-preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

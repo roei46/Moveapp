@@ -12,6 +12,7 @@
 @interface AddinformationViewcontroller () <UITextViewDelegate>
 @property(strong, nonatomic) NSMutableString *DBid;
 @property (weak, nonatomic) IBOutlet UIImageView *streetImage;
+@property (weak, nonatomic) IBOutlet UILabel *TITLE;
 
 - (IBAction)upload:(id)sender;
 
@@ -28,16 +29,26 @@
                                        style:UIBarButtonItemStylePlain
                                       target:self
                                       action:@selector(cancel:)];
+    
+    [self.view setBackgroundColor:[UIColor colorWithRed:0.27 green:0.75 blue:0.73 alpha:1.0]];
 
-  self.title = _Address;
-
-  _Feedback2.text = @"Comment";
-  _Feedback2.textColor = [UIColor lightGrayColor];
+  self.title = @"Add information";
+    _TITLE.text = _Address;
+//  _Feedback2.text = @"Comment her";
+//  _Feedback2.textColor = [UIColor lightGrayColor];
   _Feedback2.delegate = self;
   self.Feedback2.layer.borderWidth = 0.5f;
   self.Feedback2.layer.borderColor = [[UIColor grayColor] CGColor];
   self.Feedback2.layer.cornerRadius = 8;
+    
+    
 }
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [_Feedback2 resignFirstResponder];
+    
+}
+
 
 - (void)cancel:(id)sender {
 
@@ -144,7 +155,7 @@
                     actionWithTitle:@"Address uploaded!"
                               style:UIAlertActionStyleDefault
                             handler:^(UIAlertAction *action) {
-                              MapViewController *destViewController =
+                              tableView *destViewController =
                                   [self.storyboard
                                       instantiateViewControllerWithIdentifier:
                                           @"MapViewController"];
@@ -269,7 +280,7 @@
                                                           handler:^(
                                                               UIAlertAction
                                                                   *action) {
-                                                            MapViewController *
+                                                            tableView *
                                                                 destViewController =
                                                                     [self.storyboard
                                                                         instantiateViewControllerWithIdentifier:
@@ -392,7 +403,7 @@
                                                           handler:^(
                                                               UIAlertAction
                                                                   *action) {
-                                                            MapViewController *
+                                                            tableView *
                                                                 destViewController =
                                                                     [self.storyboard
                                                                         instantiateViewControllerWithIdentifier:

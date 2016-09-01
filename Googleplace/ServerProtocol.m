@@ -66,6 +66,7 @@
 }
 
 - (void)isPlaceExist:(GMSPlace *)place callback:(PlaceExist)callback {
+    
   NSURLRequest *request = [self createRequest:TestTable];
 
   NSURLSessionDataTask *postdata = [self.session

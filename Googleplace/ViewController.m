@@ -8,9 +8,9 @@
 
 #import "AddinformationViewcontroller.h"
 #import "DatabaseManager.h"
-#import "MapViewController.h"
 #import "ServerProtocol.h"
 #import "ViewController.h"
+#import "tableView.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
 // static CGFloat kSearchBarHeight = 44.0f;
@@ -24,29 +24,28 @@ static NSString const *kTerrainType = @"Terrain";
 
 @property(weak, nonatomic) IBOutlet GMSMapView *mapview;
 @property(weak, nonatomic) IBOutlet UILabel *infoLabel;
+@property(weak, nonatomic)
+    IBOutlet GMSAutocompleteTableDataSource *_tableDataSource;
+@property(strong, nonatomic)
+    IBOutlet GMSAutocompleteResultsViewController *_acViewController;
+@property(weak, nonatomic) IBOutlet GMSMarker *_Marker;
+@property(strong, nonatomic) GMSPlacesClient *placesclient;
+@property(weak, nonatomic) UITextView *_resultView;
+@property(strong, nonatomic) UISearchController *searchController;
+@property(weak, nonatomic) UISegmentedControl *_switcher;
 
 @end
 
-@implementation ViewController {
-  UISegmentedControl *_switcher;
-  GMSAutocompleteTableDataSource *_tableDataSource;
-  GMSAutocompleteResultsViewController *_acViewController;
-
-  UITextView *_resultView;
-  UISearchController *searchController;
-
-  GMSMarker *_Marker;
-  GMSPlacesClient *placesclient;
-}
+@implementation ViewController
 
 - (void)viewDidLoad {
   [super viewDidLoad];
 
   self.navigationController.navigationBar.barTintColor =
-      [UIColor colorWithRed:0 green:0.24 blue:0.45 alpha:1];
+      [UIColor colorWithRed:0.80 green:0.47 blue:0.54 alpha:1.0];
   self.navigationController.navigationBar.titleTextAttributes = @{
     NSForegroundColorAttributeName : [UIColor whiteColor],
-    NSFontAttributeName : [UIFont fontWithName:@"Bodoni 72 Smallcaps" size:21]
+    NSFontAttributeName : [UIFont fontWithName:@"Heiti TC" size:21]
   };
   self.title = @"Move-in-fo";
   self.edgesForExtendedLayout =
@@ -54,27 +53,28 @@ static NSString const *kTerrainType = @"Terrain";
 
   self.view.backgroundColor = [UIColor whiteColor];
 
-  _acViewController = [[GMSAutocompleteResultsViewController alloc] init];
-  _acViewController.delegate = self;
+  __acViewController = [[GMSAutocompleteResultsViewController alloc] init];
+  __acViewController.delegate = self;
 
-  searchController = [[UISearchController alloc]
-      initWithSearchResultsController:_acViewController];
+  _searchController = [[UISearchController alloc]
+      initWithSearchResultsController:__acViewController];
 
-  searchController.hidesNavigationBarDuringPresentation = YES;
-  searchController.dimsBackgroundDuringPresentation = YES;
+  _searchController.hidesNavigationBarDuringPresentation = YES;
+  _searchController.dimsBackgroundDuringPresentation = YES;
 
-  searchController.searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-  searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
-  [searchController.searchBar sizeToFit];
+  _searchController.searchBar.autoresizingMask =
+      UIViewAutoresizingFlexibleWidth;
+  _searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
+  //[UISearchController.searchBar sizeToFit];
   self.definesPresentationContext = YES;
-  searchController.searchResultsUpdater = _acViewController;
+  _searchController.searchResultsUpdater = __acViewController;
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    searchController.modalPresentationStyle = UIModalPresentationPopover;
+    _searchController.modalPresentationStyle = UIModalPresentationPopover;
   } else {
-    searchController.modalPresentationStyle = UIModalPresentationFullScreen;
+    _searchController.modalPresentationStyle = UIModalPresentationFullScreen;
   }
   self.definesPresentationContext = YES;
-  [self.view addSubview:searchController.searchBar];
+  [self.view addSubview:_searchController.searchBar];
   _mapview.delegate = self;
   _mapview.settings.compassButton = YES;
   _mapview.settings.myLocationButton = YES;
@@ -102,10 +102,18 @@ static NSString const *kTerrainType = @"Terrain";
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
+  _mapview.myLocationEnabled = YES;
 
-  GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:32.0808800
-                                                          longitude:34.7805700
-                                                               zoom:10];
+  CLLocationManager *locationManager;
+  locationManager = [[CLLocationManager alloc] init];
+  locationManager.distanceFilter = kCLDistanceFilterNone;
+  locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+  [locationManager startUpdatingLocation];
+
+  GMSCameraPosition *camera = [GMSCameraPosition
+      cameraWithLatitude:locationManager.location.coordinate.latitude
+               longitude:locationManager.location.coordinate.longitude
+                    zoom:10];
   self.mapview.camera = camera;
   self.mapview.padding = UIEdgeInsetsMake(0, 0, 15, 0);
 
@@ -136,44 +144,45 @@ static NSString const *kTerrainType = @"Terrain";
 
   NSLog(@"%@", request);
 
-  NSURLSessionDataTask *postdata = [session
-      dataTaskWithRequest:request
-        completionHandler:^(NSData *data, NSURLResponse *response,
-                            NSError *error) {
-          NSDictionary *result =
-              [NSJSONSerialization JSONObjectWithData:data
-                                              options:kNilOptions
-                                                error:&error];
-          NSArray *jsonResult2 = [result objectForKey:@"results"];
-          NSLog(@"test : %@", jsonResult2);
-          for (NSDictionary *dic in jsonResult2) {
-            NSString *placeID = [dic valueForKey:@"googlid"];
-            placesclient = [[GMSPlacesClient alloc] init];
+  NSURLSessionDataTask *postdata =
+      [session dataTaskWithRequest:request
+                 completionHandler:^(NSData *data, NSURLResponse *response,
+                                     NSError *error) {
+                   NSDictionary *result =
+                       [NSJSONSerialization JSONObjectWithData:data
+                                                       options:kNilOptions
+                                                         error:&error];
+                   NSArray *jsonResult2 = [result objectForKey:@"results"];
+                   NSLog(@"test : %@", jsonResult2);
+                   for (NSDictionary *dic in jsonResult2) {
+                     NSString *placeID = [dic valueForKey:@"googlid"];
+                     _placesclient = [[GMSPlacesClient alloc] init];
 
-            [placesclient lookUpPlaceID:placeID
-                               callback:^(GMSPlace *place, NSError *error) {
-                                 if (error != nil) {
-                                   NSLog(@"Place Details error %@",
-                                         [error localizedDescription]);
-                                   return;
-                                 }
-                                 if (place != nil) {
-                                   GMSMarker *marker = [[GMSMarker alloc] init];
-                                   marker.position = CLLocationCoordinate2DMake(
-                                       place.coordinate.latitude,
-                                       place.coordinate.longitude);
-                                   marker.title = place.name;
-                                   marker.snippet = @"Push to see feedbacks";
-                                   marker.map = _mapview;
+                     [_placesclient
+                         lookUpPlaceID:placeID
+                              callback:^(GMSPlace *place, NSError *error) {
+                                if (error != nil) {
+                                  NSLog(@"Place Details error %@",
+                                        [error localizedDescription]);
+                                  return;
+                                }
+                                if (place != nil) {
+                                  GMSMarker *marker = [[GMSMarker alloc] init];
+                                  marker.position = CLLocationCoordinate2DMake(
+                                      place.coordinate.latitude,
+                                      place.coordinate.longitude);
+                                  marker.title = place.name;
+                                  marker.snippet = @"Push to see feedbacks";
+                                  marker.map = _mapview;
 
-                                 } else {
-                                   NSLog(@"No place details for %@", placeID);
-                                 }
-                               }];
-            NSLog(@" place id : %@", placeID);
-          }
+                                } else {
+                                  NSLog(@"No place details for %@", placeID);
+                                }
+                              }];
+                     NSLog(@" place id : %@", placeID);
+                   }
 
-        }];
+                 }];
 
   [postdata resume];
 }
@@ -190,7 +199,7 @@ static NSString const *kTerrainType = @"Terrain";
   mapView.selectedMarker = nil;
 
   NSLog(@" Taped on marker : %@", marker.title);
-  MapViewController *destViewController = [self.storyboard
+  tableView *destViewController = [self.storyboard
       instantiateViewControllerWithIdentifier:@"MapViewController"];
   NSLog(@" Taped on marker : %@", marker.userData);
 
@@ -262,14 +271,14 @@ static NSString const *kTerrainType = @"Terrain";
 
           }];
 
-  [searchController setActive:NO];
+  //  [UISearchController setActive:NO];
 }
 
 - (void)resultsController:
             (GMSAutocompleteResultsViewController *)resultsController
     didFailAutocompleteWithError:(NSError *)error {
   // Display the error and dismiss the search controller.
-  [searchController setActive:NO];
+  //  [UISearchController setActive:NO];
 }
 
 // Show and hide the network activity indicator when we start/stop loading
@@ -287,7 +296,7 @@ static NSString const *kTerrainType = @"Terrain";
 
 - (void)didChangeSwitcher {
   NSString *title =
-      [_switcher titleForSegmentAtIndex:_switcher.selectedSegmentIndex];
+      [__switcher titleForSegmentAtIndex:__switcher.selectedSegmentIndex];
   if ([kNormalType isEqualToString:title]) {
     _mapview.mapType = kGMSTypeNormal;
   } else if ([kSatelliteType isEqualToString:title]) {

@@ -65,6 +65,30 @@
   return result;
 }
 
+//- (void)http {
+//    
+//    
+//    NSURLRequest *request = [self createRequest:TestTable];
+//    
+//    NSURLSessionDataTask *postdata = [self.session
+//                                      dataTaskWithRequest:request
+//                                      completionHandler:^(NSData *data, NSURLResponse *response,
+//                                                          NSError *error) {
+//                                          
+//                                          NSDictionary *result = [self deserialize:data];
+//                                          
+//                                          
+//                                          if (<#condition#>) {
+//                                              <#statements#>
+//                                          }
+//                                      }];
+//
+//}
+
+
+
+
+
 - (void)isPlaceExist:(GMSPlace *)place callback:(PlaceExist)callback {
     
   NSURLRequest *request = [self createRequest:TestTable];

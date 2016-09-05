@@ -11,5 +11,8 @@
 @interface ServerProtocol : NSObject
 typedef void (^PlaceExist)(BOOL exist);
 
+
 - (void)isPlaceExist:(GMSPlace *)place callback:(PlaceExist)callback;
+
+
 @end

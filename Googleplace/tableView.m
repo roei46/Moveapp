@@ -48,6 +48,9 @@
                                       target:self
                                       action:@selector(addInfo:)];
     
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(back:)];
+
+    
   
 }
 
@@ -110,7 +113,8 @@ titleForHeaderInSection:(NSInteger)section {
   [self.view addSubview:_tblView];
     
     
-    ServerProtocol *serverprotocol = [[ServerProtocol alloc]init];
+ServerProtocol *serverprotocol = [[ServerProtocol alloc]init];
+    
     
     
 
@@ -177,6 +181,20 @@ titleForHeaderInSection:(NSInteger)section {
    
 
   [postdata resume];
+}
+
+- (void)back:(id)sender {
+    
+    _mapView.selectedMarker = nil;
+    
+    AddinformationViewcontroller *destViewController = [self.storyboard
+                                                        instantiateViewControllerWithIdentifier:@"AddinformationViewcontroller"];
+    
+    destViewController.Address = _Address;
+    destViewController.working = NO;
+    
+    [self.navigationController pushViewController:destViewController
+                                         animated:YES];
 }
 
 - (void)addInfo:(id)sender {

@@ -32,7 +32,7 @@ static NSString const *kTerrainType = @"Terrain";
 @property(strong, nonatomic) GMSPlacesClient *placesclient;
 @property(weak, nonatomic) UITextView *_resultView;
 @property(strong, nonatomic) UISearchController *searchController;
-@property(weak, nonatomic) UISegmentedControl *_switcher;
+@property(strong, nonatomic) UISegmentedControl *switcher;
 
 @end
 
@@ -42,7 +42,7 @@ static NSString const *kTerrainType = @"Terrain";
   [super viewDidLoad];
 
   self.navigationController.navigationBar.barTintColor =
-      [UIColor colorWithRed:0.80 green:0.47 blue:0.54 alpha:1.0];
+      [UIColor colorWithRed:0.89 green:0.49 blue:0.53 alpha:1.0];
   self.navigationController.navigationBar.titleTextAttributes = @{
     NSForegroundColorAttributeName : [UIColor whiteColor],
     NSFontAttributeName : [UIFont fontWithName:@"Heiti TC" size:21]
@@ -65,7 +65,10 @@ static NSString const *kTerrainType = @"Terrain";
   _searchController.searchBar.autoresizingMask =
       UIViewAutoresizingFlexibleWidth;
   _searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
-  //[UISearchController.searchBar sizeToFit];
+
+  _searchController.searchBar.placeholder = @"Search your address";
+
+  [_searchController.searchBar sizeToFit];
   self.definesPresentationContext = YES;
   _searchController.searchResultsUpdater = __acViewController;
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -78,26 +81,6 @@ static NSString const *kTerrainType = @"Terrain";
   _mapview.delegate = self;
   _mapview.settings.compassButton = YES;
   _mapview.settings.myLocationButton = YES;
-
-  //      NSArray *types = @[ kNormalType, kSatelliteType, kHybridType,
-  //      kTerrainType
-  //      ];
-  //
-  //      _switcher = [[UISegmentedControl alloc] initWithItems:types];
-  //      _switcher.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin |
-  //                                   UIViewAutoresizingFlexibleWidth |
-  //                                   UIViewAutoresizingFlexibleBottomMargin;
-  //      _switcher.selectedSegmentIndex = 0;
-  //      _switcher.translatesAutoresizingMaskIntoConstraints = YES;
-  //      self.navigationItem.titleView = _switcher;
-  //
-  // self.view = _mapview;
-
-  //      [_switcher addTarget:self
-  //                    action:@selector(didChangeSwitcher)
-  //          forControlEvents:UIControlEventValueChanged];
-  //
-  //      [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -116,6 +99,25 @@ static NSString const *kTerrainType = @"Terrain";
                     zoom:10];
   self.mapview.camera = camera;
   self.mapview.padding = UIEdgeInsetsMake(0, 0, 15, 0);
+
+  NSArray *types = @[ kNormalType, kSatelliteType, kHybridType, kTerrainType ];
+
+  _switcher = [[UISegmentedControl alloc] initWithItems:types];
+  _switcher.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin |
+                               UIViewAutoresizingFlexibleWidth |
+                               UIViewAutoresizingFlexibleBottomMargin;
+  _switcher.selectedSegmentIndex = 0;
+  _switcher.translatesAutoresizingMaskIntoConstraints = YES;
+  _switcher.frame = CGRectMake(50, 50, 210, 30);
+  _switcher.tintColor = [UIColor blueColor];
+
+  [self.mapview addSubview:_switcher];
+
+  [_switcher addTarget:self
+                action:@selector(didChangeSwitcher)
+      forControlEvents:UIControlEventValueChanged];
+
+  [self.navigationController setNavigationBarHidden:NO];
 
   [self.mapview addSubview:_infoLabel];
 
@@ -187,6 +189,12 @@ static NSString const *kTerrainType = @"Terrain";
   [postdata resume];
 }
 
+- (bool)mapView:(GMSMapView *)mapView
+    didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
+  _infoLabel.text = nil;
+  return YES;
+}
+
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker {
   [mapView setSelectedMarker:marker];
   _infoLabel.text = marker.title;
@@ -214,71 +222,90 @@ static NSString const *kTerrainType = @"Terrain";
 - (void)resultsController:
             (GMSAutocompleteResultsViewController *)resultsController
  didAutocompleteWithPlace:(GMSPlace *)place {
-  // Display the results and dismiss the search controller.
   ServerProtocol *serverProtocol = [[ServerProtocol alloc] init];
   [serverProtocol
       isPlaceExist:place
           callback:^(BOOL exist) {
 
-            if (exist) {
+            if ([place.name
+                    rangeOfCharacterFromSet:[NSCharacterSet
+                                                decimalDigitCharacterSet]]
+                    .location != NSNotFound) {
+
+              if (exist) {
+                UIAlertController *alert = [UIAlertController
+                    alertControllerWithTitle:nil
+                                     message:nil
+                              preferredStyle:UIAlertControllerStyleAlert];
+
+                UIAlertAction *exist =
+                    [UIAlertAction actionWithTitle:@"Place exist"
+                                             style:UIAlertActionStyleDefault
+                                           handler:nil];
+                [alert addAction:exist];
+                [self presentViewController:alert animated:YES completion:nil];
+
+              } else {
+
+                UIAlertController *alert = [UIAlertController
+                    alertControllerWithTitle:nil
+                                     message:@"Do you wand to add this address?"
+                              preferredStyle:UIAlertControllerStyleAlert];
+
+                UIAlertAction *yes = [UIAlertAction
+                    actionWithTitle:@"yes"
+                              style:UIAlertActionStyleDefault
+                            handler:^(UIAlertAction *action) {
+
+                              AddinformationViewcontroller *destViewController =
+                                  [self.storyboard
+                                      instantiateViewControllerWithIdentifier:
+                                          @"AddinformationViewcontroller"];
+
+                              destViewController.Address = place.name;
+                              destViewController.googleId = place.placeID;
+                              destViewController.working = YES;
+
+                              [self.navigationController
+                                  pushViewController:destViewController
+                                            animated:YES];
+
+                            }];
+
+                [alert addAction:yes];
+
+                UIAlertAction *cancel =
+                    [UIAlertAction actionWithTitle:@"No"
+                                             style:UIAlertActionStyleDefault
+                                           handler:nil];
+                [alert addAction:cancel];
+
+                [self presentViewController:alert animated:YES completion:nil];
+              }
+
+            } else {
               UIAlertController *alert = [UIAlertController
                   alertControllerWithTitle:nil
                                    message:nil
                             preferredStyle:UIAlertControllerStyleAlert];
 
-              UIAlertAction *exist =
-                  [UIAlertAction actionWithTitle:@"Place exist"
+              UIAlertAction *error1 =
+                  [UIAlertAction actionWithTitle:@"Please enter a valid address"
                                            style:UIAlertActionStyleDefault
                                          handler:nil];
-              [alert addAction:exist];
-              [self presentViewController:alert animated:YES completion:nil];
-            } else {
-
-              UIAlertController *alert = [UIAlertController
-                  alertControllerWithTitle:nil
-                                   message:@"Do you wand to add this address?"
-                            preferredStyle:UIAlertControllerStyleAlert];
-
-              UIAlertAction *yes = [UIAlertAction
-                  actionWithTitle:@"yes"
-                            style:UIAlertActionStyleDefault
-                          handler:^(UIAlertAction *action) {
-
-                            AddinformationViewcontroller *destViewController =
-                                [self.storyboard
-                                    instantiateViewControllerWithIdentifier:
-                                        @"AddinformationViewcontroller"];
-
-                            destViewController.Address = place.name;
-                            destViewController.googleId = place.placeID;
-                            destViewController.working = YES;
-
-                            [self.navigationController
-                                pushViewController:destViewController
-                                          animated:YES];
-
-                          }];
-              [alert addAction:yes];
-
-              UIAlertAction *cancel =
-                  [UIAlertAction actionWithTitle:@"No"
-                                           style:UIAlertActionStyleDefault
-                                         handler:nil];
-              [alert addAction:cancel];
-
+              [alert addAction:error1];
               [self presentViewController:alert animated:YES completion:nil];
             }
-
           }];
 
-  //  [UISearchController setActive:NO];
+  [_searchController setActive:NO];
 }
 
 - (void)resultsController:
             (GMSAutocompleteResultsViewController *)resultsController
     didFailAutocompleteWithError:(NSError *)error {
   // Display the error and dismiss the search controller.
-  //  [UISearchController setActive:NO];
+  [_searchController setActive:NO];
 }
 
 // Show and hide the network activity indicator when we start/stop loading
@@ -296,7 +323,7 @@ static NSString const *kTerrainType = @"Terrain";
 
 - (void)didChangeSwitcher {
   NSString *title =
-      [__switcher titleForSegmentAtIndex:__switcher.selectedSegmentIndex];
+      [_switcher titleForSegmentAtIndex:_switcher.selectedSegmentIndex];
   if ([kNormalType isEqualToString:title]) {
     _mapview.mapType = kGMSTypeNormal;
   } else if ([kSatelliteType isEqualToString:title]) {

@@ -30,7 +30,7 @@
                                       target:self
                                       action:@selector(cancel:)];
     
-    [self.view setBackgroundColor:[UIColor colorWithRed:0.27 green:0.75 blue:0.73 alpha:1.0]];
+    [self.view setBackgroundColor:[UIColor colorWithRed:0.27 green:0.74 blue:0.74 alpha:1.0]];
 
   self.title = @"Add information";
     _TITLE.text = _Address;
@@ -46,8 +46,10 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [_Feedback2 resignFirstResponder];
-    
+    [_Apartment resignFirstResponder];
+
 }
+
 
 
 - (void)cancel:(id)sender {

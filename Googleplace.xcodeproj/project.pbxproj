@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		69ECEADDE8EEB29D34CA5DE3 /* libPods-Googleplace.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16307259C197F3DEF75BCD67 /* libPods-Googleplace.a */; };
+		C4106C8A1D80608800563481 /* 126830.svg in Resources */ = {isa = PBXBuildFile; fileRef = C4106C891D80608800563481 /* 126830.svg */; };
 		C435CDB61D4691F6002F9095 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CDB51D4691F6002F9095 /* main.m */; };
 		C435CDB91D4691F6002F9095 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CDB81D4691F6002F9095 /* AppDelegate.m */; };
 		C435CDBC1D4691F6002F9095 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CDBB1D4691F6002F9095 /* ViewController.m */; };
@@ -46,6 +47,7 @@
 		16307259C197F3DEF75BCD67 /* libPods-Googleplace.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Googleplace.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A3A9C0D10D9A88847F4526B /* Pods-Googleplace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Googleplace.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Googleplace/Pods-Googleplace.debug.xcconfig"; sourceTree = "<group>"; };
 		BA2024B2B3D0E70F033142B4 /* Pods-Googleplace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Googleplace.release.xcconfig"; path = "Pods/Target Support Files/Pods-Googleplace/Pods-Googleplace.release.xcconfig"; sourceTree = "<group>"; };
+		C4106C891D80608800563481 /* 126830.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 126830.svg; sourceTree = "<group>"; };
 		C435CDB11D4691F6002F9095 /* Googleplace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Googleplace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C435CDB51D4691F6002F9095 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C435CDB71D4691F6002F9095 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				C455D11E1D6F360100A865F8 /* papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg */,
+				C4106C891D80608800563481 /* 126830.svg */,
 				C48321561D6DDEBC00008B32 /* cover.jpeg */,
 				C4F14E061D554348003F182F /* AddinformationViewcontroller.h */,
 				C4F14E071D554348003F182F /* AddinformationViewcontroller.m */,
@@ -308,6 +311,7 @@
 				C455D11F1D6F360100A865F8 /* papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg in Resources */,
 				C48321571D6DDEBC00008B32 /* cover.jpeg in Resources */,
 				C435CDC11D4691F6002F9095 /* Assets.xcassets in Resources */,
+				C4106C8A1D80608800563481 /* 126830.svg in Resources */,
 				C435CDBF1D4691F6002F9095 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

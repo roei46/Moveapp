@@ -11,8 +11,8 @@
 
 @interface AddinformationViewcontroller () <UITextViewDelegate>
 @property(strong, nonatomic) NSMutableString *DBid;
-@property (weak, nonatomic) IBOutlet UIImageView *streetImage;
-@property (weak, nonatomic) IBOutlet UILabel *TITLE;
+@property(weak, nonatomic) IBOutlet UIImageView *streetImage;
+@property(weak, nonatomic) IBOutlet UILabel *TITLE;
 
 - (IBAction)upload:(id)sender;
 
@@ -22,48 +22,38 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-    _streetImage.image = [UIImage imageNamed:@"cover.jpeg"];
+  _streetImage.image = [UIImage imageNamed:@"cover.jpeg"];
 
   self.navigationItem.rightBarButtonItem =
       [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
                                        style:UIBarButtonItemStylePlain
                                       target:self
                                       action:@selector(cancel:)];
-    
-    [self.view setBackgroundColor:[UIColor colorWithRed:0.27 green:0.74 blue:0.74 alpha:1.0]];
 
+  [self.view setBackgroundColor:[UIColor colorWithRed:0.31
+                                                green:0.65
+                                                 blue:0.83
+                                                alpha:1.0]];
   self.title = @"Add information";
-    _TITLE.text = _Address;
-//  _Feedback2.text = @"Comment her";
-//  _Feedback2.textColor = [UIColor lightGrayColor];
+  _TITLE.text = _Address;
+  _Feedback2.text = @"Comment her";
+  _Feedback2.textColor = [UIColor lightGrayColor];
   _Feedback2.delegate = self;
-  self.Feedback2.layer.borderWidth = 0.5f;
   self.Feedback2.layer.borderColor = [[UIColor grayColor] CGColor];
   self.Feedback2.layer.cornerRadius = 8;
-    
-    
-}
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [_Feedback2 resignFirstResponder];
-    [_Apartment resignFirstResponder];
-
 }
 
-
-
-- (void)cancel:(id)sender {
-
-  ViewController *destViewController = [self.storyboard
-      instantiateViewControllerWithIdentifier:@"ViewController"];
-
-  [self.navigationController pushViewController:destViewController
-                                       animated:YES];
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+  [_Feedback2 resignFirstResponder];
+  [_Apartment resignFirstResponder];
 }
-
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-  _Feedback2.text = @"";
-  _Feedback2.textColor = [UIColor blackColor];
+
+  if (_Feedback.textColor == [UIColor lightGrayColor]) {
+    _Feedback.text = @"";
+    _Feedback.textColor = [UIColor blackColor];
+  }
+
   return YES;
 }
 
@@ -76,13 +66,23 @@
   }
 }
 
+- (void)cancel:(id)sender {
+
+  ViewController *destViewController = [self.storyboard
+      instantiateViewControllerWithIdentifier:@"ViewController"];
+
+  [self.navigationController pushViewController:destViewController
+                                       animated:YES];
+}
+
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)upload:(id)sender {
-  if (_Feedback2.text.length < 3 || _Apartment.text.length == 0) {
+  if (_Feedback2.text.length < 3 || _Apartment.text.length == 0 ||
+      [_Feedback2.text isEqual:@"Comment her"]) {
     UIAlertController *alert = [UIAlertController
         alertControllerWithTitle:@"Alert"
                          message:nil
@@ -94,9 +94,7 @@
     [alert addAction:failed];
 
     [self presentViewController:alert animated:YES completion:nil];
-  }
-
-  if (_Feedback2.text.length > 70) {
+  } else if (_Feedback2.text.length > 70) {
     UIAlertController *alert = [UIAlertController
         alertControllerWithTitle:@"Alert"
                          message:nil
@@ -157,10 +155,9 @@
                     actionWithTitle:@"Address uploaded!"
                               style:UIAlertActionStyleDefault
                             handler:^(UIAlertAction *action) {
-                              tableView *destViewController =
-                                  [self.storyboard
-                                      instantiateViewControllerWithIdentifier:
-                                          @"MapViewController"];
+                              tableView *destViewController = [self.storyboard
+                                  instantiateViewControllerWithIdentifier:
+                                      @"MapViewController"];
 
                               destViewController.Address = _Address;
 
@@ -282,15 +279,14 @@
                                                           handler:^(
                                                               UIAlertAction
                                                                   *action) {
-                                                            tableView *
-                                                                destViewController =
-                                                                    [self.storyboard
-                                                                        instantiateViewControllerWithIdentifier:
-                                                                            @"MapVi"
-                                                                            @"ewCo"
-                                                                            @"ntro"
-                                                                            @"lle"
-                                                                            @"r"];
+                                                            tableView *destViewController =
+                                                                [self.storyboard
+                                                                    instantiateViewControllerWithIdentifier:
+                                                                        @"MapVi"
+                                                                        @"ewCo"
+                                                                        @"ntro"
+                                                                        @"lle"
+                                                                        @"r"];
 
                                                             destViewController
                                                                 .Address =
@@ -405,15 +401,14 @@
                                                           handler:^(
                                                               UIAlertAction
                                                                   *action) {
-                                                            tableView *
-                                                                destViewController =
-                                                                    [self.storyboard
-                                                                        instantiateViewControllerWithIdentifier:
-                                                                            @"MapVi"
-                                                                            @"ewCo"
-                                                                            @"ntro"
-                                                                            @"lle"
-                                                                            @"r"];
+                                                            tableView *destViewController =
+                                                                [self.storyboard
+                                                                    instantiateViewControllerWithIdentifier:
+                                                                        @"MapVi"
+                                                                        @"ewCo"
+                                                                        @"ntro"
+                                                                        @"lle"
+                                                                        @"r"];
 
                                                             destViewController
                                                                 .Address =

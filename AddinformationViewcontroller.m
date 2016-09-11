@@ -7,6 +7,8 @@
 //
 
 #import "AddinformationViewcontroller.h"
+#import <UITextView+Placeholder/UITextView+Placeholder.h>
+
 #define TestTable @"https://movex.herokuapp.com/parse/classes/Test2"
 
 @interface AddinformationViewcontroller () <UITextViewDelegate>
@@ -36,34 +38,14 @@
                                                 alpha:1.0]];
   self.title = @"Add information";
   _TITLE.text = _Address;
-  _Feedback2.text = @"Comment her";
-  _Feedback2.textColor = [UIColor lightGrayColor];
-  _Feedback2.delegate = self;
-  self.Feedback2.layer.borderColor = [[UIColor grayColor] CGColor];
-  self.Feedback2.layer.cornerRadius = 8;
+  self.automaticallyAdjustsScrollViewInsets = false;
+
+  _Feedback2.placeholder = @"Please add your feedback here";
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
   [_Feedback2 resignFirstResponder];
   [_Apartment resignFirstResponder];
-}
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-
-  if (_Feedback.textColor == [UIColor lightGrayColor]) {
-    _Feedback.text = @"";
-    _Feedback.textColor = [UIColor blackColor];
-  }
-
-  return YES;
-}
-
-- (void)textViewDidChange:(UITextView *)textView {
-
-  if (_Feedback2.text.length == 0) {
-    _Feedback2.textColor = [UIColor lightGrayColor];
-    _Feedback2.text = @"Place your feedback her";
-    [_Feedback2 resignFirstResponder];
-  }
 }
 
 - (void)cancel:(id)sender {
@@ -81,10 +63,9 @@
 }
 
 - (IBAction)upload:(id)sender {
-  if (_Feedback2.text.length < 3 || _Apartment.text.length == 0 ||
-      [_Feedback2.text isEqual:@"Comment her"]) {
+  if (_Feedback2.text.length < 3 || _Apartment.text.length == 0) {
     UIAlertController *alert = [UIAlertController
-        alertControllerWithTitle:@"Alert"
+        alertControllerWithTitle:@"Cant submit"
                          message:nil
                   preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *failed =
@@ -96,7 +77,7 @@
     [self presentViewController:alert animated:YES completion:nil];
   } else if (_Feedback2.text.length > 70) {
     UIAlertController *alert = [UIAlertController
-        alertControllerWithTitle:@"Alert"
+        alertControllerWithTitle:@"Cant submit"
                          message:nil
                   preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *failed =
@@ -127,16 +108,12 @@
         forHTTPHeaderField:@"X-Parse-Application-Id"];
     [request setHTTPMethod:@"GET"];
 
-    NSLog(@"request : %@", request);
-    NSLog(@"this id: %hhd", _working);
     dispatch_group_t group = dispatch_group_create();
     dispatch_queue_t _myQueue =
         dispatch_queue_create("com.cocoafactory.DispatchGroupExample", 0);
     if (_working) {
 
       dispatch_group_async(group, _myQueue, ^{
-
-        NSLog(@" first q ");
 
         DatabaseManager *databaseManager = [[DatabaseManager alloc] init];
 

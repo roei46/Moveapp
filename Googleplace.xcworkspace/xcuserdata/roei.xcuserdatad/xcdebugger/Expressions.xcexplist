@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[MapViewController numberOfSectionsInTableView:]:MapViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__61-[ViewController resultsController:didAutocompleteWithPlace:]_block_invoke_2:ViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__26-[ViewController showmap:]_block_invoke122:ViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__32-[MapViewController viewDidLoad]_block_invoke:MapViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__59-[ViewController tableDataSource:didAutocompleteWithPlace:]_block_invoke:ViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "place.placeID">
+            </PersistentString>
+            <PersistentString
+               value = "[string isEqualToString:place.placeID]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__39-[AddinformationViewcontroller upload:]_block_invoke_2:AddinformationViewcontroller.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_Apartment.text">
+            </PersistentString>
+            <PersistentString
+               value = "_Feedback.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__32-[MapViewController viewDidLoad]_block_invoke_2:MapViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewController prepareForSegue:sender:]:ViewController.m">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

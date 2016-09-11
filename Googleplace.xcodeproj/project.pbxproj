@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		69ECEADDE8EEB29D34CA5DE3 /* libPods-Googleplace.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16307259C197F3DEF75BCD67 /* libPods-Googleplace.a */; };
-		C4106C8A1D80608800563481 /* 126830.svg in Resources */ = {isa = PBXBuildFile; fileRef = C4106C891D80608800563481 /* 126830.svg */; };
 		C435CDB61D4691F6002F9095 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CDB51D4691F6002F9095 /* main.m */; };
 		C435CDB91D4691F6002F9095 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CDB81D4691F6002F9095 /* AppDelegate.m */; };
 		C435CDBC1D4691F6002F9095 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CDBB1D4691F6002F9095 /* ViewController.m */; };
@@ -23,6 +22,9 @@
 		C455D11D1D6F353C00A865F8 /* viewFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = C455D11C1D6F353C00A865F8 /* viewFeedback.m */; };
 		C455D11F1D6F360100A865F8 /* papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C455D11E1D6F360100A865F8 /* papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg */; };
 		C48321571D6DDEBC00008B32 /* cover.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C48321561D6DDEBC00008B32 /* cover.jpeg */; };
+		C4DC66FB1D81918700F368C7 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DC66FA1D81918700F368C7 /* home.png */; };
+		C4DC66FD1D819C4D00F368C7 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DC66FC1D819C4D00F368C7 /* add.png */; };
+		C4DC66FF1D819D7D00F368C7 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DC66FE1D819D7D00F368C7 /* file.png */; };
 		C4F14E081D554348003F182F /* AddinformationViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F14E071D554348003F182F /* AddinformationViewcontroller.m */; };
 /* End PBXBuildFile section */
 
@@ -47,7 +49,6 @@
 		16307259C197F3DEF75BCD67 /* libPods-Googleplace.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Googleplace.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A3A9C0D10D9A88847F4526B /* Pods-Googleplace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Googleplace.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Googleplace/Pods-Googleplace.debug.xcconfig"; sourceTree = "<group>"; };
 		BA2024B2B3D0E70F033142B4 /* Pods-Googleplace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Googleplace.release.xcconfig"; path = "Pods/Target Support Files/Pods-Googleplace/Pods-Googleplace.release.xcconfig"; sourceTree = "<group>"; };
-		C4106C891D80608800563481 /* 126830.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = 126830.svg; sourceTree = "<group>"; };
 		C435CDB11D4691F6002F9095 /* Googleplace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Googleplace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C435CDB51D4691F6002F9095 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C435CDB71D4691F6002F9095 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -74,6 +75,9 @@
 		C455D11C1D6F353C00A865F8 /* viewFeedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = viewFeedback.m; sourceTree = "<group>"; };
 		C455D11E1D6F360100A865F8 /* papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg"; sourceTree = "<group>"; };
 		C48321561D6DDEBC00008B32 /* cover.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cover.jpeg; sourceTree = "<group>"; };
+		C4DC66FA1D81918700F368C7 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
+		C4DC66FC1D819C4D00F368C7 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
+		C4DC66FE1D819D7D00F368C7 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
 		C4F14E061D554348003F182F /* AddinformationViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddinformationViewcontroller.h; path = ../AddinformationViewcontroller.h; sourceTree = "<group>"; };
 		C4F14E071D554348003F182F /* AddinformationViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddinformationViewcontroller.m; path = ../AddinformationViewcontroller.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,8 +166,10 @@
 		C435CDB41D4691F6002F9095 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C4DC66FC1D819C4D00F368C7 /* add.png */,
 				C455D11E1D6F360100A865F8 /* papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg */,
-				C4106C891D80608800563481 /* 126830.svg */,
+				C4DC66FA1D81918700F368C7 /* home.png */,
+				C4DC66FE1D819D7D00F368C7 /* file.png */,
 				C48321561D6DDEBC00008B32 /* cover.jpeg */,
 				C4F14E061D554348003F182F /* AddinformationViewcontroller.h */,
 				C4F14E071D554348003F182F /* AddinformationViewcontroller.m */,
@@ -309,9 +315,11 @@
 			files = (
 				C435CDC41D4691F6002F9095 /* LaunchScreen.storyboard in Resources */,
 				C455D11F1D6F360100A865F8 /* papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg in Resources */,
+				C4DC66FF1D819D7D00F368C7 /* file.png in Resources */,
+				C4DC66FB1D81918700F368C7 /* home.png in Resources */,
+				C4DC66FD1D819C4D00F368C7 /* add.png in Resources */,
 				C48321571D6DDEBC00008B32 /* cover.jpeg in Resources */,
 				C435CDC11D4691F6002F9095 /* Assets.xcassets in Resources */,
-				C4106C8A1D80608800563481 /* 126830.svg in Resources */,
 				C435CDBF1D4691F6002F9095 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

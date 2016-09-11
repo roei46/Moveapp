@@ -15,13 +15,15 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
 
+#define PADDING 10.0f
+
+
 @interface tableView () <GMSMapViewDelegate, UITableViewDelegate,
                          UITableViewDataSource>
 @property(nonatomic, strong) GMSMarker *selectedMarker;
 @property(strong, nonatomic) IBOutlet UITableView *tblView;
 @property(strong, nonatomic) NSMutableString *DBid;
 @property(strong, nonatomic) NSArray *arrHeader;
-@property(strong, nonatomic) UIImageView *img2;
 
 
 @end
@@ -37,6 +39,12 @@
 }
 
 - (void)viewDidLoad {
+    
+    
+    self.tblView.estimatedRowHeight = 500.0;
+    self.tblView.rowHeight = UITableViewAutomaticDimension;
+    
+    
   _tblView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 
   self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
@@ -50,12 +58,13 @@
                                                                     NSForegroundColorAttributeName : [UIColor whiteColor],
                                                                     NSFontAttributeName : [UIFont fontWithName:@"STHeitiTC-Medium" size:16]
                                                                     };
+
+
     
   self.navigationItem.rightBarButtonItem =
-      [[UIBarButtonItem alloc] initWithTitle:@"Add"
-                                       style:UIBarButtonItemStylePlain
-                                      target:self
-                                      action:@selector(addInfo:)];
+    [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"add.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                                     style:UIBarButtonItemStylePlain target:self action:@selector(addInfo:)];
+    
 
   self.navigationItem.backBarButtonItem =
       [[UIBarButtonItem alloc] initWithTitle:@""
@@ -87,37 +96,31 @@ willDisplayHeaderView:(UIView *)view
     
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-////    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,tableView.bounds.size.width, 44)];
-//    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed :@"cover.jpeg"]];
-//    imageView.frame = CGRectMake(0,0,0,0);
-//   // [headerView addSubview: imageView];
-//    return imageView;
-//}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44.0f)];
-
     
-    UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 44)];
-    [headerView setBackgroundColor:[UIColor colorWithRed:0.31 green:0.65 blue:0.83 alpha:1.0]];
+    [view setBackgroundColor:[UIColor colorWithRed:0.31 green:0.65 blue:0.83 alpha:1.0]];
+    UIImage *img = [UIImage imageNamed:@"home.png"];
+    UIImageView *img2 =[[UIImageView alloc] initWithImage:img];
+    UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(27, 0, tableView.bounds.size.width, 44)];
+    
+    
+    [img2 setCenter:CGPointMake( 15,view.bounds.size.height/2)];
 
     [view addSubview:headerView];
     
-    _img2.image = [UIImage imageNamed:@"cover.jpeg"];
 
-    _img2.frame = CGRectMake(0,0,self.view.bounds.size.width,100);
-    [view addSubview:headerView];
-    [headerView addSubview:_img2];
     NSString *title1 = @" Apartment : ";
 
     headerView.text =[title1 stringByAppendingString:[_arrHeader objectAtIndex:section]];
-   
+   [view addSubview:headerView];
+    [view addSubview:img2];
+
     
     
-    
-    return headerView;
+    return view;
     
 }
 
@@ -134,6 +137,8 @@ willDisplayHeaderView:(UIView *)view
     return 44.0f;
 }
 
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
@@ -143,16 +148,23 @@ willDisplayHeaderView:(UIView *)view
   if (cell == nil) {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                   reuseIdentifier:CellIdentifier];
+      
+      
+
+      
+      
   }
+    
     [cell setSeparatorInset:UIEdgeInsetsZero];
-
+    
     [cell setBackgroundColor:[UIColor colorWithRed:0.91 green:0.97 blue:1.00 alpha:1.0]];
-  cell.textLabel.textColor = [UIColor blackColor];
+    cell.textLabel.backgroundColor = [UIColor yellowColor];
 
-  cell.textLabel.text = appResult[_arrHeader[indexPath.section]][indexPath.row];
+    cell.textLabel.text = appResult[_arrHeader[indexPath.section]][indexPath.row];
 
   return cell;
 }
+
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Remove seperator inset
@@ -170,25 +182,8 @@ willDisplayHeaderView:(UIView *)view
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
 }
-- (void)tableView:(UITableView *)tableView
-    didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//
-//  UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
-//  viewFeedback *destViewController =
-//      [self.storyboard instantiateViewControllerWithIdentifier:@"viewFeedback"];
-//
-//  destViewController.Address = selectedCell.textLabel.text;
-//  [self.navigationController pushViewController:destViewController
-//                                       animated:YES];
-    [self.tblView beginUpdates];
-    [self.tblView endUpdates];
-}
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    
-//    
-//    
-//}
+
+
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];

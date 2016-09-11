@@ -54,7 +54,7 @@ static NSString const *kTerrainType = @"Terrain";
   self.edgesForExtendedLayout =
       UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight;
 
-  self.view.backgroundColor = [UIColor whiteColor];
+  //self.view.backgroundColor = [UIColor whiteColor];
 
   __acViewController = [[GMSAutocompleteResultsViewController alloc] init];
   __acViewController.delegate = self;
@@ -387,7 +387,8 @@ static NSString const *kTerrainType = @"Terrain";
     _switcher.selectedSegmentIndex = 0;
     _switcher.translatesAutoresizingMaskIntoConstraints = YES;
     _switcher.frame = CGRectMake(50, 50, 210, 30);
-    _switcher.tintColor = [UIColor blueColor];
+    _switcher.tintColor = [UIColor whiteColor];
+         [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:0.25 green:0.79 blue:0.78 alpha:1.0]} forState:UIControlStateNormal];
 
     [self.mapview addSubview:_switcher];
 

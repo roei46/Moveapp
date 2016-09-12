@@ -19,8 +19,8 @@
 		C437F68F1D51272600FAC6D2 /* ServerProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = C437F68E1D51272600FAC6D2 /* ServerProtocol.m */; };
 		C437F6921D5127F500FAC6D2 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C437F6911D5127F500FAC6D2 /* DatabaseManager.m */; };
 		C437F6951D529EEF00FAC6D2 /* tableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C437F6941D529EEF00FAC6D2 /* tableView.m */; };
-		C455D11D1D6F353C00A865F8 /* viewFeedback.m in Sources */ = {isa = PBXBuildFile; fileRef = C455D11C1D6F353C00A865F8 /* viewFeedback.m */; };
 		C455D11F1D6F360100A865F8 /* papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C455D11E1D6F360100A865F8 /* papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg */; };
+		C47A9AE21D8591E1003CA822 /* customCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C47A9AE11D8591E1003CA822 /* customCell.m */; };
 		C48321571D6DDEBC00008B32 /* cover.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C48321561D6DDEBC00008B32 /* cover.jpeg */; };
 		C4DC66FB1D81918700F368C7 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DC66FA1D81918700F368C7 /* home.png */; };
 		C4DC66FD1D819C4D00F368C7 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DC66FC1D819C4D00F368C7 /* add.png */; };
@@ -71,9 +71,9 @@
 		C437F6911D5127F500FAC6D2 /* DatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
 		C437F6931D529EEF00FAC6D2 /* tableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tableView.h; sourceTree = "<group>"; };
 		C437F6941D529EEF00FAC6D2 /* tableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tableView.m; sourceTree = "<group>"; };
-		C455D11B1D6F353C00A865F8 /* viewFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewFeedback.h; sourceTree = "<group>"; };
-		C455D11C1D6F353C00A865F8 /* viewFeedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = viewFeedback.m; sourceTree = "<group>"; };
 		C455D11E1D6F360100A865F8 /* papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg"; sourceTree = "<group>"; };
+		C47A9AE01D8591E1003CA822 /* customCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = customCell.h; path = ../customCell.h; sourceTree = "<group>"; };
+		C47A9AE11D8591E1003CA822 /* customCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = customCell.m; path = ../customCell.m; sourceTree = "<group>"; };
 		C48321561D6DDEBC00008B32 /* cover.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cover.jpeg; sourceTree = "<group>"; };
 		C4DC66FA1D81918700F368C7 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		C4DC66FC1D819C4D00F368C7 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
@@ -157,8 +157,6 @@
 				C437F6911D5127F500FAC6D2 /* DatabaseManager.m */,
 				C437F6931D529EEF00FAC6D2 /* tableView.h */,
 				C437F6941D529EEF00FAC6D2 /* tableView.m */,
-				C455D11B1D6F353C00A865F8 /* viewFeedback.h */,
-				C455D11C1D6F353C00A865F8 /* viewFeedback.m */,
 			);
 			path = Googleplace;
 			sourceTree = "<group>";
@@ -174,6 +172,8 @@
 				C4F14E061D554348003F182F /* AddinformationViewcontroller.h */,
 				C4F14E071D554348003F182F /* AddinformationViewcontroller.m */,
 				C435CDB51D4691F6002F9095 /* main.m */,
+				C47A9AE01D8591E1003CA822 /* customCell.h */,
+				C47A9AE11D8591E1003CA822 /* customCell.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -394,8 +394,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C437F68F1D51272600FAC6D2 /* ServerProtocol.m in Sources */,
-				C455D11D1D6F353C00A865F8 /* viewFeedback.m in Sources */,
 				C435CDBC1D4691F6002F9095 /* ViewController.m in Sources */,
+				C47A9AE21D8591E1003CA822 /* customCell.m in Sources */,
 				C4F14E081D554348003F182F /* AddinformationViewcontroller.m in Sources */,
 				C435CDB91D4691F6002F9095 /* AppDelegate.m in Sources */,
 				C437F6951D529EEF00FAC6D2 /* tableView.m in Sources */,

@@ -11,11 +11,10 @@
 #import "ServerProtocol.h"
 #import "ViewController.h"
 #import "tableView.h"
-#include "viewFeedback.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
+#import "customCell.h"
 
-#define PADDING 10.0f
 
 
 @interface tableView () <GMSMapViewDelegate, UITableViewDelegate,
@@ -40,7 +39,8 @@
 
 - (void)viewDidLoad {
     
-    
+    self.tblView.delegate = self;
+    self.tblView.dataSource = self;
     self.tblView.estimatedRowHeight = 500.0;
     self.tblView.rowHeight = UITableViewAutomaticDimension;
     
@@ -136,6 +136,14 @@ willDisplayHeaderView:(UIView *)view
    
     return 44.0f;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
+}
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 100;
+}
 
 
 
@@ -143,25 +151,26 @@ willDisplayHeaderView:(UIView *)view
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
   static NSString *CellIdentifier = @"Cell";
-  UITableViewCell *cell =
+  customCell *cell =
       [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    
   if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+    cell = [[customCell alloc] initWithStyle:UITableViewCellStyleDefault
                                   reuseIdentifier:CellIdentifier];
-      
-      
-
-      
-      
-  }
+    
+        }
     
     [cell setSeparatorInset:UIEdgeInsetsZero];
     
     [cell setBackgroundColor:[UIColor colorWithRed:0.91 green:0.97 blue:1.00 alpha:1.0]];
-    cell.textLabel.backgroundColor = [UIColor yellowColor];
+    
+    
 
-    cell.textLabel.text = appResult[_arrHeader[indexPath.section]][indexPath.row];
-
+    cell.cellLabel.text = appResult[_arrHeader[indexPath.section]][indexPath.row];
+    
+    [cell.cellLabel sizeToFit];
+    
   return cell;
 }
 

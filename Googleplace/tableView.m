@@ -39,6 +39,8 @@
 
 - (void)viewDidLoad {
     
+   
+    
     self.tblView.delegate = self;
     self.tblView.dataSource = self;
     self.tblView.estimatedRowHeight = 500.0;
@@ -72,6 +74,10 @@
                                       target:self
                                       action:@selector(back:)];
 }
+
+
+
+
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -127,6 +133,8 @@ willDisplayHeaderView:(UIView *)view
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
+    
+    
 
   return [appResult[_arrHeader[section]] count];
 }
@@ -136,14 +144,14 @@ willDisplayHeaderView:(UIView *)view
    
     return 44.0f;
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewAutomaticDimension;
-}
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 100;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return UITableViewAutomaticDimension;
+//}
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return 100;
+//}
 
 
 
@@ -161,6 +169,10 @@ willDisplayHeaderView:(UIView *)view
     
         }
     
+    
+    
+   
+    
     [cell setSeparatorInset:UIEdgeInsetsZero];
     
     [cell setBackgroundColor:[UIColor colorWithRed:0.91 green:0.97 blue:1.00 alpha:1.0]];
@@ -173,6 +185,7 @@ willDisplayHeaderView:(UIView *)view
     
   return cell;
 }
+
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {

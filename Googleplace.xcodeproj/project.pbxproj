@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		69ECEADDE8EEB29D34CA5DE3 /* libPods-Googleplace.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16307259C197F3DEF75BCD67 /* libPods-Googleplace.a */; };
+		C4031EC21D89FE6D003C8033 /* DetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4031EC11D89FE6D003C8033 /* DetailTableViewController.m */; };
+		C4031EC51D8ACBD7003C8033 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4031EC31D8ACBD7003C8033 /* Main.storyboard */; };
+		C4031EC81D8AD1F1003C8033 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4031EC71D8AD1F1003C8033 /* MainViewController.m */; };
 		C435CDB61D4691F6002F9095 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CDB51D4691F6002F9095 /* main.m */; };
 		C435CDB91D4691F6002F9095 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CDB81D4691F6002F9095 /* AppDelegate.m */; };
 		C435CDBC1D4691F6002F9095 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CDBB1D4691F6002F9095 /* ViewController.m */; };
-		C435CDBF1D4691F6002F9095 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C435CDBD1D4691F6002F9095 /* Main.storyboard */; };
 		C435CDC11D4691F6002F9095 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C435CDC01D4691F6002F9095 /* Assets.xcassets */; };
 		C435CDC41D4691F6002F9095 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C435CDC21D4691F6002F9095 /* LaunchScreen.storyboard */; };
 		C435CDCF1D4691F6002F9095 /* GoogleplaceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CDCE1D4691F6002F9095 /* GoogleplaceTests.m */; };
@@ -21,6 +23,7 @@
 		C437F6951D529EEF00FAC6D2 /* tableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C437F6941D529EEF00FAC6D2 /* tableView.m */; };
 		C455D11F1D6F360100A865F8 /* papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C455D11E1D6F360100A865F8 /* papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg */; };
 		C47A9AE21D8591E1003CA822 /* customCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C47A9AE11D8591E1003CA822 /* customCell.m */; };
+		C47D26B11D8855C6004314F2 /* ExpandableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C47D26B01D8855C6004314F2 /* ExpandableCell.m */; };
 		C48321571D6DDEBC00008B32 /* cover.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C48321561D6DDEBC00008B32 /* cover.jpeg */; };
 		C4DC66FB1D81918700F368C7 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DC66FA1D81918700F368C7 /* home.png */; };
 		C4DC66FD1D819C4D00F368C7 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DC66FC1D819C4D00F368C7 /* add.png */; };
@@ -49,13 +52,17 @@
 		16307259C197F3DEF75BCD67 /* libPods-Googleplace.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Googleplace.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A3A9C0D10D9A88847F4526B /* Pods-Googleplace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Googleplace.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Googleplace/Pods-Googleplace.debug.xcconfig"; sourceTree = "<group>"; };
 		BA2024B2B3D0E70F033142B4 /* Pods-Googleplace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Googleplace.release.xcconfig"; path = "Pods/Target Support Files/Pods-Googleplace/Pods-Googleplace.release.xcconfig"; sourceTree = "<group>"; };
+		C4031EC01D89FE6D003C8033 /* DetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewController.h; sourceTree = "<group>"; };
+		C4031EC11D89FE6D003C8033 /* DetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewController.m; sourceTree = "<group>"; };
+		C4031EC41D8ACBD7003C8033 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C4031EC61D8AD1F1003C8033 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		C4031EC71D8AD1F1003C8033 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		C435CDB11D4691F6002F9095 /* Googleplace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Googleplace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C435CDB51D4691F6002F9095 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C435CDB71D4691F6002F9095 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C435CDB81D4691F6002F9095 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C435CDBA1D4691F6002F9095 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		C435CDBB1D4691F6002F9095 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		C435CDBE1D4691F6002F9095 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C435CDC01D4691F6002F9095 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C435CDC31D4691F6002F9095 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C435CDC51D4691F6002F9095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -74,6 +81,8 @@
 		C455D11E1D6F360100A865F8 /* papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg"; sourceTree = "<group>"; };
 		C47A9AE01D8591E1003CA822 /* customCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = customCell.h; path = ../customCell.h; sourceTree = "<group>"; };
 		C47A9AE11D8591E1003CA822 /* customCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = customCell.m; path = ../customCell.m; sourceTree = "<group>"; };
+		C47D26AF1D8855C6004314F2 /* ExpandableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandableCell.h; sourceTree = "<group>"; };
+		C47D26B01D8855C6004314F2 /* ExpandableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandableCell.m; sourceTree = "<group>"; };
 		C48321561D6DDEBC00008B32 /* cover.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cover.jpeg; sourceTree = "<group>"; };
 		C4DC66FA1D81918700F368C7 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		C4DC66FC1D819C4D00F368C7 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
@@ -146,8 +155,10 @@
 				C435CDB81D4691F6002F9095 /* AppDelegate.m */,
 				C435CDBA1D4691F6002F9095 /* ViewController.h */,
 				C435CDBB1D4691F6002F9095 /* ViewController.m */,
-				C435CDBD1D4691F6002F9095 /* Main.storyboard */,
+				C4031EC61D8AD1F1003C8033 /* MainViewController.h */,
+				C4031EC71D8AD1F1003C8033 /* MainViewController.m */,
 				C435CDC01D4691F6002F9095 /* Assets.xcassets */,
+				C4031EC31D8ACBD7003C8033 /* Main.storyboard */,
 				C435CDC21D4691F6002F9095 /* LaunchScreen.storyboard */,
 				C435CDC51D4691F6002F9095 /* Info.plist */,
 				C435CDB41D4691F6002F9095 /* Supporting Files */,
@@ -157,6 +168,8 @@
 				C437F6911D5127F500FAC6D2 /* DatabaseManager.m */,
 				C437F6931D529EEF00FAC6D2 /* tableView.h */,
 				C437F6941D529EEF00FAC6D2 /* tableView.m */,
+				C4031EC01D89FE6D003C8033 /* DetailTableViewController.h */,
+				C4031EC11D89FE6D003C8033 /* DetailTableViewController.m */,
 			);
 			path = Googleplace;
 			sourceTree = "<group>";
@@ -174,6 +187,8 @@
 				C435CDB51D4691F6002F9095 /* main.m */,
 				C47A9AE01D8591E1003CA822 /* customCell.h */,
 				C47A9AE11D8591E1003CA822 /* customCell.m */,
+				C47D26AF1D8855C6004314F2 /* ExpandableCell.h */,
+				C47D26B01D8855C6004314F2 /* ExpandableCell.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -316,11 +331,11 @@
 				C435CDC41D4691F6002F9095 /* LaunchScreen.storyboard in Resources */,
 				C455D11F1D6F360100A865F8 /* papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg in Resources */,
 				C4DC66FF1D819D7D00F368C7 /* file.png in Resources */,
+				C4031EC51D8ACBD7003C8033 /* Main.storyboard in Resources */,
 				C4DC66FB1D81918700F368C7 /* home.png in Resources */,
 				C4DC66FD1D819C4D00F368C7 /* add.png in Resources */,
 				C48321571D6DDEBC00008B32 /* cover.jpeg in Resources */,
 				C435CDC11D4691F6002F9095 /* Assets.xcassets in Resources */,
-				C435CDBF1D4691F6002F9095 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,11 +408,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4031EC81D8AD1F1003C8033 /* MainViewController.m in Sources */,
+				C4031EC21D89FE6D003C8033 /* DetailTableViewController.m in Sources */,
 				C437F68F1D51272600FAC6D2 /* ServerProtocol.m in Sources */,
 				C435CDBC1D4691F6002F9095 /* ViewController.m in Sources */,
 				C47A9AE21D8591E1003CA822 /* customCell.m in Sources */,
 				C4F14E081D554348003F182F /* AddinformationViewcontroller.m in Sources */,
 				C435CDB91D4691F6002F9095 /* AppDelegate.m in Sources */,
+				C47D26B11D8855C6004314F2 /* ExpandableCell.m in Sources */,
 				C437F6951D529EEF00FAC6D2 /* tableView.m in Sources */,
 				C437F6921D5127F500FAC6D2 /* DatabaseManager.m in Sources */,
 				C435CDB61D4691F6002F9095 /* main.m in Sources */,
@@ -436,10 +454,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		C435CDBD1D4691F6002F9095 /* Main.storyboard */ = {
+		C4031EC31D8ACBD7003C8033 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				C435CDBE1D4691F6002F9095 /* Base */,
+				C4031EC41D8ACBD7003C8033 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

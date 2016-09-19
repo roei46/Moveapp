@@ -3,19 +3,22 @@ PODS:
   - GoogleMaps (1.13.2)
   - Parse (1.14.2):
     - Bolts/Tasks (~> 1.8)
+  - SLExpandableTableView (1.3.1)
   - UITextView+Placeholder (1.2.0)
 
 DEPENDENCIES:
   - GoogleMaps
   - Parse
+  - SLExpandableTableView
   - UITextView+Placeholder (~> 1.2)
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   GoogleMaps: b20a103ff307f58392e603cf142e59d7e30374c1
   Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
+  SLExpandableTableView: ff63a4bb4b71c6c3ae2b7cb1cde6a36c1645f23c
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
 
-PODFILE CHECKSUM: 532d513031c60b22a744b813460bee76fa44d2eb
+PODFILE CHECKSUM: d956c4d6377836721feb44eac0944ba550423717
 
 COCOAPODS: 1.0.1

@@ -1,15 +1,15 @@
 //
-//  customCell.m
+//  ExpandableCell.m
 //  Googleplace
 //
-//  Created by Roei Baruch on 11/09/2016.
+//  Created by Roei Baruch on 13/09/2016.
 //  Copyright © 2016 Roei Baruch. All rights reserved.
 //
 
-#import "customCell.h"
+#import "ExpandableCell.h"
 
-@implementation customCell
 
+@implementation ExpandableCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -21,9 +21,9 @@
 
     // Configure the view for the selected state
 }
-
-
-
-
+- (void)setExpansionStyle:(UIExpansionStyle)style animated:(BOOL)animated
+{
+    
+}
 
 @end

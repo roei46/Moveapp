@@ -14,16 +14,18 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
 #import "customCell.h"
+#import "ExpandableCell.h"
+
 
 
 
 @interface tableView () <GMSMapViewDelegate, UITableViewDelegate,
-                         UITableViewDataSource>
+                         UITableViewDataSource >
 @property(nonatomic, strong) GMSMarker *selectedMarker;
 @property(strong, nonatomic) IBOutlet UITableView *tblView;
 @property(strong, nonatomic) NSMutableString *DBid;
-@property(strong, nonatomic) NSArray *arrHeader;
-
+@property(strong, nonatomic) NSMutableArray *arrHeader;
+@property (nonatomic, strong) NSMutableIndexSet *expandableSections;
 
 @end
 
@@ -40,9 +42,7 @@
 - (void)viewDidLoad {
     
    
-    
-    self.tblView.delegate = self;
-    self.tblView.dataSource = self;
+    self.tblView.tableFooterView.hidden = YES;
     self.tblView.estimatedRowHeight = 500.0;
     self.tblView.rowHeight = UITableViewAutomaticDimension;
     
@@ -73,8 +73,9 @@
                                        style:UIBarButtonItemStylePlain
                                       target:self
                                       action:@selector(back:)];
+    
+  
 }
-
 
 
 
@@ -134,9 +135,7 @@ willDisplayHeaderView:(UIView *)view
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
     
-    
-
-  return [appResult[_arrHeader[section]] count];
+  return [appResult[_arrHeader[section]] count] + 1;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -144,62 +143,98 @@ willDisplayHeaderView:(UIView *)view
    
     return 44.0f;
 }
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return UITableViewAutomaticDimension;
-//}
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return 100;
-//}
 
+- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    
+    return 1.0f;
+}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
 
-  static NSString *CellIdentifier = @"Cell";
-  customCell *cell =
-      [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    
-  if (cell == nil) {
-    cell = [[customCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                  reuseIdentifier:CellIdentifier];
-    
-        }
-    
-    
-    
+
+        static NSString *CellIdentifier = @"cell";
+        customCell * customcell =
+        [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        
+        if (customcell== nil) {
+            customcell = [[customCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                           reuseIdentifier:CellIdentifier];
    
+        }
+        
+        
+        [customcell setSeparatorInset:UIEdgeInsetsZero];
+        
+        [customcell setBackgroundColor:[UIColor colorWithRed:0.91 green:0.97 blue:1.00 alpha:1.0]];
     
-    [cell setSeparatorInset:UIEdgeInsetsZero];
     
-    [cell setBackgroundColor:[UIColor colorWithRed:0.91 green:0.97 blue:1.00 alpha:1.0]];
-    
-    
+    if(indexPath.row > 0)
+    {
+        customcell.textLabel.text = appResult[_arrHeader[indexPath.section]][indexPath.row - 1];
+        customcell.textLabel.numberOfLines  = 0;
+        customcell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        
+        
+        //customcell.label.text = appResult[_arrHeader[indexPath.section]][indexPath.row - 1];
+        
+        
+        //customcell.cellLabel.text = appResult[_arrHeader[indexPath.section]][indexPath.row - 1];
+        
+    }
 
-    cell.cellLabel.text = appResult[_arrHeader[indexPath.section]][indexPath.row];
     
-    [cell.cellLabel sizeToFit];
+     [customcell.cellLabel sizeToFit];
     
-  return cell;
+    customcell.preservesSuperviewLayoutMargins = false;
+    customcell.separatorInset = UIEdgeInsetsZero;
+    customcell.layoutMargins = UIEdgeInsetsZero;
+
+  return customcell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    
+    
+    [tableView beginUpdates];
+    [tableView endUpdates];
 }
 
 
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Remove seperator inset
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsZero];
+//-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    // Remove seperator inset
+//    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+//        [cell setSeparatorInset:UIEdgeInsetsZero];
+//    }
+//    
+//    // Prevent the cell from inheriting the Table View's margin settings
+//    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+//        [cell setPreservesSuperviewLayoutMargins:NO];
+//    }
+//    
+//    // Explictly set your cell's layout margins
+//    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+//        [cell setLayoutMargins:UIEdgeInsetsZero];
+//    }
+//}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [tableView setSeparatorInset:UIEdgeInsetsZero];
     }
     
-    // Prevent the cell from inheriting the Table View's margin settings
-    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
-        [cell setPreservesSuperviewLayoutMargins:NO];
+    if ([tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [tableView setLayoutMargins:UIEdgeInsetsZero];
     }
     
-    // Explictly set your cell's layout margins
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
@@ -207,12 +242,13 @@ willDisplayHeaderView:(UIView *)view
 
 
 
+
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  self.tblView.delegate = self;
-  self.tblView.dataSource = self;
+//  self.tblView.delegate = self;
+//  self.tblView.dataSource = self;
+    
 
-  [self.view addSubview:_tblView];
 
   // ServerProtocol *serverprotocol = [[ServerProtocol alloc]init];
 
@@ -252,6 +288,7 @@ willDisplayHeaderView:(UIView *)view
                                                 options:kNilOptions
                                                   error:&error];
             jsonResult2 = [result objectForKey:@"results"];
+            NSLog(@"result : %@", result);
             NSLog(@"test : %@", jsonResult2);
             for (NSDictionary *addname in jsonResult2) {
               if ([[addname valueForKey:@"Address"] isEqualToString:_Address]) {
@@ -267,7 +304,15 @@ willDisplayHeaderView:(UIView *)view
                     sortedArrayUsingDescriptors:[NSArray
                                                     arrayWithObject:sortOrder]];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                  [self.tblView reloadData];
+                [self.tblView reloadData];
+                   
+                    self.tblView= [[SLExpandableTableView alloc] initWithFrame:self.tblView.frame style:UITableViewStylePlain];
+                    self.tblView.delegate = self;
+                    self.tblView.dataSource = self;
+                    self.tblView.separatorInset = UIEdgeInsetsZero;
+                    [self.view addSubview:self.tblView];
+                    self.tblView= [[SLExpandableTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+                    
                 });
 
                 break;
@@ -278,6 +323,9 @@ willDisplayHeaderView:(UIView *)view
 
   [postdata resume];
 }
+
+
+
 
 - (void)back:(id)sender {
 
@@ -311,5 +359,62 @@ willDisplayHeaderView:(UIView *)view
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
+
+- (BOOL)tableView:(SLExpandableTableView *)tableView canExpandSection:(NSInteger)section
+{
+    // return YES, if the section should be expandable
+    NSLog(@"canExpandSection");
+    return YES;
+}
+
+- (BOOL)tableView:(SLExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section
+{
+    // return YES, if you need to download data to expand this section. tableView will call tableView:downloadDataForExpandableSection: for this section
+    NSLog(@"needsToDownloadDataForExpandableSection");
+    return FALSE;
+}
+
+- (UITableViewCell<UIExpandingTableViewCell> *)tableView:(SLExpandableTableView *)tableView expandingCellForSection:(NSInteger)section
+{
+    // this cell will be displayed at IndexPath with section: section and row 0
+    
+    
+    NSString *CellIdentifier = @"ExpandableCell";
+    ExpandableCell *expandableCell = (ExpandableCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (expandableCell == nil) {
+        expandableCell = [[ExpandableCell   alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    expandableCell .textLabel.text = @"blah blah";
+    
+    return expandableCell ;
+}
+
+#pragma mark table view delegate
+
+- (void)tableView:(SLExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section
+{
+    // download your data here
+    //call [tableView expandSection:section animated:YES]; if your download was successful
+    // call [tableView cancelDownloadInSection:section]; if your download was NOT successful
+    NSLog(@"downloadDataForExpandableSection");
+}
+
+- (void)tableView:(SLExpandableTableView *)tableView didExpandSection:(NSUInteger)section animated:(BOOL)animated
+{
+    //...
+    NSLog(@"didExpandSection");
+}
+
+- (void)tableView:(SLExpandableTableView *)tableView didCollapseSection:(NSUInteger)section animated:(BOOL)animated
+{
+    //...
+    NSLog(@"didCollapseSection");
+}
+
+
+
+
 
 @end

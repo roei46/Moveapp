@@ -179,46 +179,7 @@ static NSString const *kTerrainType = @"Terrain";
         // Log details of the failure
         NSLog(@"Error: %@ %@", error, [error userInfo]);
       }
-      //    }];
-      //                   NSArray *jsonResult2 = [result
-      //                   objectForKey:@"results"];
-      //                   NSLog(@"test : %@", jsonResult2);
-      //                   for (NSDictionary *dic in jsonResult2) {
-      //                     NSString *placeID = [dic valueForKey:@"googlid"];
-      //                     _placesclient = [[GMSPlacesClient alloc] init];
-      //
-      //                     [_placesclient
-      //                         lookUpPlaceID:placeID
-      //                              callback:^(GMSPlace *place, NSError
-      //                              *error) {
-      //                                if (error != nil) {
-      //                                  NSLog(@"Place Details error %@",
-      //                                        [error localizedDescription]);
-      //                                  return;
-      //                                }
-      //                                if (place != nil) {
-      //                                  GMSMarker *marker = [[GMSMarker alloc]
-      //                                  init];
-      //                                  marker.position =
-      //                                  CLLocationCoordinate2DMake(
-      //                                      place.coordinate.latitude,
-      //                                      place.coordinate.longitude);
-      //                                  marker.title = place.name;
-      //                                  marker.snippet = @"Push to see
-      //                                  feedbacks";
-      //                                  marker.map = _mapview;
-      //
-      //                                } else {
-      //                                  NSLog(@"No place details for %@",
-      //                                  placeID);
-      //                                }
-      //                             }];
-      //                     NSLog(@" place id : %@", placeID);
-      //                   }
-      //
-      //                 }];
-
-      // [postdata resume];
+   
     
         
     }];
@@ -242,8 +203,9 @@ static NSString const *kTerrainType = @"Terrain";
   mapView.selectedMarker = nil;
 
   NSLog(@" Taped on marker : %@", marker.title);
+    
   tableView *destViewController = [self.storyboard
-      instantiateViewControllerWithIdentifier:@"MapViewController"];
+      instantiateViewControllerWithIdentifier:@"DetailTableViewController"];
   NSLog(@" Taped on marker : %@", marker.userData);
 
   destViewController.Address = marker.title;

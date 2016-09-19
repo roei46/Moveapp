@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface customCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *cellLabel;
+
 
 
 @end

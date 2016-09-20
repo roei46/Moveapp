@@ -21,7 +21,6 @@ UITableViewDataSource >
 @property(nonatomic, strong) GMSMarker *selectedMarker;
 @property(strong, nonatomic) NSMutableString *DBid;
 @property(strong, nonatomic) NSMutableArray *arrHeader;
-@property (nonatomic, strong) NSMutableIndexSet *expandableSections;
 
 @end
 
@@ -34,6 +33,8 @@ UITableViewDataSource >
     UISegmentedControl *_switcher;
     NSArray *jsonResult2;
     NSDictionary *appResult;
+    NSMutableDictionary  *tempAppResult;
+    
 
 }
 
@@ -41,7 +42,7 @@ UITableViewDataSource >
     [super viewDidLoad];
     
     
-    self.tableView.tableFooterView.hidden = YES;
+   
     self.tableView.estimatedRowHeight = 500.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
@@ -74,13 +75,15 @@ UITableViewDataSource >
                                     action:@selector(back:)];
     
 
+    
+   
 }
 
--(void)loadView
-{
-    self.tableView= [[SLExpandableTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    
-}
+//-(void)loadView
+//{
+//    self.tableView= [[SLExpandableTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+//    
+//}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -136,6 +139,7 @@ UITableViewDataSource >
                                                       _arrHeader = [appResult allKeys];
                                                       NSLog(@"%@", _arrHeader);
                                                       
+                                                      
                                                       NSSortDescriptor *sortOrder =
                                                       [NSSortDescriptor sortDescriptorWithKey:@"self"
                                                                                     ascending:YES];
@@ -143,8 +147,15 @@ UITableViewDataSource >
                                                                                       sortedArrayUsingDescriptors:[NSArray
                                                                                                                    arrayWithObject:sortOrder]];
                                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                                          tempAppResult = [[NSMutableDictionary alloc] init];
+                                                          [appResult enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                                                              
+                                                              [tempAppResult setValue:[[NSArray alloc] init] forKey:key] ;
+                                                          }];
+                                                         
                                                           [self.tableView reloadData];
-                                                          
+                                                          NSLog(@"App result: %@", appResult);
+                                                          NSLog(@"Temp App result: %@", tempAppResult);
                                                       });
                                                       
                                                       break;
@@ -188,9 +199,9 @@ UITableViewDataSource >
  [customcell setBackgroundColor:[UIColor colorWithRed:0.91 green:0.97 blue:1.00 alpha:1.0]];
  
  
- if(indexPath.row > 0)
- {
- customcell.textLabel.text = appResult[_arrHeader[indexPath.section]][indexPath.row - 1];
+ //if(indexPath.row > 0)
+ //{
+ customcell.textLabel.text = tempAppResult[_arrHeader[indexPath.section]][indexPath.row];
  customcell.textLabel.numberOfLines  = 0;
  customcell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
  
@@ -200,7 +211,7 @@ UITableViewDataSource >
  
  //customcell.cellLabel.text = appResult[_arrHeader[indexPath.section]][indexPath.row - 1];
  
- }
+ //}
  
  
  [customcell.cellLabel sizeToFit];
@@ -254,8 +265,16 @@ willDisplayHeaderView:(UIView *)view
     NSString *title1 = @" Apartment : ";
     
     headerView.text =[title1 stringByAppendingString:[_arrHeader objectAtIndex:section]];
+    
+    UIButton * button = [[UIButton alloc] initWithFrame:view.frame];
+    button.tag = section;
+    button.accessibilityLabel = [_arrHeader objectAtIndex:section];
+    [button addTarget:self action:@selector(sectionHeaderSelected:) forControlEvents:UIControlEventTouchUpInside];
+    button.backgroundColor = [UIColor clearColor];
+    
     [view addSubview:headerView];
     [view addSubview:img2];
+    [view addSubview:button];
     
     
     
@@ -273,7 +292,7 @@ willDisplayHeaderView:(UIView *)view
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
     
-    return [appResult[_arrHeader[section]] count] + 1;
+    return [tempAppResult[_arrHeader[section]] count];
 }
 
 /*
@@ -355,65 +374,119 @@ willDisplayHeaderView:(UIView *)view
 
 
 
-- (BOOL)tableView:(SLExpandableTableView *)tableView canExpandSection:(NSInteger)section
+//- (BOOL)tableView:(SLExpandableTableView *)tableView canExpandSection:(NSInteger)section
+//{
+//    // return YES, if the section should be expandable
+//    NSLog(@"canExpandSection");
+//    return TRUE;
+//}
+//
+//- (BOOL)tableView:(SLExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section
+//{
+//    // return YES, if you need to download data to expand this section. tableView will call tableView:downloadDataForExpandableSection: for this section
+//    NSLog(@"needsToDownloadDataForExpandableSection");
+//    return FALSE;
+//    
+//    
+//}
+//- (UITableViewCell<UIExpandingTableViewCell> *)tableView:(SLExpandableTableView *)tableView expandingCellForSection:(NSInteger)section
+//{
+//    // this cell will be displayed at IndexPath with section: section and row 0
+//    
+//    
+//    NSString *CellIdentifier = @"ExpandableCell";
+//    ExpandableCell *expandableCell = (ExpandableCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//    
+//    if (expandableCell == nil) {
+//        expandableCell = [[ExpandableCell   alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//    }
+//    
+//    expandableCell .textLabel.text = @"Push to see feedbacks";
+//    
+//    expandableCell .preservesSuperviewLayoutMargins = false;
+//    expandableCell .separatorInset = UIEdgeInsetsZero;
+//    expandableCell .layoutMargins = UIEdgeInsetsZero;
+//    
+//    return expandableCell ;
+//}
+
+
+-(void)sectionHeaderSelected:(id)sender
 {
-    // return YES, if the section should be expandable
-    NSLog(@"canExpandSection");
-    return TRUE;
+    NSUInteger section = ((UIButton*)sender).tag;
+    NSString * key = ((UIButton*)sender).accessibilityLabel;
+    NSMutableArray* IndexPathArray = [[NSMutableArray alloc] init];
+    
+    if( [tempAppResult[key] count] > 0 )
+    {
+        //if section has rows,reset value
+        int row  = [tempAppResult[key] count] ;
+        
+        for(int i = 0 ; i < row; ++i)
+        {
+            [IndexPathArray addObject:[NSIndexPath indexPathForRow: i inSection:section]];
+        }
+        
+        [tempAppResult setObject:[[NSArray alloc ] init] forKey:key];
+       NSLog(@"Collapsed section %@",tempAppResult);
+        
+        
+        [self.tableView beginUpdates];
+        [self.tableView deleteRowsAtIndexPaths:IndexPathArray withRowAnimation:UITableViewRowAnimationTop];
+        [self.tableView endUpdates];
+        
+    }
+    else
+    {
+        //if section has no rows,add  value
+        
+        [tempAppResult setObject:appResult[key] forKey:key];
+        NSLog(@"Expand section %@",tempAppResult);
+        NSMutableArray* IndexPathArray = [[NSMutableArray alloc] init];
+        
+        int row  = [tempAppResult[key] count] ;
+        
+        NSLog(@"Row count %d", row);
+        
+        for(int i = 0 ; i < row; ++i)
+        {
+            [IndexPathArray addObject:[NSIndexPath indexPathForRow: i inSection:section]];
+        }
+        
+        
+        
+        [self.tableView beginUpdates];
+        [self.tableView insertRowsAtIndexPaths:IndexPathArray withRowAnimation:UITableViewRowAnimationTop];
+        [self.tableView endUpdates];
+        
+    }
 }
 
-- (BOOL)tableView:(SLExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section
-{
-    // return YES, if you need to download data to expand this section. tableView will call tableView:downloadDataForExpandableSection: for this section
-    NSLog(@"needsToDownloadDataForExpandableSection");
-    return FALSE;
-    
-    
-}
-- (UITableViewCell<UIExpandingTableViewCell> *)tableView:(SLExpandableTableView *)tableView expandingCellForSection:(NSInteger)section
-{
-    // this cell will be displayed at IndexPath with section: section and row 0
-    
-    
-    NSString *CellIdentifier = @"ExpandableCell";
-    ExpandableCell *expandableCell = (ExpandableCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (expandableCell == nil) {
-        expandableCell = [[ExpandableCell   alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    
-    expandableCell .textLabel.text = @"Push to see feedbacks";
-    
-    expandableCell .preservesSuperviewLayoutMargins = false;
-    expandableCell .separatorInset = UIEdgeInsetsZero;
-    expandableCell .layoutMargins = UIEdgeInsetsZero;
-    
-    return expandableCell ;
-}
+
 
 
 #pragma mark table view delegate
 
-- (void)tableView:(SLExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section
-{
-    // download your data here
-    // call [tableView expandSection:section animated:YES]; if download was successful
-    // call [tableView cancelDownloadInSection:section]; if your download was NOT successful
-    NSLog(@"downloadDataForExpandableSection");
-}
-
-- (void)tableView:(SLExpandableTableView *)tableView didExpandSection:(NSUInteger)section animated:(BOOL)animated
-{
-    //...
-    NSLog(@"didExpandSection");
-}
-
-- (void)tableView:(SLExpandableTableView *)tableView didCollapseSection:(NSUInteger)section animated:(BOOL)animated
-{
-    //...
-    NSLog(@"didCollapseSection");
-}
-
+//- (void)tableView:(SLExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section
+//{
+//    // download your data here
+//    // call [tableView expandSection:section animated:YES]; if download was successful
+//    // call [tableView cancelDownloadInSection:section]; if your download was NOT successful
+//    NSLog(@"downloadDataForExpandableSection");
+//}
+//
+//- (void)tableView:(SLExpandableTableView *)tableView didExpandSection:(NSUInteger)section animated:(BOOL)animated
+//{
+//    //...
+//    NSLog(@"didExpandSection");
+//}
+//
+//- (void)tableView:(SLExpandableTableView *)tableView didCollapseSection:(NSUInteger)section animated:(BOOL)animated
+//{
+//    //...
+//    NSLog(@"didCollapseSection");
+//}
+//
 @end
 
 

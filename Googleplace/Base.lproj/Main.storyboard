@@ -1,28 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BzY-jF-r8x">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Y3G-Vp-C0B">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Main-->
-        <scene sceneID="YDu-Vd-yai">
+        <!--Quick Add View Controller-->
+        <scene sceneID="2Ns-HM-9ys">
             <objects>
-                <viewController title="Main" id="JJj-SP-IaE" customClass="MainViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QuickAddViewController" id="yfX-cX-rNc" customClass="QuickAddViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ayt-UI-MM6"/>
-                        <viewControllerLayoutGuide type="bottom" id="roL-dt-bcJ"/>
+                        <viewControllerLayoutGuide type="top" id="IUv-eX-qHH"/>
+                        <viewControllerLayoutGuide type="bottom" id="GhT-bX-ysi"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ow0-LG-eam">
+                    <view key="view" contentMode="scaleToFill" id="gfm-zW-c9U">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZTv-JN-XfV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ajA-X5-3zn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="429" y="-323"/>
+            <point key="canvasLocation" x="1788" y="32"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="5XR-NN-qQv">
+            <objects>
+                <viewController id="wuR-lP-jIj" customClass="MainViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YvX-rT-8ow"/>
+                        <viewControllerLayoutGuide type="bottom" id="7Xk-yG-SC2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kYa-c8-vkn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8oE-70-nu8">
+                                <rect key="frame" x="0.0" y="326" width="320" height="30"/>
+                                <state key="normal" title="Press to see map"/>
+                                <connections>
+                                    <action selector="mapButton:" destination="wuR-lP-jIj" eventType="touchUpInside" id="yuh-ND-0gW"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gFj-rK-hhK">
+                                <rect key="frame" x="40" y="64" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Welcom to MOVE-In-fo! the application that will show you feedbacks on apartmnts. please use proper languege and give yout honest feedback on the place that you lived in in order to help other people to choose wisly</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vY-YQ-PUY">
+                                <rect key="frame" x="0.0" y="256" width="320" height="30"/>
+                                <state key="normal" title="Press to add addres"/>
+                                <connections>
+                                    <action selector="addButton:" destination="wuR-lP-jIj" eventType="touchUpInside" id="jMi-b6-MCy"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="bXq-9Q-VMZ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XKj-8K-U7D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="864" y="203"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -33,7 +75,7 @@
                         <viewControllerLayoutGuide type="bottom" id="oeC-1t-NQR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjj-Sq-FMk">
@@ -80,19 +122,19 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="694" y="213"/>
+            <point key="canvasLocation" x="1226" y="213"/>
         </scene>
         <!--Detail Table View Controller-->
         <scene sceneID="aWL-O1-Dbw">
             <objects>
                 <tableViewController storyboardIdentifier="DetailTableViewController" id="F4w-ay-rGQ" customClass="DetailTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="44" sectionFooterHeight="28" id="Yed-sL-Tbp">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="2" id="Yed-sL-Tbp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="3e4-Js-w4Q" customClass="customCell">
-                                <rect key="frame" x="0.0" y="44" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="50" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3e4-Js-w4Q" id="52B-Vr-LpN">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -127,7 +169,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HUa-Jx-qAG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1103" y="213"/>
+            <point key="canvasLocation" x="1635" y="213"/>
         </scene>
         <!--Addinformation Viewcontroller-->
         <scene sceneID="sFe-EO-Q8w">
@@ -184,25 +226,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u6o-xH-Ggu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1569" y="223"/>
+            <point key="canvasLocation" x="2101" y="223"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="uGa-6J-m5e">
+        <scene sceneID="a7e-bp-gEz">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BzY-jF-r8x" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Y3G-Vp-C0B" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fCq-nz-A8d">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="U15-SY-TtX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="4Ea-K3-pvY"/>
+                        <segue destination="wuR-lP-jIj" kind="relationship" relationship="rootViewController" id="5oG-ft-zbE"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Obj-86-wDZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W2b-bO-UfN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6" y="128"/>
+            <point key="canvasLocation" x="394" y="203"/>
         </scene>
     </scenes>
 </document>

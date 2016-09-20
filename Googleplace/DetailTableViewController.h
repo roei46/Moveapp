@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <SLExpandableTableView.h>
+//#import <SLExpandableTableView.h>
 
 @interface DetailTableViewController : UITableViewController
 

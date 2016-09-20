@@ -10,22 +10,18 @@
 #import "DatabaseManager.h"
 #import "ServerProtocol.h"
 #import "ViewController.h"
+#import "customCell.h"
 #import "tableView.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
-#import "customCell.h"
-#import "ExpandableCell.h"
-
-
-
 
 @interface tableView () <GMSMapViewDelegate, UITableViewDelegate,
-                         UITableViewDataSource >
+                         UITableViewDataSource>
 @property(nonatomic, strong) GMSMarker *selectedMarker;
 @property(strong, nonatomic) IBOutlet UITableView *tblView;
 @property(strong, nonatomic) NSMutableString *DBid;
 @property(strong, nonatomic) NSMutableArray *arrHeader;
-@property (nonatomic, strong) NSMutableIndexSet *expandableSections;
+@property(nonatomic, strong) NSMutableIndexSet *expandableSections;
 
 @end
 
@@ -40,46 +36,38 @@
 }
 
 - (void)viewDidLoad {
-    
-   
-    self.tblView.tableFooterView.hidden = YES;
-    self.tblView.estimatedRowHeight = 500.0;
-    self.tblView.rowHeight = UITableViewAutomaticDimension;
-    
-    
+
+  self.tblView.tableFooterView.hidden = YES;
+  self.tblView.estimatedRowHeight = 500.0;
+  self.tblView.rowHeight = UITableViewAutomaticDimension;
+
   _tblView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 
   self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 
   self.automaticallyAdjustsScrollViewInsets = NO;
-  self.tblView.backgroundColor =
-      [UIColor clearColor];
+  self.tblView.backgroundColor = [UIColor clearColor];
 
   self.title = _Address;
-    self.navigationController.navigationBar.titleTextAttributes = @{
-                                                                    NSForegroundColorAttributeName : [UIColor whiteColor],
-                                                                    NSFontAttributeName : [UIFont fontWithName:@"STHeitiTC-Medium" size:16]
-                                                                    };
+  self.navigationController.navigationBar.titleTextAttributes = @{
+    NSForegroundColorAttributeName : [UIColor whiteColor],
+    NSFontAttributeName : [UIFont fontWithName:@"STHeitiTC-Medium" size:16]
+  };
 
-
-    
-  self.navigationItem.rightBarButtonItem =
-    [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"add.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                     style:UIBarButtonItemStylePlain target:self action:@selector(addInfo:)];
-    
+  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+      initWithImage:
+          [[UIImage imageNamed:@"add.png"]
+              imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+              style:UIBarButtonItemStylePlain
+             target:self
+             action:@selector(addInfo:)];
 
   self.navigationItem.backBarButtonItem =
       [[UIBarButtonItem alloc] initWithTitle:@""
                                        style:UIBarButtonItemStylePlain
                                       target:self
                                       action:@selector(back:)];
-    
-  
 }
-
-
-
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
@@ -88,167 +76,157 @@
 
 - (NSString *)tableView:(UITableView *)tableView
 titleForHeaderInSection:(NSInteger)section {
-    NSString *title1 = @"Apartment : ";
-   
+  NSString *title1 = @"Apartment : ";
 
-
-    return [title1 stringByAppendingString:[_arrHeader objectAtIndex:section]];
+  return [title1 stringByAppendingString:[_arrHeader objectAtIndex:section]];
 }
 - (void)tableView:(UITableView *)tableView
-willDisplayHeaderView:(UIView *)view
-       forSection:(NSInteger)section {
-    
-    view.tintColor = [UIColor colorWithRed:0.31 green:0.65 blue:0.83 alpha:1.0];
-    
-    
+    willDisplayHeaderView:(UIView *)view
+               forSection:(NSInteger)section {
+
+  view.tintColor = [UIColor colorWithRed:0.31 green:0.65 blue:0.83 alpha:1.0];
 }
 
+- (UIView *)tableView:(UITableView *)tableView
+    viewForHeaderInSection:(NSInteger)section {
+  UIView *view = [[UIView alloc]
+      initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44.0f)];
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44.0f)];
-    
-    [view setBackgroundColor:[UIColor colorWithRed:0.31 green:0.65 blue:0.83 alpha:1.0]];
-    UIImage *img = [UIImage imageNamed:@"home.png"];
-    UIImageView *img2 =[[UIImageView alloc] initWithImage:img];
-    UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(27, 0, tableView.bounds.size.width, 44)];
-    
-    
-    [img2 setCenter:CGPointMake( 15,view.bounds.size.height/2)];
+  [view setBackgroundColor:[UIColor colorWithRed:0.31
+                                           green:0.65
+                                            blue:0.83
+                                           alpha:1.0]];
+  UIImage *img = [UIImage imageNamed:@"home.png"];
+  UIImageView *img2 = [[UIImageView alloc] initWithImage:img];
+  UILabel *headerView = [[UILabel alloc]
+      initWithFrame:CGRectMake(27, 0, tableView.bounds.size.width, 44)];
 
-    [view addSubview:headerView];
-    
+  [img2 setCenter:CGPointMake(15, view.bounds.size.height / 2)];
 
-    NSString *title1 = @" Apartment : ";
+  [view addSubview:headerView];
 
-    headerView.text =[title1 stringByAppendingString:[_arrHeader objectAtIndex:section]];
-   [view addSubview:headerView];
-    [view addSubview:img2];
+  NSString *title1 = @" Apartment : ";
 
-    
-    
-    return view;
-    
+  headerView.text =
+      [title1 stringByAppendingString:[_arrHeader objectAtIndex:section]];
+  [view addSubview:headerView];
+  [view addSubview:img2];
+
+  return view;
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
-    
+
   return [appResult[_arrHeader[section]] count] + 1;
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-   
-    return 44.0f;
+- (CGFloat)tableView:(UITableView *)tableView
+    heightForHeaderInSection:(NSInteger)section {
+
+  return 44.0f;
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    
-    return 1.0f;
+- (CGFloat)tableView:(UITableView *)tableView
+    heightForFooterInSection:(NSInteger)section {
+
+  return 1.0f;
 }
 
+//- (UITableViewCell *)tableView:(UITableView *)tableView
+//         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//
+//
+//
+//        static NSString *CellIdentifier = @"cell";
+//        customCell * customcell =
+//        [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//
+//
+//        if (customcell== nil) {
+//            customcell = [[customCell alloc]
+//            initWithStyle:UITableViewCellStyleDefault
+//                                           reuseIdentifier:CellIdentifier];
+//
+//        }
+//
+//
+//        [customcell setSeparatorInset:UIEdgeInsetsZero];
+//
+//        [customcell setBackgroundColor:[UIColor colorWithRed:0.91 green:0.97
+//        blue:1.00 alpha:1.0]];
+//
+//
+//    if(indexPath.row > 0)
+//    {
+//        customcell.textLabel.text =
+//        appResult[_arrHeader[indexPath.section]][indexPath.row - 1];
+//        customcell.textLabel.numberOfLines  = 0;
+//        customcell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+//
+//
+//
+//
+//    }
+//
+//
+//     [customcell.cellLabel sizeToFit];
+//
+//    customcell.preservesSuperviewLayoutMargins = false;
+//    customcell.separatorInset = UIEdgeInsetsZero;
+//    customcell.layoutMargins = UIEdgeInsetsZero;
+//
+//  return customcell;
+//}
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (void)tableView:(UITableView *)tableView
+    didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-
-        static NSString *CellIdentifier = @"cell";
-        customCell * customcell =
-        [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        
-        if (customcell== nil) {
-            customcell = [[customCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                           reuseIdentifier:CellIdentifier];
-   
-        }
-        
-        
-        [customcell setSeparatorInset:UIEdgeInsetsZero];
-        
-        [customcell setBackgroundColor:[UIColor colorWithRed:0.91 green:0.97 blue:1.00 alpha:1.0]];
-    
-    
-    if(indexPath.row > 0)
-    {
-        customcell.textLabel.text = appResult[_arrHeader[indexPath.section]][indexPath.row - 1];
-        customcell.textLabel.numberOfLines  = 0;
-        customcell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        
-        
-        //customcell.label.text = appResult[_arrHeader[indexPath.section]][indexPath.row - 1];
-        
-        
-        //customcell.cellLabel.text = appResult[_arrHeader[indexPath.section]][indexPath.row - 1];
-        
-    }
-
-    
-     [customcell.cellLabel sizeToFit];
-    
-    customcell.preservesSuperviewLayoutMargins = false;
-    customcell.separatorInset = UIEdgeInsetsZero;
-    customcell.layoutMargins = UIEdgeInsetsZero;
-
-  return customcell;
+  [tableView beginUpdates];
+  [tableView endUpdates];
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
-    
-    
-    [tableView beginUpdates];
-    [tableView endUpdates];
-}
-
-
-//-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+//-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell
+//*)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 //{
 //    // Remove seperator inset
 //    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
 //        [cell setSeparatorInset:UIEdgeInsetsZero];
 //    }
-//    
+//
 //    // Prevent the cell from inheriting the Table View's margin settings
-//    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+//    if ([cell
+//    respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
 //        [cell setPreservesSuperviewLayoutMargins:NO];
 //    }
-//    
+//
 //    // Explictly set your cell's layout margins
 //    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
 //        [cell setLayoutMargins:UIEdgeInsetsZero];
 //    }
 //}
 
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [tableView setSeparatorInset:UIEdgeInsetsZero];
-    }
-    
-    if ([tableView respondsToSelector:@selector(setLayoutMargins:)]) {
-        [tableView setLayoutMargins:UIEdgeInsetsZero];
-    }
-    
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
-    }
+- (void)tableView:(UITableView *)tableView
+  willDisplayCell:(UITableViewCell *)cell
+forRowAtIndexPath:(NSIndexPath *)indexPath {
+
+  if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+    [tableView setSeparatorInset:UIEdgeInsetsZero];
+  }
+
+  if ([tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+    [tableView setLayoutMargins:UIEdgeInsetsZero];
+  }
+
+  if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+    [cell setLayoutMargins:UIEdgeInsetsZero];
+  }
 }
-
-
-
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-//  self.tblView.delegate = self;
-//  self.tblView.dataSource = self;
-    
-
+  //  self.tblView.delegate = self;
+  //  self.tblView.dataSource = self;
 
   // ServerProtocol *serverprotocol = [[ServerProtocol alloc]init];
 
@@ -304,15 +282,13 @@ willDisplayHeaderView:(UIView *)view
                     sortedArrayUsingDescriptors:[NSArray
                                                     arrayWithObject:sortOrder]];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tblView reloadData];
-                   
-                    self.tblView= [[SLExpandableTableView alloc] initWithFrame:self.tblView.frame style:UITableViewStylePlain];
-                    self.tblView.delegate = self;
-                    self.tblView.dataSource = self;
-                    self.tblView.separatorInset = UIEdgeInsetsZero;
-                    [self.view addSubview:self.tblView];
-                    self.tblView= [[SLExpandableTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-                    
+                  [self.tblView reloadData];
+
+                  self.tblView.delegate = self;
+                  self.tblView.dataSource = self;
+                  self.tblView.separatorInset = UIEdgeInsetsZero;
+                  [self.view addSubview:self.tblView];
+
                 });
 
                 break;
@@ -323,9 +299,6 @@ willDisplayHeaderView:(UIView *)view
 
   [postdata resume];
 }
-
-
-
 
 - (void)back:(id)sender {
 
@@ -359,62 +332,5 @@ willDisplayHeaderView:(UIView *)view
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
-
-- (BOOL)tableView:(SLExpandableTableView *)tableView canExpandSection:(NSInteger)section
-{
-    // return YES, if the section should be expandable
-    NSLog(@"canExpandSection");
-    return YES;
-}
-
-- (BOOL)tableView:(SLExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section
-{
-    // return YES, if you need to download data to expand this section. tableView will call tableView:downloadDataForExpandableSection: for this section
-    NSLog(@"needsToDownloadDataForExpandableSection");
-    return FALSE;
-}
-
-- (UITableViewCell<UIExpandingTableViewCell> *)tableView:(SLExpandableTableView *)tableView expandingCellForSection:(NSInteger)section
-{
-    // this cell will be displayed at IndexPath with section: section and row 0
-    
-    
-    NSString *CellIdentifier = @"ExpandableCell";
-    ExpandableCell *expandableCell = (ExpandableCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (expandableCell == nil) {
-        expandableCell = [[ExpandableCell   alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    
-    expandableCell .textLabel.text = @"blah blah";
-    
-    return expandableCell ;
-}
-
-#pragma mark table view delegate
-
-- (void)tableView:(SLExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section
-{
-    // download your data here
-    //call [tableView expandSection:section animated:YES]; if your download was successful
-    // call [tableView cancelDownloadInSection:section]; if your download was NOT successful
-    NSLog(@"downloadDataForExpandableSection");
-}
-
-- (void)tableView:(SLExpandableTableView *)tableView didExpandSection:(NSUInteger)section animated:(BOOL)animated
-{
-    //...
-    NSLog(@"didExpandSection");
-}
-
-- (void)tableView:(SLExpandableTableView *)tableView didCollapseSection:(NSUInteger)section animated:(BOOL)animated
-{
-    //...
-    NSLog(@"didCollapseSection");
-}
-
-
-
-
 
 @end

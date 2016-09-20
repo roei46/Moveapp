@@ -6,8 +6,8 @@
 //  Copyright © 2016 Roei Baruch. All rights reserved.
 //
 
-#import "ViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface MainViewController : ViewController
+@interface MainViewController :UIViewController
 
 @end

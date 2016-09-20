@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <SLExpandableTableView.h>
 
 
-@interface tableView : UIViewController<SLExpandableTableViewDelegate,SLExpandableTableViewDatasource>
+@interface tableView : UIViewController
 
 @property(nonatomic, strong) NSString *Address;
 

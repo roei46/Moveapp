@@ -11,6 +11,7 @@
 		C4031EC21D89FE6D003C8033 /* DetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4031EC11D89FE6D003C8033 /* DetailTableViewController.m */; };
 		C4031EC51D8ACBD7003C8033 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4031EC31D8ACBD7003C8033 /* Main.storyboard */; };
 		C4031EC81D8AD1F1003C8033 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4031EC71D8AD1F1003C8033 /* MainViewController.m */; };
+		C4031ECB1D916DC5003C8033 /* QuickAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4031ECA1D916DC5003C8033 /* QuickAddViewController.m */; };
 		C435CDB61D4691F6002F9095 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CDB51D4691F6002F9095 /* main.m */; };
 		C435CDB91D4691F6002F9095 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CDB81D4691F6002F9095 /* AppDelegate.m */; };
 		C435CDBC1D4691F6002F9095 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CDBB1D4691F6002F9095 /* ViewController.m */; };
@@ -23,7 +24,6 @@
 		C437F6951D529EEF00FAC6D2 /* tableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C437F6941D529EEF00FAC6D2 /* tableView.m */; };
 		C455D11F1D6F360100A865F8 /* papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C455D11E1D6F360100A865F8 /* papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg */; };
 		C47A9AE21D8591E1003CA822 /* customCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C47A9AE11D8591E1003CA822 /* customCell.m */; };
-		C47D26B11D8855C6004314F2 /* ExpandableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C47D26B01D8855C6004314F2 /* ExpandableCell.m */; };
 		C48321571D6DDEBC00008B32 /* cover.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C48321561D6DDEBC00008B32 /* cover.jpeg */; };
 		C4DC66FB1D81918700F368C7 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DC66FA1D81918700F368C7 /* home.png */; };
 		C4DC66FD1D819C4D00F368C7 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DC66FC1D819C4D00F368C7 /* add.png */; };
@@ -57,6 +57,8 @@
 		C4031EC41D8ACBD7003C8033 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C4031EC61D8AD1F1003C8033 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		C4031EC71D8AD1F1003C8033 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		C4031EC91D916DC5003C8033 /* QuickAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickAddViewController.h; sourceTree = "<group>"; };
+		C4031ECA1D916DC5003C8033 /* QuickAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickAddViewController.m; sourceTree = "<group>"; };
 		C435CDB11D4691F6002F9095 /* Googleplace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Googleplace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C435CDB51D4691F6002F9095 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C435CDB71D4691F6002F9095 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -81,8 +83,6 @@
 		C455D11E1D6F360100A865F8 /* papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg"; sourceTree = "<group>"; };
 		C47A9AE01D8591E1003CA822 /* customCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = customCell.h; path = ../customCell.h; sourceTree = "<group>"; };
 		C47A9AE11D8591E1003CA822 /* customCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = customCell.m; path = ../customCell.m; sourceTree = "<group>"; };
-		C47D26AF1D8855C6004314F2 /* ExpandableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandableCell.h; sourceTree = "<group>"; };
-		C47D26B01D8855C6004314F2 /* ExpandableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandableCell.m; sourceTree = "<group>"; };
 		C48321561D6DDEBC00008B32 /* cover.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cover.jpeg; sourceTree = "<group>"; };
 		C4DC66FA1D81918700F368C7 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		C4DC66FC1D819C4D00F368C7 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
@@ -157,6 +157,8 @@
 				C435CDBB1D4691F6002F9095 /* ViewController.m */,
 				C4031EC61D8AD1F1003C8033 /* MainViewController.h */,
 				C4031EC71D8AD1F1003C8033 /* MainViewController.m */,
+				C4031EC91D916DC5003C8033 /* QuickAddViewController.h */,
+				C4031ECA1D916DC5003C8033 /* QuickAddViewController.m */,
 				C435CDC01D4691F6002F9095 /* Assets.xcassets */,
 				C4031EC31D8ACBD7003C8033 /* Main.storyboard */,
 				C435CDC21D4691F6002F9095 /* LaunchScreen.storyboard */,
@@ -187,8 +189,6 @@
 				C435CDB51D4691F6002F9095 /* main.m */,
 				C47A9AE01D8591E1003CA822 /* customCell.h */,
 				C47A9AE11D8591E1003CA822 /* customCell.m */,
-				C47D26AF1D8855C6004314F2 /* ExpandableCell.h */,
-				C47D26B01D8855C6004314F2 /* ExpandableCell.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -408,6 +408,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4031ECB1D916DC5003C8033 /* QuickAddViewController.m in Sources */,
 				C4031EC81D8AD1F1003C8033 /* MainViewController.m in Sources */,
 				C4031EC21D89FE6D003C8033 /* DetailTableViewController.m in Sources */,
 				C437F68F1D51272600FAC6D2 /* ServerProtocol.m in Sources */,
@@ -415,7 +416,6 @@
 				C47A9AE21D8591E1003CA822 /* customCell.m in Sources */,
 				C4F14E081D554348003F182F /* AddinformationViewcontroller.m in Sources */,
 				C435CDB91D4691F6002F9095 /* AppDelegate.m in Sources */,
-				C47D26B11D8855C6004314F2 /* ExpandableCell.m in Sources */,
 				C437F6951D529EEF00FAC6D2 /* tableView.m in Sources */,
 				C437F6921D5127F500FAC6D2 /* DatabaseManager.m in Sources */,
 				C435CDB61D4691F6002F9095 /* main.m in Sources */,

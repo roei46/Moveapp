@@ -17,17 +17,52 @@
                     <view key="view" contentMode="scaleToFill" id="gfm-zW-c9U">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qjo-Xl-4dn">
+                                <rect key="frame" x="0.0" y="118" width="320" height="45"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="agf-Cs-p5u">
+                                <rect key="frame" x="10" y="300" width="300" height="151"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Apartment number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KDo-Hl-q0e">
+                                <rect key="frame" x="10" y="223" width="300" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsA-zP-Dt3">
+                                <rect key="frame" x="0.0" y="471" width="320" height="34"/>
+                                <color key="backgroundColor" red="0.19448390409999999" green="0.52347997310000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Submit">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="submit:" destination="yfX-cX-rNc" eventType="touchUpInside" id="NrQ-Si-FLG"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="Apartment" destination="KDo-Hl-q0e" id="3u1-0B-jKY"/>
+                        <outlet property="Feedback2" destination="agf-Cs-p5u" id="lnC-2V-Uje"/>
+                        <outlet property="TITLE" destination="qjo-Xl-4dn" id="4yZ-ir-d0R"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ajA-X5-3zn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1788" y="32"/>
+            <point key="canvasLocation" x="1648" y="42"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="5XR-NN-qQv">
             <objects>
-                <viewController id="wuR-lP-jIj" customClass="MainViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="wuR-lP-jIj" customClass="MainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YvX-rT-8ow"/>
                         <viewControllerLayoutGuide type="bottom" id="7Xk-yG-SC2"/>
@@ -38,7 +73,10 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8oE-70-nu8">
                                 <rect key="frame" x="0.0" y="326" width="320" height="30"/>
-                                <state key="normal" title="Press to see map"/>
+                                <color key="backgroundColor" red="0.1236136023" green="0.45507654130000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Press to see map">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="mapButton:" destination="wuR-lP-jIj" eventType="touchUpInside" id="yuh-ND-0gW"/>
                                 </connections>
@@ -52,7 +90,10 @@
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vY-YQ-PUY">
                                 <rect key="frame" x="0.0" y="256" width="320" height="30"/>
-                                <state key="normal" title="Press to add addres"/>
+                                <color key="backgroundColor" red="0.19448390409999999" green="0.52347997310000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Press to add address">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="addButton:" destination="wuR-lP-jIj" eventType="touchUpInside" id="jMi-b6-MCy"/>
                                 </connections>
@@ -78,9 +119,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjj-Sq-FMk">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjj-Sq-FMk">
                                 <rect key="frame" x="0.0" y="483" width="320" height="21"/>
                                 <color key="backgroundColor" white="1" alpha="0.84812721631205679" colorSpace="calibratedWhite"/>
+                                <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -93,9 +135,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="oeC-1t-NQR" firstAttribute="top" secondItem="SEG-Jv-MLD" secondAttribute="bottom" id="5UI-ys-kZ4"/>
+                            <constraint firstItem="zjj-Sq-FMk" firstAttribute="leading" secondItem="SEG-Jv-MLD" secondAttribute="leading" id="BcI-ER-XMt"/>
                             <constraint firstItem="SEG-Jv-MLD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="YnF-T5-k6l"/>
+                            <constraint firstItem="zjj-Sq-FMk" firstAttribute="top" secondItem="P3w-Sq-jg5" secondAttribute="bottom" constant="463" id="aeo-1D-7dR"/>
                             <constraint firstAttribute="trailing" secondItem="SEG-Jv-MLD" secondAttribute="trailing" id="hpJ-lg-X0c"/>
                             <constraint firstItem="SEG-Jv-MLD" firstAttribute="top" secondItem="P3w-Sq-jg5" secondAttribute="bottom" id="lD2-Au-GGz"/>
+                            <constraint firstItem="zjj-Sq-FMk" firstAttribute="trailing" secondItem="SEG-Jv-MLD" secondAttribute="trailing" id="mWk-ua-UpL"/>
                             <constraint firstAttribute="bottom" secondItem="zjj-Sq-FMk" secondAttribute="bottom" id="yAv-rU-WOo"/>
                         </constraints>
                     </view>
@@ -215,7 +260,6 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                         </subviews>
-                        <color key="backgroundColor" red="0.092591669698935175" green="1" blue="0.59969713115688594" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="Apartment" destination="XVP-Vi-an5" id="waA-94-G5c"/>
@@ -238,6 +282,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="3f0-k6-56L">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="wuR-lP-jIj" kind="relationship" relationship="rootViewController" id="5oG-ft-zbE"/>
                     </connections>

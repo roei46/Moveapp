@@ -25,8 +25,6 @@ static NSString const *kTerrainType = @"Terrain";
 @property(weak, nonatomic) IBOutlet GMSMapView *mapview;
 @property(nonatomic, assign) BOOL showSegmant;
 @property(weak, nonatomic) IBOutlet UILabel *infoLabel;
-@property(weak, nonatomic)
-    IBOutlet GMSAutocompleteTableDataSource *_tableDataSource;
 @property(strong, nonatomic)
     IBOutlet GMSAutocompleteResultsViewController *_acViewController;
 @property(weak, nonatomic) IBOutlet GMSMarker *_Marker;
@@ -54,7 +52,6 @@ static NSString const *kTerrainType = @"Terrain";
   self.edgesForExtendedLayout =
       UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight;
 
-  //self.view.backgroundColor = [UIColor whiteColor];
 
   __acViewController = [[GMSAutocompleteResultsViewController alloc] init];
   __acViewController.delegate = self;

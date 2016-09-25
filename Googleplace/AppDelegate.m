@@ -31,7 +31,6 @@
 
       }];
   [Parse initializeWithConfiguration:parscon];
-//    [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:0.25 green:0.79 blue:0.78 alpha:1.0]} forState:UIControlStateSelected];
 
 
   return YES;

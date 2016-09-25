@@ -14,7 +14,6 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
 #import "customCell.h"
-#import "ExpandableCell.h"
 
 @interface DetailTableViewController ()<GMSMapViewDelegate, UITableViewDelegate,
 UITableViewDataSource >

@@ -39,11 +39,11 @@
   self.title = @"Add information";
   _TITLE.text = _Address;
   self.automaticallyAdjustsScrollViewInsets = false;
-    _Feedback2.layer.cornerRadius = 5;
-
+  _Feedback2.layer.cornerRadius = 5;
 
   _Feedback2.placeholder = @"Please add your feedback here";
 }
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
   [_Feedback2 resignFirstResponder];

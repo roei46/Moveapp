@@ -22,6 +22,20 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
+    self.navigationController.navigationBar.barTintColor =
+    [UIColor colorWithRed:0.25 green:0.79 blue:0.78 alpha:1.0];
+    self.navigationController.navigationBar.titleTextAttributes = @{
+                                                                    NSForegroundColorAttributeName : [UIColor whiteColor],
+                                                                    NSFontAttributeName : [UIFont fontWithName:@"Heiti TC" size:21]
+                                                                    };
+    self.title = @"Move-in-fo";
+    self.edgesForExtendedLayout =
+    UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight;
+    
+    [self.view setBackgroundColor:[UIColor colorWithRed:0.31
+                                                 green:0.65
+                                                  blue:0.83
+                                                 alpha:1.0]];
     
  
 }

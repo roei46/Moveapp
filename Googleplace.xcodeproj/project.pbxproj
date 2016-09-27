@@ -29,6 +29,8 @@
 		C4DC66FD1D819C4D00F368C7 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DC66FC1D819C4D00F368C7 /* add.png */; };
 		C4DC66FF1D819D7D00F368C7 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DC66FE1D819D7D00F368C7 /* file.png */; };
 		C4F14E081D554348003F182F /* AddinformationViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F14E071D554348003F182F /* AddinformationViewcontroller.m */; };
+		C4F4EDC51D99CCDB0035B067 /* expand-button.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F4EDC31D99CCDB0035B067 /* expand-button.png */; };
+		C4F4EDCA1D9A9FD10035B067 /* expand-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F4EDC91D9A9FD10035B067 /* expand-arrow.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,8 @@
 		C4DC66FE1D819D7D00F368C7 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
 		C4F14E061D554348003F182F /* AddinformationViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddinformationViewcontroller.h; path = ../AddinformationViewcontroller.h; sourceTree = "<group>"; };
 		C4F14E071D554348003F182F /* AddinformationViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddinformationViewcontroller.m; path = ../AddinformationViewcontroller.m; sourceTree = "<group>"; };
+		C4F4EDC31D99CCDB0035B067 /* expand-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "expand-button.png"; sourceTree = "<group>"; };
+		C4F4EDC91D9A9FD10035B067 /* expand-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "expand-arrow.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +183,8 @@
 		C435CDB41D4691F6002F9095 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C4F4EDC31D99CCDB0035B067 /* expand-button.png */,
+				C4F4EDC91D9A9FD10035B067 /* expand-arrow.png */,
 				C4DC66FC1D819C4D00F368C7 /* add.png */,
 				C455D11E1D6F360100A865F8 /* papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg */,
 				C4DC66FA1D81918700F368C7 /* home.png */,
@@ -331,6 +337,8 @@
 				C435CDC41D4691F6002F9095 /* LaunchScreen.storyboard in Resources */,
 				C455D11F1D6F360100A865F8 /* papers.co-vl20-android-marshmallow-new-green-pink-pattern-4-wallpaper.jpg in Resources */,
 				C4DC66FF1D819D7D00F368C7 /* file.png in Resources */,
+				C4F4EDCA1D9A9FD10035B067 /* expand-arrow.png in Resources */,
+				C4F4EDC51D99CCDB0035B067 /* expand-button.png in Resources */,
 				C4031EC51D8ACBD7003C8033 /* Main.storyboard in Resources */,
 				C4DC66FB1D81918700F368C7 /* home.png in Resources */,
 				C4DC66FD1D819C4D00F368C7 /* add.png in Resources */,

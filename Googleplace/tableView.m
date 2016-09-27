@@ -225,10 +225,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  //  self.tblView.delegate = self;
-  //  self.tblView.dataSource = self;
 
-  // ServerProtocol *serverprotocol = [[ServerProtocol alloc]init];
 
   NSURLSession *session =
       [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration

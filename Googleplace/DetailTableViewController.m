@@ -20,6 +20,10 @@ UITableViewDataSource >
 @property(nonatomic, strong) GMSMarker *selectedMarker;
 @property(strong, nonatomic) NSMutableString *DBid;
 @property(strong, nonatomic) NSMutableArray *arrHeader;
+@property(strong, nonatomic) UIImage *btnImge;
+@property(nonatomic, assign) BOOL press;
+
+
 
 @end
 
@@ -248,6 +252,10 @@ willDisplayHeaderView:(UIView *)view
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    
+    
+    
+    
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44.0f)];
     
     [view setBackgroundColor:[UIColor colorWithRed:0.31 green:0.65 blue:0.83 alpha:1.0]];
@@ -255,15 +263,20 @@ willDisplayHeaderView:(UIView *)view
     UIImageView *img2 =[[UIImageView alloc] initWithImage:img];
     UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(27, 0, tableView.bounds.size.width, 44)];
     
-    
     [img2 setCenter:CGPointMake( 15,view.bounds.size.height/2)];
     
-    [view addSubview:headerView];
     
     
     NSString *title1 = @" Apartment : ";
     
     headerView.text =[title1 stringByAppendingString:[_arrHeader objectAtIndex:section]];
+    _btnImge = [UIImage imageNamed:@"expand-button.png"];
+
+    UIImageView *ximage =[[UIImageView alloc] initWithImage:_btnImge];
+    ximage.accessibilityLabel = @"expand-button.png";
+    [ximage setCenter:CGPointMake( 300,view.bounds.size.height/2)];
+
+    
     
     UIButton * button = [[UIButton alloc] initWithFrame:view.frame];
     button.tag = section;
@@ -271,6 +284,13 @@ willDisplayHeaderView:(UIView *)view
     [button addTarget:self action:@selector(sectionHeaderSelected:) forControlEvents:UIControlEventTouchUpInside];
     button.backgroundColor = [UIColor clearColor];
     
+   
+    
+    
+    
+    
+    
+    [view addSubview:ximage];
     [view addSubview:headerView];
     [view addSubview:img2];
     [view addSubview:button];
@@ -294,49 +314,6 @@ willDisplayHeaderView:(UIView *)view
     return [tempAppResult[_arrHeader[section]] count];
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 
 - (void)back:(id)sender {
@@ -373,52 +350,32 @@ willDisplayHeaderView:(UIView *)view
 
 
 
-//- (BOOL)tableView:(SLExpandableTableView *)tableView canExpandSection:(NSInteger)section
-//{
-//    // return YES, if the section should be expandable
-//    NSLog(@"canExpandSection");
-//    return TRUE;
-//}
-//
-//- (BOOL)tableView:(SLExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section
-//{
-//    // return YES, if you need to download data to expand this section. tableView will call tableView:downloadDataForExpandableSection: for this section
-//    NSLog(@"needsToDownloadDataForExpandableSection");
-//    return FALSE;
-//    
-//    
-//}
-//- (UITableViewCell<UIExpandingTableViewCell> *)tableView:(SLExpandableTableView *)tableView expandingCellForSection:(NSInteger)section
-//{
-//    // this cell will be displayed at IndexPath with section: section and row 0
-//    
-//    
-//    NSString *CellIdentifier = @"ExpandableCell";
-//    ExpandableCell *expandableCell = (ExpandableCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//    
-//    if (expandableCell == nil) {
-//        expandableCell = [[ExpandableCell   alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-//    }
-//    
-//    expandableCell .textLabel.text = @"Push to see feedbacks";
-//    
-//    expandableCell .preservesSuperviewLayoutMargins = false;
-//    expandableCell .separatorInset = UIEdgeInsetsZero;
-//    expandableCell .layoutMargins = UIEdgeInsetsZero;
-//    
-//    return expandableCell ;
-//}
-
 
 -(void)sectionHeaderSelected:(id)sender
 {
+    
     NSUInteger section = ((UIButton*)sender).tag;
     NSString * key = ((UIButton*)sender).accessibilityLabel;
     NSMutableArray* IndexPathArray = [[NSMutableArray alloc] init];
     
+    UIImageView* tempImageView;
+    
+    
+    for (UIImageView* imageView in ((UIView*)((UIButton*)sender).superview).subviews)
+    {
+        if([imageView.accessibilityLabel isEqualToString:@"expand-button.png"])
+        {
+            tempImageView = imageView;
+            break;
+        }
+    }
+    
     if( [tempAppResult[key] count] > 0 )
     {
         //if section has rows,reset value
+        
+        tempImageView.image = [UIImage imageNamed:@"expand-button.png"];
+        
         int row  = [tempAppResult[key] count] ;
         
         for(int i = 0 ; i < row; ++i)
@@ -434,10 +391,14 @@ willDisplayHeaderView:(UIView *)view
         [self.tableView deleteRowsAtIndexPaths:IndexPathArray withRowAnimation:UITableViewRowAnimationTop];
         [self.tableView endUpdates];
         
+        
+        
     }
     else
     {
         //if section has no rows,add  value
+        
+         tempImageView.image = [UIImage imageNamed:@"expand-arrow.png"];
         
         [tempAppResult setObject:appResult[key] forKey:key];
         NSLog(@"Expand section %@",tempAppResult);
@@ -464,28 +425,7 @@ willDisplayHeaderView:(UIView *)view
 
 
 
-#pragma mark table view delegate
 
-//- (void)tableView:(SLExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section
-//{
-//    // download your data here
-//    // call [tableView expandSection:section animated:YES]; if download was successful
-//    // call [tableView cancelDownloadInSection:section]; if your download was NOT successful
-//    NSLog(@"downloadDataForExpandableSection");
-//}
-//
-//- (void)tableView:(SLExpandableTableView *)tableView didExpandSection:(NSUInteger)section animated:(BOOL)animated
-//{
-//    //...
-//    NSLog(@"didExpandSection");
-//}
-//
-//- (void)tableView:(SLExpandableTableView *)tableView didCollapseSection:(NSUInteger)section animated:(BOOL)animated
-//{
-//    //...
-//    NSLog(@"didCollapseSection");
-//}
-//
 @end
 
 

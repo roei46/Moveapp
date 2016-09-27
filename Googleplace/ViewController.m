@@ -48,6 +48,10 @@ static NSString const *kTerrainType = @"Terrain";
     NSForegroundColorAttributeName : [UIColor whiteColor],
     NSFontAttributeName : [UIFont fontWithName:@"Heiti TC" size:21]
   };
+    
+    
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+
   self.title = @"Move-in-fo";
   self.edgesForExtendedLayout =
       UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight;
@@ -102,41 +106,7 @@ static NSString const *kTerrainType = @"Terrain";
 
   [self.mapview addSubview:_infoLabel];
 
-  //  NSURLSession *session =
-  //      [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration
-  //                                                 defaultSessionConfiguration]
-  //                                    delegate:nil
-  //                               delegateQueue:nil];
-  //  NSMutableURLRequest *request = [NSMutableURLRequest
-  //       requestWithURL:
-  //           [NSURL
-  //               URLWithString:@"https://movex.herokuapp.com/parse/classes/Test2"]
-  //          cachePolicy:NSURLRequestUseProtocolCachePolicy
-  //      timeoutInterval:60.0];
-  //
-  //  // use only in SET
-  //  //  NSError *error;
-  //  //    NSData *jsondata;
-  //
-  //  [request addValue:@"application/json" forHTTPHeaderField:@"Content-type"];
-  //  [request addValue:@"movexroei"
-  //  forHTTPHeaderField:@"X-Parse-Application-Id"];
-  //
-  //  // use only in SET
-  //  //    [request setHTTPBody:jsondata];
-  //  [request setHTTPMethod:@"GET"];
-  //
-  //  NSLog(@"%@", request);
-  //
-  //  NSURLSessionDataTask *postdata =
-  //      [session dataTaskWithRequest:request
-  //                 completionHandler:^(NSData *data, NSURLResponse *response,
-  //                                     NSError *error) {
-  //                   NSDictionary *result =
-  //                       [NSJSONSerialization JSONObjectWithData:data
-  //                                                       options:kNilOptions
-  //                                                         error:&error];
-    
+
     
   PFQuery *query = [PFQuery queryWithClassName:@"Test2"];
     [query selectKeys:@[@"googlid"]];
@@ -236,6 +206,13 @@ static NSString const *kTerrainType = @"Terrain";
                     [UIAlertAction actionWithTitle:@"Place exist"
                                              style:UIAlertActionStyleDefault
                                            handler:nil];
+                  GMSCameraPosition *camera = [GMSCameraPosition
+                                               cameraWithLatitude:place.coordinate.latitude
+                                               longitude:place.coordinate.longitude
+                                               zoom:6];
+                  self.mapview.camera = camera;
+                  
+                  
                 [alert addAction:exist];
                 [self presentViewController:alert animated:YES completion:nil];
 

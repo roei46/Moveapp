@@ -12,6 +12,7 @@
 
 
 @interface MainViewController ()
+@property (weak, nonatomic) IBOutlet UITextView *text;
 - (IBAction)mapButton:(id)sender;
 - (IBAction)addButton:(id)sender;
 
@@ -36,8 +37,11 @@
                                                  green:0.65
                                                   blue:0.83
                                                  alpha:1.0]];
-    
- 
+    _text.backgroundColor = [UIColor colorWithRed:0.31
+                                            green:0.65
+                                             blue:0.83
+                                            alpha:1.0];
+    _text.editable = NO;
 }
 
 - (void)didReceiveMemoryWarning {

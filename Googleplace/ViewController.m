@@ -27,11 +27,13 @@ static NSString const *kTerrainType = @"Terrain";
 @property(weak, nonatomic) IBOutlet UILabel *infoLabel;
 @property(strong, nonatomic)
     IBOutlet GMSAutocompleteResultsViewController *_acViewController;
-@property(weak, nonatomic) IBOutlet GMSMarker *_Marker;
+@property(weak, nonatomic)  GMSMarker *_Marker;
 @property(strong, nonatomic) GMSPlacesClient *placesclient;
 @property(weak, nonatomic) UITextView *_resultView;
 @property(strong, nonatomic) UISearchController *searchController;
 @property(strong, nonatomic) UISegmentedControl *switcher;
+@property(strong, nonatomic)  GMSMarker *targetMarker;
+
 
 @end
 
@@ -181,6 +183,15 @@ static NSString const *kTerrainType = @"Terrain";
                                        animated:YES];
 }
 
+-(void)mapView:(GMSMapView *)mapView willMove:(BOOL)gesture{
+    
+    if(gesture)
+    {
+        _targetMarker.icon= nil;
+    }
+}
+   
+
 #pragma mark - GMSAutocompleteResultsViewControllerDelegate
 
 - (void)resultsController:
@@ -206,11 +217,28 @@ static NSString const *kTerrainType = @"Terrain";
                     [UIAlertAction actionWithTitle:@"Place exist"
                                              style:UIAlertActionStyleDefault
                                            handler:nil];
+                  
+                 
                   GMSCameraPosition *camera = [GMSCameraPosition
                                                cameraWithLatitude:place.coordinate.latitude
                                                longitude:place.coordinate.longitude
-                                               zoom:6];
+                                               zoom:15];
                   self.mapview.camera = camera;
+                  if(!_targetMarker)
+                  {
+                      _targetMarker = [[GMSMarker alloc] init];
+                     
+                      _targetMarker.map = _mapview;
+                      
+                  }
+                  
+                  _targetMarker.position = CLLocationCoordinate2DMake(
+                                                                      place.coordinate.latitude, place.coordinate.longitude);
+                  
+                  _targetMarker.icon = [UIImage imageNamed:@"searching-location-gps-indicator.png"];
+                
+                  
+
                   
                   
                 [alert addAction:exist];

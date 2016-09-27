@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import "ViewController.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 
 @import GoogleMaps;
 
@@ -31,6 +34,7 @@
 
       }];
   [Parse initializeWithConfiguration:parscon];
+    [Fabric with:@[[Crashlytics class]]];
 
 
   return YES;

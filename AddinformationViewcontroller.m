@@ -136,7 +136,7 @@
                             handler:^(UIAlertAction *action) {
                               tableView *destViewController = [self.storyboard
                                   instantiateViewControllerWithIdentifier:
-                                      @"MapViewController"];
+                                      @"DetailTableViewController"];
 
                               destViewController.Address = _Address;
 
@@ -261,11 +261,8 @@
                                                             tableView *destViewController =
                                                                 [self.storyboard
                                                                     instantiateViewControllerWithIdentifier:
-                                                                        @"MapVi"
-                                                                        @"ewCo"
-                                                                        @"ntro"
-                                                                        @"lle"
-                                                                        @"r"];
+                                                                        @"DetailTableViewController"
+                                                                    ];
 
                                                             destViewController
                                                                 .Address =
@@ -316,6 +313,7 @@
               }
 
               NSLog(@" second q ");
+                
 
               PFQuery *query = [PFQuery queryWithClassName:@"Test2"];
               [query
@@ -383,11 +381,7 @@
                                                             tableView *destViewController =
                                                                 [self.storyboard
                                                                     instantiateViewControllerWithIdentifier:
-                                                                        @"MapVi"
-                                                                        @"ewCo"
-                                                                        @"ntro"
-                                                                        @"lle"
-                                                                        @"r"];
+                                                                        @"DetailTableViewController"];
 
                                                             destViewController
                                                                 .Address =

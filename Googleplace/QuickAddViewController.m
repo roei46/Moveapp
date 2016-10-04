@@ -176,6 +176,7 @@ forSearchBarIcon:(UISearchBarIcon)icon
                                            handler:nil];
                 _Address = place.name;
                 _googleId = place.placeID;
+                  _working = NO;
                 [alert addAction:exist];
                 [self presentViewController:alert animated:YES completion:nil];
 
@@ -393,7 +394,7 @@ preparation before navigation
                 }
               }
 
-              NSLog(@" second q ");
+              NSLog(@" first q ");
 
               PFQuery *query = [PFQuery queryWithClassName:@"Test2"];
               [query
@@ -461,11 +462,7 @@ preparation before navigation
                                                             tableView *destViewController =
                                                                 [self.storyboard
                                                                     instantiateViewControllerWithIdentifier:
-                                                                        @"MapVi"
-                                                                        @"ewCo"
-                                                                        @"ntro"
-                                                                        @"lle"
-                                                                        @"r"];
+                                                                        @"DetailTableViewController"];
 
                                                             destViewController
                                                                 .Address =
@@ -583,11 +580,7 @@ preparation before navigation
                                                             tableView *destViewController =
                                                                 [self.storyboard
                                                                     instantiateViewControllerWithIdentifier:
-                                                                        @"MapVi"
-                                                                        @"ewCo"
-                                                                        @"ntro"
-                                                                        @"lle"
-                                                                        @"r"];
+                                                                       @"DetailTableViewController"];
 
                                                             destViewController
                                                                 .Address =

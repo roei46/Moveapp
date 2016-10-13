@@ -15,6 +15,7 @@
 @property(strong, nonatomic) NSMutableString *DBid;
 @property(weak, nonatomic) IBOutlet UIImageView *streetImage;
 @property(weak, nonatomic) IBOutlet UILabel *TITLE;
+@property (weak, nonatomic) IBOutlet UIButton *upload;
 
 - (IBAction)upload:(id)sender;
 
@@ -24,6 +25,9 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+ 
+    
+    _upload.backgroundColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
   _streetImage.image = [UIImage imageNamed:@"cover.jpeg"];
 
   self.navigationItem.rightBarButtonItem =
@@ -32,16 +36,21 @@
                                       target:self
                                       action:@selector(cancel:)];
 
-  [self.view setBackgroundColor:[UIColor colorWithRed:0.31
-                                                green:0.65
-                                                 blue:0.83
-                                                alpha:1.0]];
+    [self.view setBackgroundColor:[UIColor colorWithRed:0.25 green:0.73 blue:0.65 alpha:1.0]];
   self.title = @"Add information";
+    self.navigationController.navigationBar.titleTextAttributes = @{
+                                                                    NSForegroundColorAttributeName : [UIColor whiteColor],
+                                                                    NSFontAttributeName : [UIFont fontWithName:@"AppleSDGothicNeo-Bold" size:21]
+                                                                    };
+
   _TITLE.text = _Address;
   self.automaticallyAdjustsScrollViewInsets = false;
-  _Feedback2.layer.cornerRadius = 5;
 
   _Feedback2.placeholder = @"Please add your feedback here";
+    [_Apartment.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+
+
+
 }
 
 
@@ -92,7 +101,7 @@
   }
 
   else {
-
+    
     NSURLSession *session =
         [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration
                                                    defaultSessionConfiguration]
@@ -126,7 +135,7 @@
               if (found) {
 
                 UIAlertController *alert = [UIAlertController
-                    alertControllerWithTitle:@"Alert"
+                    alertControllerWithTitle:nil
                                      message:nil
                               preferredStyle:UIAlertControllerStyleAlert];
 
@@ -139,6 +148,11 @@
                                       @"DetailTableViewController"];
 
                               destViewController.Address = _Address;
+                                _TITLE.text =@"";
+                                _Apartment.text =@"";
+                                
+                                _Feedback2.text =@"";
+
 
                               [self.navigationController
                                   pushViewController:destViewController
@@ -194,6 +208,8 @@
               }
 
               NSLog(@" second q ");
+                
+             
 
               PFQuery *query = [PFQuery queryWithClassName:@"Test2"];
               [query
@@ -213,8 +229,14 @@
                                                 setObject:[NSMutableArray array]
                                                    forKey:_Apartment.text];
                                           }
+                                            
+                                            NSString *trimmed = [_Feedback2.text stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+                                            NSLog(@"trimmed : %@", _Feedback2.text);
+                                            NSLog(@"trimmed : %@", trimmed);
+
+                                            
                                           [[dict objectForKey:_Apartment.text]
-                                              addObject:_Feedback2.text];
+                                              addObject:trimmed];
 
                                           [item setObject:dict
                                                    forKey:@"apartmentsDict"];
@@ -244,8 +266,8 @@
                                                                completion:nil];
                                             } else {
                                               UIAlertController *alert = [UIAlertController
-                                                  alertControllerWithTitle:
-                                                      @"Alert"
+                                                  alertControllerWithTitle:nil
+                                                    
                                                                    message:nil
                                                             preferredStyle:
                                                                 UIAlertControllerStyleAlert];
@@ -267,6 +289,10 @@
                                                             destViewController
                                                                 .Address =
                                                                 _Address;
+                                                              _TITLE.text =@"";
+                                                              _Apartment.text =@"";
+                                                              
+                                                              _Feedback2.text =@"";
 
                                                             [self.navigationController
                                                                 pushViewController:
@@ -333,8 +359,12 @@
                                                 setObject:[NSMutableArray array]
                                                    forKey:_Apartment.text];
                                           }
+                                            
+                                            NSString *trimmed = [_Feedback2.text stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+                                            NSLog(@"trimmed : %@", _Feedback2.text);
+                                            NSLog(@"trimmed : %@", trimmed);
                                           [[dict objectForKey:_Apartment.text]
-                                              addObject:_Feedback2.text];
+                                              addObject:trimmed];
 
                                           [item setObject:dict
                                                    forKey:@"apartmentsDict"];
@@ -364,8 +394,7 @@
                                                                completion:nil];
                                             } else {
                                               UIAlertController *alert = [UIAlertController
-                                                  alertControllerWithTitle:
-                                                      @"Alert"
+                                                  alertControllerWithTitle:nil
                                                                    message:nil
                                                             preferredStyle:
                                                                 UIAlertControllerStyleAlert];
@@ -386,6 +415,14 @@
                                                             destViewController
                                                                 .Address =
                                                                 _Address;
+                                                              
+                                                              _Apartment.text =@"";
+                                                              
+                                                              _Feedback2.text =@"";
+                                                              _TITLE.text =@"";
+                                                              
+                                                              
+
 
                                                             [self.navigationController
                                                                 pushViewController:
@@ -404,9 +441,11 @@
                                         }];
 
             }];
-
+        
+       
       [postdata resume];
     }
   }
+   
 }
 @end

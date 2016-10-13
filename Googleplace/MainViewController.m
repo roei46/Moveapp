@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *text;
 - (IBAction)mapButton:(id)sender;
 - (IBAction)addButton:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *mapbutton;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
 
 @end
 
@@ -23,25 +25,33 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
+    _mapbutton.backgroundColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
+    _addButton.backgroundColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
+    
     self.navigationController.navigationBar.barTintColor =
-    [UIColor colorWithRed:0.25 green:0.79 blue:0.78 alpha:1.0];
+    [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
     self.navigationController.navigationBar.titleTextAttributes = @{
                                                                     NSForegroundColorAttributeName : [UIColor whiteColor],
-                                                                    NSFontAttributeName : [UIFont fontWithName:@"Heiti TC" size:21]
+                                                                    NSFontAttributeName : [UIFont fontWithName:@"AppleSDGothicNeo-Bold" size:21]
                                                                     };
     self.title = @"Move-in-fo";
     self.edgesForExtendedLayout =
     UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight;
     
-    [self.view setBackgroundColor:[UIColor colorWithRed:0.31
-                                                 green:0.65
-                                                  blue:0.83
-                                                 alpha:1.0]];
-    _text.backgroundColor = [UIColor colorWithRed:0.31
-                                            green:0.65
-                                             blue:0.83
-                                            alpha:1.0];
+    [self.view setBackgroundColor:[UIColor colorWithRed:0.25 green:0.73 blue:0.65 alpha:1.0]];
+    _text.backgroundColor = [UIColor colorWithRed:0.25 green:0.73 blue:0.65 alpha:1.0];
+    
+    
+    
+
+    
     _text.editable = NO;
+    
+    
+    
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,6 +71,9 @@ preparation before navigation
 */
 
 - (IBAction)mapButton:(id)sender {
+    
+    
+    
 
   ViewController *destViewController = [self.storyboard
       instantiateViewControllerWithIdentifier:@"ViewController"];

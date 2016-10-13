@@ -19,6 +19,7 @@
     GMSAutocompleteResultsViewController *_acViewController;
 @property(strong, nonatomic) NSMutableString *DBid;
 @property(weak, nonatomic) IBOutlet UILabel *TITLE;
+@property (weak, nonatomic) IBOutlet UIButton *submit;
 
 - (IBAction)submit:(id)sender;
 
@@ -28,6 +29,9 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+    
+    
+    
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 
   self.navigationItem.rightBarButtonItem =
@@ -37,25 +41,34 @@
                                       action:@selector(cancel:)];
 
   self.navigationController.navigationBar.barTintColor =
-      [UIColor colorWithRed:0.25 green:0.79 blue:0.78 alpha:1.0];
+      [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
   self.navigationController.navigationBar.titleTextAttributes = @{
     NSForegroundColorAttributeName : [UIColor whiteColor],
-    NSFontAttributeName : [UIFont fontWithName:@"Heiti TC" size:21]
+    NSFontAttributeName : [UIFont fontWithName:@"AppleSDGothicNeo-Bold" size:21]
   };
   self.title = @"Move-in-fo";
   self.edgesForExtendedLayout =
       UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight;
 
-  [self.view setBackgroundColor:[UIColor colorWithRed:0.31
-                                                green:0.65
-                                                 blue:0.83
-                                                alpha:1.0]];
+    [self.view setBackgroundColor:[UIColor colorWithRed:0.25 green:0.73 blue:0.65 alpha:1.0]];
+
+    _submit.backgroundColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
 
   __acViewController = [[GMSAutocompleteResultsViewController alloc] init];
   __acViewController.delegate = self;
 
   _searchController = [[UISearchController alloc]
       initWithSearchResultsController:__acViewController];
+    
+    _searchController.searchBar.autoresizingMask =
+    UIViewAutoresizingFlexibleWidth;
+    _searchController.hidesNavigationBarDuringPresentation = YES;
+    _searchController.dimsBackgroundDuringPresentation = YES;
+    _searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    
+    _searchController.searchBar.placeholder = @"Search your address";
+    
+    [_searchController.searchBar sizeToFit];
 
   [_searchController.searchBar sizeToFit];
     _searchController.searchBar.barTintColor = [UIColor colorWithRed:0.31
@@ -80,13 +93,15 @@
 
   [self.view addSubview:_searchController.searchBar];
 
-  _Feedback2.layer.cornerRadius = 5;
   _Feedback2.placeholder = @"Please add your feedback here";
     
     
     [[UILabel appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor blackColor]];
 
 }
+
+
+
 - (UIImage *)tintedImageWithColor:(UIColor *)tintColor image:(UIImage *)image {
     UIGraphicsBeginImageContextWithOptions(image.size, NO, [[UIScreen mainScreen] scale]);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -123,6 +138,11 @@ forSearchBarIcon:(UISearchBarIcon)icon
               state:UIControlStateNormal];
 }
 - (void)cancel:(id)sender {
+    
+    _Apartment.text =@"";
+    
+    _Feedback2.text =@"";
+    
 
   MainViewController *destViewController = [self.storyboard
       instantiateViewControllerWithIdentifier:@"MainViewController"];
@@ -133,15 +153,7 @@ forSearchBarIcon:(UISearchBarIcon)icon
 
 #pragma mark - GMSAutocompleteResultsViewControllerDelegate
 
-//- (void)resultsController:
-//            (GMSAutocompleteResultsViewController *)resultsController
-// didAutocompleteWithPlace:(GMSPlace *)place {
-//  // Display the results and dismiss the search controller.
-//
-//  _TITLE.text = place.name;
-//
-//  [_searchController setActive:NO];
-//}
+
 
 - (void)resultsController:
             (GMSAutocompleteResultsViewController *)resultsController
@@ -327,7 +339,7 @@ preparation before navigation
               if (found) {
 
                 UIAlertController *alert = [UIAlertController
-                    alertControllerWithTitle:@"Alert"
+                    alertControllerWithTitle:nil
                                      message:nil
                               preferredStyle:UIAlertControllerStyleAlert];
 
@@ -338,7 +350,10 @@ preparation before navigation
                               tableView *destViewController = [self.storyboard
                                   instantiateViewControllerWithIdentifier:
                                       @"DetailTableViewController"];
-
+                                _Apartment.text =@"";
+                                
+                                _Feedback2.text =@"";
+                                _TITLE.text = @"";
                               destViewController.Address = _Address;
 
                               [self.navigationController
@@ -445,9 +460,7 @@ preparation before navigation
                                                                completion:nil];
                                             } else {
                                               UIAlertController *alert = [UIAlertController
-                                                  alertControllerWithTitle:
-                                                      @"Alert"
-                                                                   message:nil
+                                                  alertControllerWithTitle:nil                                                                   message:nil
                                                             preferredStyle:
                                                                 UIAlertControllerStyleAlert];
 
@@ -467,6 +480,11 @@ preparation before navigation
                                                             destViewController
                                                                 .Address =
                                                                 _Address;
+                                                              _Apartment.text =@"";
+                                                              
+                                                              _Feedback2.text =@"";
+                                                              _TITLE.text = @"";
+
 
                                                             [self.navigationController
                                                                 pushViewController:
@@ -563,9 +581,7 @@ preparation before navigation
                                                                completion:nil];
                                             } else {
                                               UIAlertController *alert = [UIAlertController
-                                                  alertControllerWithTitle:
-                                                      @"Alert"
-                                                                   message:nil
+                                                  alertControllerWithTitle:nil                                                                   message:nil
                                                             preferredStyle:
                                                                 UIAlertControllerStyleAlert];
 
@@ -585,6 +601,12 @@ preparation before navigation
                                                             destViewController
                                                                 .Address =
                                                                 _Address;
+                                                              
+                                                              _Apartment.text =@"";
+                                                              
+                                                              _Feedback2.text =@"";
+                                                              _TITLE.text = @"";
+
 
                                                             [self.navigationController
                                                                 pushViewController:

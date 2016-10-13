@@ -44,24 +44,25 @@ UITableViewDataSource >
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    self.tableView.contentInset = UIEdgeInsetsMake(5, 0, 0, 0);
+
    
     self.tableView.estimatedRowHeight = 500.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  //  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.backgroundColor =
-    [UIColor whiteColor];
+    [UIColor colorWithRed:0.25 green:0.73 blue:0.65 alpha:1.0];
     
     self.title = _Address;
     self.navigationController.navigationBar.titleTextAttributes = @{
                                                                     NSForegroundColorAttributeName : [UIColor whiteColor],
-                                                                    NSFontAttributeName : [UIFont fontWithName:@"STHeitiTC-Medium" size:16]
+                                                                    NSFontAttributeName : [UIFont fontWithName:@"AppleSDGothicNeo-Bold" size:21]
                                                                     };
     
     
@@ -199,12 +200,15 @@ UITableViewDataSource >
  
  [customcell setSeparatorInset:UIEdgeInsetsZero];
  
- [customcell setBackgroundColor:[UIColor colorWithRed:0.91 green:0.97 blue:1.00 alpha:1.0]];
+ //[customcell setBackgroundColor:[UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0]];
  
- 
+ [customcell setBackgroundColor:[UIColor whiteColor]];
+  
  //if(indexPath.row > 0)
  //{
  customcell.textLabel.text = tempAppResult[_arrHeader[indexPath.section]][indexPath.row];
+     customcell.textLabel.textColor =[UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
+
  customcell.textLabel.numberOfLines  = 0;
  customcell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
  
@@ -258,7 +262,7 @@ willDisplayHeaderView:(UIView *)view
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44.0f)];
     
-    [view setBackgroundColor:[UIColor colorWithRed:0.31 green:0.65 blue:0.83 alpha:1.0]];
+    [view setBackgroundColor:[UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0]];
     UIImage *img = [UIImage imageNamed:@"home.png"];
     UIImageView *img2 =[[UIImageView alloc] initWithImage:img];
     UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(27, 0, tableView.bounds.size.width, 44)];
@@ -266,10 +270,15 @@ willDisplayHeaderView:(UIView *)view
     [img2 setCenter:CGPointMake( 15,view.bounds.size.height/2)];
     
     
+
+    NSString *title1 = [[NSString alloc] initWithFormat:@" Apartment : %@" ,[_arrHeader objectAtIndex:section]];
+
+    NSMutableAttributedString *title3 = [[NSMutableAttributedString alloc] initWithString:title1];
     
-    NSString *title1 = @" Apartment : ";
-    
-    headerView.text =[title1 stringByAppendingString:[_arrHeader objectAtIndex:section]];
+    [title3 addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0,title1.length)];
+   headerView.attributedText =title3;
+
+    //headerView.text =[title1 stringByAppendingString:title2];
     _btnImge = [UIImage imageNamed:@"expand-button.png"];
 
     UIImageView *ximage =[[UIImageView alloc] initWithImage:_btnImge];

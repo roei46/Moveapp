@@ -45,10 +45,10 @@ static NSString const *kTerrainType = @"Terrain";
   _showSegmant = YES;
 
   self.navigationController.navigationBar.barTintColor =
-[UIColor colorWithRed:0.25 green:0.79 blue:0.78 alpha:1.0];
+    [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
     self.navigationController.navigationBar.titleTextAttributes = @{
     NSForegroundColorAttributeName : [UIColor whiteColor],
-    NSFontAttributeName : [UIFont fontWithName:@"Heiti TC" size:21]
+    NSFontAttributeName : [UIFont fontWithName:@"AppleSDGothicNeo-Bold" size:21]
   };
     
     
@@ -163,6 +163,9 @@ static NSString const *kTerrainType = @"Terrain";
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker {
   [mapView setSelectedMarker:marker];
   _infoLabel.text = marker.title;
+    _infoLabel.textColor =[UIColor whiteColor];
+    _infoLabel.backgroundColor =[UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
+
   return YES;
 }
 
@@ -224,19 +227,26 @@ static NSString const *kTerrainType = @"Terrain";
                                                longitude:place.coordinate.longitude
                                                zoom:15];
                   self.mapview.camera = camera;
-                  if(!_targetMarker)
-                  {
-                      _targetMarker = [[GMSMarker alloc] init];
-                     
-                      _targetMarker.map = _mapview;
-                      
-                  }
                   
-                  _targetMarker.position = CLLocationCoordinate2DMake(
-                                                                      place.coordinate.latitude, place.coordinate.longitude);
-                  
-                  _targetMarker.icon = [UIImage imageNamed:@"searching-location-gps-indicator.png"];
-                
+//                  if(!_targetMarker)
+//                  {
+//                      _targetMarker = [[GMSMarker alloc] init];
+//                     
+//                      _targetMarker.map = _mapview;
+//                      
+//                  }
+                  _targetMarker = [GMSMarker markerWithPosition:CLLocationCoordinate2DMake(
+                                                                                           place.coordinate.latitude, place.coordinate.longitude)];
+                  _targetMarker.map = _mapview;
+
+                _targetMarker.icon = [GMSMarker markerImageWithColor:[UIColor blackColor]];
+
+//                  _targetMarker.position = CLLocationCoordinate2DMake(
+//                                                                      place.coordinate.latitude, place.coordinate.longitude);
+
+//                  _targetMarker.icon = [UIImage imageNamed:@"searching-location-gps-indicator.png"];
+                  _targetMarker.map = nil;
+
                   
 
                   

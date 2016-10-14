@@ -231,10 +231,7 @@
                                           }
                                             
                                             NSString *trimmed = [_Feedback2.text stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
-                                            NSLog(@"trimmed : %@", _Feedback2.text);
-                                            NSLog(@"trimmed : %@", trimmed);
-
-                                            
+                                          
                                           [[dict objectForKey:_Apartment.text]
                                               addObject:trimmed];
 
@@ -361,8 +358,7 @@
                                           }
                                             
                                             NSString *trimmed = [_Feedback2.text stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
-                                            NSLog(@"trimmed : %@", _Feedback2.text);
-                                            NSLog(@"trimmed : %@", trimmed);
+                                           
                                           [[dict objectForKey:_Apartment.text]
                                               addObject:trimmed];
 

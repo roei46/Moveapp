@@ -68,6 +68,7 @@
     
     _searchController.searchBar.placeholder = @"Search your address";
     
+
     [_searchController.searchBar sizeToFit];
 
   [_searchController.searchBar sizeToFit];
@@ -96,7 +97,6 @@
   _Feedback2.placeholder = @"Please add your feedback here";
     
     
-    [[UILabel appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor blackColor]];
 
 }
 
@@ -429,8 +429,10 @@ preparation before navigation
                                                 setObject:[NSMutableArray array]
                                                    forKey:_Apartment.text];
                                           }
+                                            
+                                              NSString *trimmed = [_Feedback2.text stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
                                           [[dict objectForKey:_Apartment.text]
-                                              addObject:_Feedback2.text];
+                                              addObject:trimmed];
 
                                           [item setObject:dict
                                                    forKey:@"apartmentsDict"];
@@ -550,8 +552,9 @@ preparation before navigation
                                                 setObject:[NSMutableArray array]
                                                    forKey:_Apartment.text];
                                           }
+                                              NSString *trimmed = [_Feedback2.text stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
                                           [[dict objectForKey:_Apartment.text]
-                                              addObject:_Feedback2.text];
+                                              addObject:trimmed];
 
                                           [item setObject:dict
                                                    forKey:@"apartmentsDict"];

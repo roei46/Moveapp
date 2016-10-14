@@ -19,7 +19,7 @@ static NSString const *kHybridType = @"Hybrid";
 static NSString const *kTerrainType = @"Terrain";
 
 @interface ViewController () <GMSAutocompleteResultsViewControllerDelegate,
-                              GMSMapViewDelegate>
+                              GMSMapViewDelegate ,UISearchControllerDelegate>
 - (IBAction)mapChange:(id)sender;
 
 @property(weak, nonatomic) IBOutlet GMSMapView *mapview;
@@ -73,6 +73,8 @@ static NSString const *kTerrainType = @"Terrain";
   _searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
 
   _searchController.searchBar.placeholder = @"Search your address";
+    
+    _searchController.delegate =self;
 
   [_searchController.searchBar sizeToFit];
   self.definesPresentationContext = YES;
@@ -87,10 +89,22 @@ static NSString const *kTerrainType = @"Terrain";
   _mapview.delegate = self;
   _mapview.settings.compassButton = YES;
   _mapview.settings.myLocationButton = YES;
+    
+    [[UILabel appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor whiteColor]];
+
+ 
 }
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
+    
+   
+
+    
+    
+    
+    
+    
   _mapview.myLocationEnabled = YES;
 
   CLLocationManager *locationManager;

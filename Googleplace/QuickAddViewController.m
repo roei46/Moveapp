@@ -91,12 +91,22 @@
   } else {
     _searchController.modalPresentationStyle = UIModalPresentationFullScreen;
   }
+    
+    
+    
 
-  [self.view addSubview:_searchController.searchBar];
 
   _Feedback2.placeholder = @"Please add your feedback here";
     
     
+    UITextField *searchField = [_searchController.searchBar valueForKey:@"_searchField"];
+    
+    
+    // Change the search bar placeholder text color
+    [searchField setValue:[UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0]
+               forKeyPath:@"_placeholderLabel.textColor"];
+    searchField.backgroundColor = [UIColor redColor];
+    [self.view addSubview:_searchController.searchBar];
 
 }
 
@@ -183,7 +193,7 @@ forSearchBarIcon:(UISearchBarIcon)icon
                               preferredStyle:UIAlertControllerStyleAlert];
 
                 UIAlertAction *exist =
-                    [UIAlertAction actionWithTitle:@"Place exist"
+                    [UIAlertAction actionWithTitle:@"Address is already exist"
                                              style:UIAlertActionStyleDefault
                                            handler:nil];
                 _Address = place.name;

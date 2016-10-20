@@ -295,7 +295,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Apartment number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XVP-Vi-an5">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder=" Apartment number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XVP-Vi-an5">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="yhg-5g-U8H"/>
@@ -352,7 +352,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Y3G-Vp-C0B" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="U15-SY-TtX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="U15-SY-TtX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

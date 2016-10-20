@@ -94,13 +94,15 @@
     
     
     
+    _Feedback2.placeholder = @"Please add your feedback here";
 
-
-  _Feedback2.placeholder = @"Please add your feedback here";
-    
     
     UITextField *searchField = [_searchController.searchBar valueForKey:@"_searchField"];
     
+    UIImageView *imageV = searchField.leftView;
+    imageV.image = [imageV.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    imageV.tintColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
+
     
     // Change the search bar placeholder text color
     [searchField setValue:[UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0]

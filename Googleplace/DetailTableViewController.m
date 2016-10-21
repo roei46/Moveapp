@@ -283,9 +283,14 @@ willDisplayHeaderView:(UIView *)view
 
     UIImageView *ximage =[[UIImageView alloc] initWithImage:_btnImge];
     ximage.accessibilityLabel = @"expand-button.png";
-    [ximage setCenter:CGPointMake( 300,view.bounds.size.height/2)];
 
+    //[ximage setCenter:CGPointMake( 300,view.bounds.size.height/2)];
+    ximage.frame = CGRectMake(290,ximage.bounds.size.height/2,20,20);
     
+    
+    
+    ximage.autoresizingMask = UIViewAutoresizingFlexibleTopMargin  | UIViewAutoresizingFlexibleBottomMargin |
+    UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     
     UIButton * button = [[UIButton alloc] initWithFrame:view.frame];
     button.tag = section;
@@ -294,17 +299,12 @@ willDisplayHeaderView:(UIView *)view
     button.backgroundColor = [UIColor clearColor];
     
    
-    
-    
-    
-    
-    
     [view addSubview:ximage];
     [view addSubview:headerView];
     [view addSubview:img2];
     [view addSubview:button];
     
-    
+   
     
     return view;
     

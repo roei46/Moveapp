@@ -57,6 +57,15 @@ static NSString const *kTerrainType = @"Terrain";
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
     
+    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil]
+     setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor  whiteColor],
+       NSFontAttributeName:[UIFont fontWithName:@"AppleSDGothicNeo-Bold" size:16]
+       }
+     forState:UIControlStateNormal];
+    
+    
+    
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 
   self.title = @"Move-in-fo";

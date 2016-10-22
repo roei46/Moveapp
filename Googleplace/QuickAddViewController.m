@@ -440,8 +440,12 @@ preparation before navigation
                                                 setObject:[NSMutableArray array]
                                                    forKey:_Apartment.text];
                                           }
+                                            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\n+" options:0 error:NULL];
+                                            NSString *trimmed = [regex stringByReplacingMatchesInString:_Feedback2.text options:0 range:NSMakeRange(0, [_Feedback2.text length]) withTemplate:@"\n"];
                                             
-                                              NSString *trimmed = [_Feedback2.text stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+//                                              NSString *trimmed = [_Feedback2.text stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+                                            
+                                            
                                           [[dict objectForKey:_Apartment.text]
                                               addObject:trimmed];
 
@@ -563,7 +567,13 @@ preparation before navigation
                                                 setObject:[NSMutableArray array]
                                                    forKey:_Apartment.text];
                                           }
-                                              NSString *trimmed = [_Feedback2.text stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+//                                              NSString *trimmed = [_Feedback2.text stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+                                            
+                                            
+                                            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\n+" options:0 error:NULL];
+                                            NSString *trimmed = [regex stringByReplacingMatchesInString:_Feedback2.text options:0 range:NSMakeRange(0, [_Feedback2.text length]) withTemplate:@"\n"];
+                                            
+                                            
                                           [[dict objectForKey:_Apartment.text]
                                               addObject:trimmed];
 

@@ -170,13 +170,18 @@
 				C4031EC31D8ACBD7003C8033 /* Main.storyboard */,
 				C435CDC21D4691F6002F9095 /* LaunchScreen.storyboard */,
 				C435CDC51D4691F6002F9095 /* Info.plist */,
-				C435CDB41D4691F6002F9095 /* Supporting Files */,
+				C4F14E061D554348003F182F /* AddinformationViewcontroller.h */,
+				C4F14E071D554348003F182F /* AddinformationViewcontroller.m */,
+				C435CDB51D4691F6002F9095 /* main.m */,
+				C47A9AE01D8591E1003CA822 /* customCell.h */,
+				C47A9AE11D8591E1003CA822 /* customCell.m */,
 				C437F68D1D51272600FAC6D2 /* ServerProtocol.h */,
 				C437F68E1D51272600FAC6D2 /* ServerProtocol.m */,
 				C437F6901D5127F500FAC6D2 /* DatabaseManager.h */,
 				C437F6911D5127F500FAC6D2 /* DatabaseManager.m */,
 				C4031EC01D89FE6D003C8033 /* DetailTableViewController.h */,
 				C4031EC11D89FE6D003C8033 /* DetailTableViewController.m */,
+				C435CDB41D4691F6002F9095 /* Supporting Files */,
 			);
 			path = Googleplace;
 			sourceTree = "<group>";
@@ -190,11 +195,6 @@
 				C475C13D1DAAE38700B5A008 /* expand-button.png */,
 				C475C13E1DAAE38700B5A008 /* expand-arrow.png */,
 				C48321561D6DDEBC00008B32 /* cover.jpeg */,
-				C4F14E061D554348003F182F /* AddinformationViewcontroller.h */,
-				C4F14E071D554348003F182F /* AddinformationViewcontroller.m */,
-				C435CDB51D4691F6002F9095 /* main.m */,
-				C47A9AE01D8591E1003CA822 /* customCell.h */,
-				C47A9AE11D8591E1003CA822 /* customCell.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

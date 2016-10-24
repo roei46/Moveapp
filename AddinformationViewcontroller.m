@@ -5,7 +5,7 @@
 //  Created by Roei Baruch on 06/08/2016.
 //  Copyright © 2016 Roei Baruch. All rights reserved.
 //
-
+#import "DetailTableViewController.h"
 #import "AddinformationViewcontroller.h"
 #import <UITextView+Placeholder/UITextView+Placeholder.h>
 
@@ -143,7 +143,7 @@
                     actionWithTitle:@"Address uploaded!"
                               style:UIAlertActionStyleDefault
                             handler:^(UIAlertAction *action) {
-                              tableView *destViewController = [self.storyboard
+                              DetailTableViewController *destViewController = [self.storyboard
                                   instantiateViewControllerWithIdentifier:
                                       @"DetailTableViewController"];
 
@@ -278,7 +278,7 @@
                                                           handler:^(
                                                               UIAlertAction
                                                                   *action) {
-                                                            tableView *destViewController =
+                                                            DetailTableViewController *destViewController =
                                                                 [self.storyboard
                                                                     instantiateViewControllerWithIdentifier:
                                                                         @"DetailTableViewController"
@@ -407,7 +407,7 @@
                                                           handler:^(
                                                               UIAlertAction
                                                                   *action) {
-                                                            tableView *destViewController =
+                                                            DetailTableViewController *destViewController =
                                                                 [self.storyboard
                                                                     instantiateViewControllerWithIdentifier:
                                                                         @"DetailTableViewController"];

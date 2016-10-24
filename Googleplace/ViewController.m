@@ -5,12 +5,11 @@
 //  Created by Roei Baruch on 25/07/2016.
 //  Copyright © 2016 Roei Baruch. All rights reserved.
 //
-
+#import "DetailTableViewController.h"
 #import "AddinformationViewcontroller.h"
 #import "DatabaseManager.h"
 #import "ServerProtocol.h"
 #import "ViewController.h"
-#import "tableView.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
 static NSString const *kNormalType = @"Normal";
@@ -190,11 +189,12 @@ static NSString const *kTerrainType = @"Terrain";
     }];
 }
 
-- (bool)mapView:(GMSMapView *)mapView
+- (void)mapView:(GMSMapView *)mapView
     didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
-  _infoLabel.text = nil;
-  return YES;
+ _infoLabel.text = nil;
 }
+
+
 
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker {
   [mapView setSelectedMarker:marker];
@@ -212,7 +212,7 @@ static NSString const *kTerrainType = @"Terrain";
 
   NSLog(@" Taped on marker : %@", marker.title);
     
-  tableView *destViewController = [self.storyboard
+  DetailTableViewController *destViewController = [self.storyboard
       instantiateViewControllerWithIdentifier:@"DetailTableViewController"];
   NSLog(@" Taped on marker : %@", marker.userData);
 
@@ -227,6 +227,7 @@ static NSString const *kTerrainType = @"Terrain";
     if (gesture) {
         
         		self.targetMarker.icon = [GMSMarker markerImageWithColor:[UIColor clearColor]];
+
     }
     
 }

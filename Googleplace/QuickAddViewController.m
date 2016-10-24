@@ -5,7 +5,7 @@
 //  Created by Roei Baruch on 20/09/2016.
 //  Copyright © 2016 Roei Baruch. All rights reserved.
 //
-
+#import "DetailTableViewController.h"
 #import "QuickAddViewController.h"
 #import <UITextView+Placeholder/UITextView+Placeholder.h>
 
@@ -358,7 +358,7 @@ preparation before navigation
                     actionWithTitle:@"Address uploaded!"
                               style:UIAlertActionStyleDefault
                             handler:^(UIAlertAction *action) {
-                              tableView *destViewController = [self.storyboard
+                              DetailTableViewController *destViewController = [self.storyboard
                                   instantiateViewControllerWithIdentifier:
                                       @"DetailTableViewController"];
                                 _Apartment.text =@"";
@@ -489,7 +489,7 @@ preparation before navigation
                                                           handler:^(
                                                               UIAlertAction
                                                                   *action) {
-                                                            tableView *destViewController =
+                                                            DetailTableViewController *destViewController =
                                                                 [self.storyboard
                                                                     instantiateViewControllerWithIdentifier:
                                                                         @"DetailTableViewController"];
@@ -617,7 +617,7 @@ preparation before navigation
                                                           handler:^(
                                                               UIAlertAction
                                                                   *action) {
-                                                            tableView *destViewController =
+                                                            DetailTableViewController *destViewController =
                                                                 [self.storyboard
                                                                     instantiateViewControllerWithIdentifier:
                                                                        @"DetailTableViewController"];

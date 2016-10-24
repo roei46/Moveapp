@@ -60,7 +60,7 @@ static NSString const *kTerrainType = @"Terrain";
     [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil]
      setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor  whiteColor],
-       NSFontAttributeName:[UIFont fontWithName:@"AppleSDGothicNeo-Bold" size:16]
+       NSFontAttributeName:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:16]
        }
      forState:UIControlStateNormal];
     

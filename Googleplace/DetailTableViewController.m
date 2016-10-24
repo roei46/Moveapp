@@ -140,16 +140,17 @@ UITableViewDataSource >
                                                   if ([[addname valueForKey:@"Address"] isEqualToString:_Address]) {
                                                       appResult = addname[@"apartmentsDict"];
                                                       
-                                                      _arrHeader = [appResult allKeys];
-                                                      NSLog(@"%@", _arrHeader);
+                                                      self.arrHeader = (NSMutableArray *)[appResult allKeys];
+                                                      NSLog(@"not sortd :%@", _arrHeader);
+                                                      
+                       
+                                                      self.arrHeader  = (NSMutableArray *)[self.arrHeader sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+                                                          return [obj1 compare:obj2 options:NSNumericSearch];
+                                                      }];
                                                       
                                                       
-                                                      NSSortDescriptor *sortOrder =
-                                                      [NSSortDescriptor sortDescriptorWithKey:@"self"
-                                                                                    ascending:YES];
-                                                      _arrHeader = (NSMutableArray *)[_arrHeader
-                                                                                      sortedArrayUsingDescriptors:[NSArray
-                                                                                                                   arrayWithObject:sortOrder]];
+                                                      NSLog(@" sortd :%@", self.arrHeader );
+
                                                       dispatch_async(dispatch_get_main_queue(), ^{
                                                           tempAppResult = [[NSMutableDictionary alloc] init];
                                                           [appResult enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {

@@ -73,12 +73,12 @@
                   symbolName = "-[QuickAddViewController submit:]"
                   moduleName = "Googleplace"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/roei/Desktop/Project/Googleplace/Googleplace/QuickAddViewController.m"
-                  timestampString = "497896266.253951"
+                  urlString = "file:///Users/roei/Desktop/Project/Move-in-fo/Googleplace/QuickAddViewController.m"
+                  timestampString = "499025540.4916"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "501"
-                  endingLineNumber = "501"
+                  startingLineNumber = "526"
+                  endingLineNumber = "526"
                   offsetFromSymbolStart = "2000">
                </Location>
                <Location
@@ -88,12 +88,12 @@
                   symbolName = "-[QuickAddViewController submit:]"
                   moduleName = "Googleplace"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/roei/Desktop/Project/Googleplace/Googleplace/QuickAddViewController.m"
-                  timestampString = "497896266.260537"
+                  urlString = "file:///Users/roei/Desktop/Project/Move-in-fo/Googleplace/QuickAddViewController.m"
+                  timestampString = "499025540.496433"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "501"
-                  endingLineNumber = "501"
+                  startingLineNumber = "526"
+                  endingLineNumber = "526"
                   offsetFromSymbolStart = "2082">
                </Location>
             </Locations>

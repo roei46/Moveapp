@@ -15,10 +15,9 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
 
-@interface tableView () <GMSMapViewDelegate, UITableViewDelegate,
-                         UITableViewDataSource>
+@interface tableView () <GMSMapViewDelegate, UITableViewDelegate>
 @property(nonatomic, strong) GMSMarker *selectedMarker;
-@property(strong, nonatomic) IBOutlet UITableView *tblView;
+@property(strong, nonatomic) UITableView *tblView;
 @property(strong, nonatomic) NSMutableString *DBid;
 @property(strong, nonatomic) NSMutableArray *arrHeader;
 @property(nonatomic, strong) NSMutableIndexSet *expandableSections;
@@ -282,7 +281,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
                   [self.tblView reloadData];
 
                   self.tblView.delegate = self;
-                  self.tblView.dataSource = self;
+                 // self.tblView.dataSource = self;
                   self.tblView.separatorInset = UIEdgeInsetsZero;
                   [self.view addSubview:self.tblView];
 

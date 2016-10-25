@@ -37,7 +37,7 @@
                                       action:@selector(cancel:)];
 
     [self.view setBackgroundColor:[UIColor colorWithRed:0.25 green:0.73 blue:0.65 alpha:1.0]];
-  self.title = @"Add information";
+  self.title = @"Add Review";
     self.navigationController.navigationBar.titleTextAttributes = @{
                                                                     NSForegroundColorAttributeName : [UIColor whiteColor],
                                                                     NSFontAttributeName : [UIFont fontWithName:@"AppleSDGothicNeo-Bold" size:21]
@@ -46,7 +46,7 @@
   _TITLE.text = _Address;
   self.automaticallyAdjustsScrollViewInsets = false;
 
-  _Feedback2.placeholder = @"Please add your feedback here";
+  _Feedback2.placeholder = @"Please add your review here";
     [_Apartment.layer setBorderColor:[[UIColor whiteColor] CGColor]];
 
 

@@ -22,24 +22,30 @@ UITableViewDataSource >
 @property(strong, nonatomic) NSMutableArray *arrHeader;
 @property(strong, nonatomic) UIImage *btnImge;
 @property(nonatomic, assign) BOOL press;
-
+@property(strong, nonatomic) GMSMapView *_mapView;
+@property(strong, nonatomic) GMSMarker *_Marker;
+@property(strong, nonatomic) GMSPlacesClient *placesclient;
+@property(strong, nonatomic) UISegmentedControl *_switcher;
+@property(strong, nonatomic) NSArray *jsonResult2;
+@property(strong, nonatomic) NSDictionary *appResult;
+@property(strong, nonatomic) NSMutableDictionary *tempAppResult;
 
 
 @end
 
 
 
-@implementation DetailTableViewController{
-    GMSMapView *_mapView;
-    GMSMarker *_Marker;
-    GMSPlacesClient *placesclient;
-    UISegmentedControl *_switcher;
-    NSArray *jsonResult2;
-    NSDictionary *appResult;
-    NSMutableDictionary  *tempAppResult;
-    
-
-}
+@implementation DetailTableViewController
+//    GMSMapView *_mapView;
+//    GMSMarker *_Marker;
+//    GMSPlacesClient *placesclient;
+//    UISegmentedControl *_switcher;
+//    NSArray *jsonResult2;
+//    NSDictionary *appResult;
+//    NSMutableDictionary  *tempAppResult;
+//    
+//
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -133,14 +139,14 @@ UITableViewDataSource >
                                               [NSJSONSerialization JSONObjectWithData:data
                                                                               options:kNilOptions
                                                                                 error:&error];
-                                              jsonResult2 = [result objectForKey:@"results"];
+                                              self.jsonResult2 = [result objectForKey:@"results"];
                                               NSLog(@"result : %@", result);
-                                              NSLog(@"test : %@", jsonResult2);
-                                              for (NSDictionary *addname in jsonResult2) {
+                                              NSLog(@"test : %@", self.jsonResult2);
+                                              for (NSDictionary *addname in self.jsonResult2) {
                                                   if ([[addname valueForKey:@"Address"] isEqualToString:_Address]) {
-                                                      appResult = addname[@"apartmentsDict"];
+                                                      self.appResult = addname[@"apartmentsDict"];
                                                       
-                                                      self.arrHeader = (NSMutableArray *)[appResult allKeys];
+                                                      self.arrHeader = (NSMutableArray *)[self.appResult allKeys];
                                                       NSLog(@"not sortd :%@", _arrHeader);
                                                       
                        
@@ -152,15 +158,15 @@ UITableViewDataSource >
                                                       NSLog(@" sortd :%@", self.arrHeader );
 
                                                       dispatch_async(dispatch_get_main_queue(), ^{
-                                                          tempAppResult = [[NSMutableDictionary alloc] init];
-                                                          [appResult enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                                                          self.tempAppResult = [[NSMutableDictionary alloc] init];
+                                                          [self.appResult enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
                                                               
-                                                              [tempAppResult setValue:[[NSArray alloc] init] forKey:key] ;
+                                                              [self.tempAppResult setValue:[[NSArray alloc] init] forKey:key] ;
                                                           }];
                                                          
                                                           [self.tableView reloadData];
-                                                          NSLog(@"App result: %@", appResult);
-                                                          NSLog(@"Temp App result: %@", tempAppResult);
+                                                          NSLog(@"App result: %@", self.appResult);
+                                                          NSLog(@"Temp App result: %@", self.tempAppResult);
                                                       });
                                                       
                                                       break;
@@ -207,7 +213,7 @@ UITableViewDataSource >
   
  //if(indexPath.row > 0)
  //{
- customcell.textLabel.text = tempAppResult[_arrHeader[indexPath.section]][indexPath.row];
+ customcell.textLabel.text = self.tempAppResult[self.arrHeader[indexPath.section]][indexPath.row];
      customcell.textLabel.textColor =[UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
 
  customcell.textLabel.numberOfLines  = 0;
@@ -321,14 +327,14 @@ willDisplayHeaderView:(UIView *)view
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
     
-    return [tempAppResult[_arrHeader[section]] count];
+    return [self.tempAppResult[self.arrHeader[section]] count];
 }
 
 
 
 - (void)back:(id)sender {
     
-    _mapView.selectedMarker = nil;
+    self._mapView.selectedMarker = nil;
     
     AddinformationViewcontroller *destViewController = [self.storyboard
                                                         instantiateViewControllerWithIdentifier:@"AddinformationViewcontroller"];
@@ -342,7 +348,7 @@ willDisplayHeaderView:(UIView *)view
 
 - (void)addInfo:(id)sender {
     
-    _mapView.selectedMarker = nil;
+    self._mapView.selectedMarker = nil;
     
     AddinformationViewcontroller *destViewController = [self.storyboard
                                                         instantiateViewControllerWithIdentifier:@"AddinformationViewcontroller"];
@@ -380,21 +386,21 @@ willDisplayHeaderView:(UIView *)view
         }
     }
     
-    if( [tempAppResult[key] count] > 0 )
+    if( [self.tempAppResult[key] count] > 0 )
     {
         //if section has rows,reset value
         
         tempImageView.image = [UIImage imageNamed:@"expand-button.png"];
         
-        int row  = [tempAppResult[key] count] ;
+        int row  = [self.tempAppResult[key] count] ;
         
         for(int i = 0 ; i < row; ++i)
         {
             [IndexPathArray addObject:[NSIndexPath indexPathForRow: i inSection:section]];
         }
         
-        [tempAppResult setObject:[[NSArray alloc ] init] forKey:key];
-       NSLog(@"Collapsed section %@",tempAppResult);
+        [self.tempAppResult setObject:[[NSArray alloc ] init] forKey:key];
+       NSLog(@"Collapsed section %@",self.tempAppResult);
         
         
         [self.tableView beginUpdates];
@@ -410,11 +416,11 @@ willDisplayHeaderView:(UIView *)view
         
          tempImageView.image = [UIImage imageNamed:@"expand-arrow.png"];
         
-        [tempAppResult setObject:appResult[key] forKey:key];
-        NSLog(@"Expand section %@",tempAppResult);
+        [self.tempAppResult setObject:self.appResult[key] forKey:key];
+        NSLog(@"Expand section %@",self.tempAppResult);
         NSMutableArray* IndexPathArray = [[NSMutableArray alloc] init];
         
-        int row  = [tempAppResult[key] count] ;
+        int row  = [self.tempAppResult[key] count] ;
         
         NSLog(@"Row count %d", row);
         

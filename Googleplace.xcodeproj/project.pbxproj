@@ -28,6 +28,7 @@
 		C475C1461DAAEB6D00B5A008 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = C475C1451DAAEB6D00B5A008 /* add.png */; };
 		C47A9AE21D8591E1003CA822 /* customCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C47A9AE11D8591E1003CA822 /* customCell.m */; };
 		C48321571D6DDEBC00008B32 /* cover.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C48321561D6DDEBC00008B32 /* cover.jpeg */; };
+		C4D703721DBFEEAB0078B0B6 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4D703711DBFEEAB0078B0B6 /* MessageUI.framework */; };
 		C4F14E081D554348003F182F /* AddinformationViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F14E071D554348003F182F /* AddinformationViewcontroller.m */; };
 		C4F4EDCF1D9AC32C0035B067 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F4EDCD1D9AC32C0035B067 /* Fabric.framework */; };
 		C4F4EDD01D9AC32C0035B067 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F4EDCE1D9AC32C0035B067 /* Crashlytics.framework */; };
@@ -88,6 +89,7 @@
 		C47A9AE01D8591E1003CA822 /* customCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = customCell.h; path = ../customCell.h; sourceTree = "<group>"; };
 		C47A9AE11D8591E1003CA822 /* customCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = customCell.m; path = ../customCell.m; sourceTree = "<group>"; };
 		C48321561D6DDEBC00008B32 /* cover.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cover.jpeg; sourceTree = "<group>"; };
+		C4D703711DBFEEAB0078B0B6 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		C4F14E061D554348003F182F /* AddinformationViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddinformationViewcontroller.h; path = ../AddinformationViewcontroller.h; sourceTree = "<group>"; };
 		C4F14E071D554348003F182F /* AddinformationViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddinformationViewcontroller.m; path = ../AddinformationViewcontroller.m; sourceTree = "<group>"; };
 		C4F4EDCD1D9AC32C0035B067 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4D703721DBFEEAB0078B0B6 /* MessageUI.framework in Frameworks */,
 				69ECEADDE8EEB29D34CA5DE3 /* libPods-Googleplace.a in Frameworks */,
 				C4F4EDD01D9AC32C0035B067 /* Crashlytics.framework in Frameworks */,
 				C4F4EDCF1D9AC32C0035B067 /* Fabric.framework in Frameworks */,
@@ -220,6 +223,7 @@
 		FC2D9E020B56F861E55521B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C4D703711DBFEEAB0078B0B6 /* MessageUI.framework */,
 				16307259C197F3DEF75BCD67 /* libPods-Googleplace.a */,
 			);
 			name = Frameworks;

@@ -17,6 +17,7 @@
 - (IBAction)addButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *mapbutton;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
+@property (weak, nonatomic) IBOutlet UIButton *ShowEmail;
 
 @end
 
@@ -26,9 +27,10 @@
   [super viewDidLoad];
   self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    _mapbutton.backgroundColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
-    _addButton.backgroundColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
-    
+    self.mapbutton.backgroundColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
+    self.addButton.backgroundColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
+    self.ShowEmail.backgroundColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
+
     self.navigationController.navigationBar.barTintColor =
     [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
     self.navigationController.navigationBar.titleTextAttributes = @{
@@ -60,16 +62,62 @@
   // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+- (IBAction)ShowEmail:(id)sender {
+    if ([MFMailComposeViewController canSendMail]){
 
-// In a storyboard-based application, you will often want to do a little
-preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    NSArray *toRecipents = [NSArray arrayWithObject:@"roei46@yahoo.com"];
+    
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+
+    [mc setToRecipients:toRecipents];
+    
+    // Present mail view controller on screen
+    [self presentViewController:mc animated:YES completion:NULL];
+    
 }
-*/
+    else
+    {
+        NSLog(@"This device cannot send email");
+        
+        UIAlertController *alert = [UIAlertController
+                                    alertControllerWithTitle:nil
+                                    message:nil
+                                    preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *Mailoff =
+        [UIAlertAction actionWithTitle:@"please activate your email or refer to this mail manually:roei46@yahoo.com"
+                                 style:UIAlertActionStyleDefault
+                               handler:nil];
+        
+        [alert addAction:Mailoff];
+        [self presentViewController:alert animated:YES completion:nil];
+
+    }
+}
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
 
 - (IBAction)mapButton:(id)sender {
     
@@ -91,4 +139,5 @@ preparation before navigation
     [self.navigationController pushViewController:destViewController
                                          animated:YES];
 }
+
 @end

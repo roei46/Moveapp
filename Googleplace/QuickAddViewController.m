@@ -13,7 +13,7 @@
 
 @interface QuickAddViewController () <UISearchBarDelegate,
      GMSAutocompleteResultsViewControllerDelegate,
-    GMSMapViewDelegate>
+    GMSMapViewDelegate ,UITextFieldDelegate,UITextViewDelegate>
 @property(strong, nonatomic) UISearchController *searchController;
 @property(strong, nonatomic)
     GMSAutocompleteResultsViewController *_acViewController;
@@ -94,7 +94,7 @@
     
     
     
-    _Feedback2.placeholder = @"Please add your feedback here";
+    _Feedback2.placeholder = @"Please add your review here";
 
     
     UITextField *searchField = [_searchController.searchBar valueForKey:@"_searchField"];
@@ -137,8 +137,26 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-  [_Feedback2 resignFirstResponder];
-  [_Apartment resignFirstResponder];
+  [self.Feedback2 resignFirstResponder];
+  [self.Apartment resignFirstResponder];
+}
+
+-(BOOL) textFieldShouldReturn:(UITextField *)textField{
+    
+    [self.Apartment resignFirstResponder];
+    [self.Feedback2 resignFirstResponder];
+
+    return YES;
+}
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    
+    if([text isEqualToString:@"\n"]) {
+        [self.Feedback2 resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
 }
 
 - (void)setImage:(UIImage *)iconImage

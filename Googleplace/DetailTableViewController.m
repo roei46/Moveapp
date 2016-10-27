@@ -207,25 +207,15 @@ UITableViewDataSource >
  
  [customcell setSeparatorInset:UIEdgeInsetsZero];
  
- //[customcell setBackgroundColor:[UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0]];
  
  [customcell setBackgroundColor:[UIColor whiteColor]];
   
- //if(indexPath.row > 0)
- //{
  customcell.textLabel.text = self.tempAppResult[self.arrHeader[indexPath.section]][indexPath.row];
      customcell.textLabel.textColor =[UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
 
  customcell.textLabel.numberOfLines  = 0;
  customcell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
  
- 
- //customcell.label.text = appResult[_arrHeader[indexPath.section]][indexPath.row - 1];
- 
- 
- //customcell.cellLabel.text = appResult[_arrHeader[indexPath.section]][indexPath.row - 1];
- 
- //}
  
  
  [customcell.cellLabel sizeToFit];
@@ -274,11 +264,11 @@ willDisplayHeaderView:(UIView *)view
     UIImageView *img2 =[[UIImageView alloc] initWithImage:img];
     UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(27, 0, tableView.bounds.size.width, 44)];
     
-    [img2 setCenter:CGPointMake( 15,view.bounds.size.height/2)];
+   // [img2 setCenter:CGPointMake( 15,view.bounds.size.height/2)];
     
     
 
-    NSString *title1 = [[NSString alloc] initWithFormat:@" Apartment : %@" ,[_arrHeader objectAtIndex:section]];
+    NSString *title1 = [[NSString alloc] initWithFormat:@" Apartment : %@" ,[self.arrHeader objectAtIndex:section]];
 
     NSMutableAttributedString *title3 = [[NSMutableAttributedString alloc] initWithString:title1];
     
@@ -286,36 +276,39 @@ willDisplayHeaderView:(UIView *)view
    headerView.attributedText =title3;
 
     //headerView.text =[title1 stringByAppendingString:title2];
-    _btnImge = [UIImage imageNamed:@"expand-button.png"];
+    self.btnImge = [UIImage imageNamed:@"expand-button.png"];
 
-    UIImageView *ximage =[[UIImageView alloc] initWithImage:_btnImge];
+    UIImageView *ximage =[[UIImageView alloc] initWithImage:self.btnImge];
     ximage.accessibilityLabel = @"expand-button.png";
 
     //[ximage setCenter:CGPointMake( 300,view.bounds.size.height/2)];
     ximage.frame = CGRectMake(290,ximage.bounds.size.height/2,20,20);
+    ximage.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin ;
+
     
     
-    
-    ximage.autoresizingMask = UIViewAutoresizingFlexibleTopMargin  | UIViewAutoresizingFlexibleBottomMargin |
-    UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     
     UIButton * button = [[UIButton alloc] initWithFrame:view.frame];
     button.tag = section;
-    button.accessibilityLabel = [_arrHeader objectAtIndex:section];
+    button.accessibilityLabel = [self.arrHeader objectAtIndex:section];
     [button addTarget:self action:@selector(sectionHeaderSelected:) forControlEvents:UIControlEventTouchUpInside];
-    button.backgroundColor = [UIColor clearColor];
+    button.backgroundColor = [UIColor clearColor
+                              ];
     
+    button.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin ;
+
    
     [view addSubview:ximage];
     [view addSubview:headerView];
     [view addSubview:img2];
     [view addSubview:button];
     
-   
     
+
     return view;
     
 }
+
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -376,11 +369,12 @@ willDisplayHeaderView:(UIView *)view
     
     UIImageView* tempImageView;
     
-    
     for (UIImageView* imageView in ((UIView*)((UIButton*)sender).superview).subviews)
     {
         if([imageView.accessibilityLabel isEqualToString:@"expand-button.png"])
         {
+            
+            
             tempImageView = imageView;
             break;
         }
@@ -391,6 +385,8 @@ willDisplayHeaderView:(UIView *)view
         //if section has rows,reset value
         
         tempImageView.image = [UIImage imageNamed:@"expand-button.png"];
+       
+        
         
         int row  = [self.tempAppResult[key] count] ;
         
@@ -401,6 +397,7 @@ willDisplayHeaderView:(UIView *)view
         
         [self.tempAppResult setObject:[[NSArray alloc ] init] forKey:key];
        NSLog(@"Collapsed section %@",self.tempAppResult);
+        
         
         
         [self.tableView beginUpdates];

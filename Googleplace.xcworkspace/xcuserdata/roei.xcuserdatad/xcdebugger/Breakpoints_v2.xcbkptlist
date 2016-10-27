@@ -74,12 +74,12 @@
                   moduleName = "Googleplace"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/roei/Desktop/Project/Move-in-fo/Googleplace/QuickAddViewController.m"
-                  timestampString = "499267154.472542"
+                  timestampString = "499273021.631719"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "544"
                   endingLineNumber = "544"
-                  offsetFromSymbolStart = "2000">
+                  offsetFromSymbolStart = "1870">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -89,12 +89,12 @@
                   moduleName = "Googleplace"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/roei/Desktop/Project/Move-in-fo/Googleplace/QuickAddViewController.m"
-                  timestampString = "499267154.503967"
+                  timestampString = "499273021.635709"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "544"
                   endingLineNumber = "544"
-                  offsetFromSymbolStart = "2082">
+                  offsetFromSymbolStart = "1890">
                </Location>
             </Locations>
          </BreakpointContent>

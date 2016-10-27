@@ -172,7 +172,6 @@
 				C435CDC01D4691F6002F9095 /* Assets.xcassets */,
 				C4031EC31D8ACBD7003C8033 /* Main.storyboard */,
 				C435CDC21D4691F6002F9095 /* LaunchScreen.storyboard */,
-				C435CDC51D4691F6002F9095 /* Info.plist */,
 				C4B0A3421DC20FA1003FD7C0 /* customCell.h */,
 				C4B0A3401DC20F96003FD7C0 /* customCell.m */,
 				C4F14E061D554348003F182F /* AddinformationViewcontroller.h */,
@@ -192,6 +191,7 @@
 		C435CDB41D4691F6002F9095 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C435CDC51D4691F6002F9095 /* Info.plist */,
 				C475C1451DAAEB6D00B5A008 /* add.png */,
 				C475C1411DAAE42400B5A008 /* home.png */,
 				C42FFFC11D9B009000360BF4 /* searching-location-gps-indicator.png */,

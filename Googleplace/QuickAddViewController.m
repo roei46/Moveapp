@@ -307,7 +307,7 @@ preparation before navigation
 */
 
 - (IBAction)submit:(id)sender {
-  if (_Feedback2.text.length < 3 || _Apartment.text.length == 0) {
+  if (self.Feedback2.text.length < 3 || self.Apartment.text.length == 0) {
     UIAlertController *alert = [UIAlertController
         alertControllerWithTitle:@"Cant submit"
                          message:nil
@@ -319,13 +319,13 @@ preparation before navigation
     [alert addAction:failed];
 
     [self presentViewController:alert animated:YES completion:nil];
-  } else if (_Feedback2.text.length > 70) {
+  } else if (self.Feedback2.text.length > 70 || self.Apartment.text.length >4) {
     UIAlertController *alert = [UIAlertController
         alertControllerWithTitle:@"Cant submit"
                          message:nil
                   preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *failed =
-        [UIAlertAction actionWithTitle:@"You can write only 70 notes"
+        [UIAlertAction actionWithTitle:@"You can write  70 notes of review and 4 digit apartment"
                                  style:UIAlertActionStyleDefault
                                handler:nil];
     [alert addAction:failed];

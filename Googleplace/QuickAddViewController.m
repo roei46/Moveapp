@@ -18,8 +18,8 @@
 @property(strong, nonatomic)
     GMSAutocompleteResultsViewController *_acViewController;
 @property(strong, nonatomic) NSMutableString *DBid;
-@property(weak, nonatomic) IBOutlet UILabel *TITLE;
-@property (weak, nonatomic) IBOutlet UIButton *submit;
+@property(weak, nonatomic)  UILabel *TITLE;
+@property (weak, nonatomic)  UIButton *submit;
 
 - (IBAction)submit:(id)sender;
 

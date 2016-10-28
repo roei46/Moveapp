@@ -264,7 +264,7 @@ willDisplayHeaderView:(UIView *)view
     UIImageView *img2 =[[UIImageView alloc] initWithImage:img];
     UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(27, 0, tableView.bounds.size.width, 44)];
     
-   // [img2 setCenter:CGPointMake( 15,view.bounds.size.height/2)];
+    [img2 setCenter:CGPointMake( 15,view.bounds.size.height/2)];
     
     
 

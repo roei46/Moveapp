@@ -86,7 +86,7 @@
                                     preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *Mailoff =
-        [UIAlertAction actionWithTitle:@"please activate your email or refer to this mail manually:roei46@yahoo.com"
+        [UIAlertAction actionWithTitle:@"please activate your email"
                                  style:UIAlertActionStyleDefault
                                handler:nil];
         

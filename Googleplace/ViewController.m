@@ -385,9 +385,17 @@ static NSString const *kTerrainType = @"Terrain";
                                  UIViewAutoresizingFlexibleBottomMargin;
     _switcher.selectedSegmentIndex = 0;
     _switcher.translatesAutoresizingMaskIntoConstraints = YES;
-    _switcher.frame = CGRectMake(50, 50, 210, 30);
-    _switcher.tintColor = [UIColor whiteColor];
-         [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:0.25 green:0.79 blue:0.78 alpha:1.0]} forState:UIControlStateNormal];
+      float X_Co = (self.view.frame.size.width - 250)/2;
+
+//    _switcher.frame = CGRectMake(50, 50, 250, 30);
+      _switcher.frame = CGRectMake(X_Co, 50, 250, 30);
+
+
+
+//    _switcher.tintColor = [UIColor whiteColor];
+//         [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:0.25 green:0.79 blue:0.78 alpha:1.0]} forState:UIControlStateNormal];
+      _switcher.tintColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
+      [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]} forState:UIControlStateNormal];
 
     [self.mapview addSubview:_switcher];
 

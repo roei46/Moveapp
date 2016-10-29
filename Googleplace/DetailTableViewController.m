@@ -283,20 +283,71 @@ willDisplayHeaderView:(UIView *)view
 
     //[ximage setCenter:CGPointMake( 300,view.bounds.size.height/2)];
     ximage.frame = CGRectMake([UIScreen mainScreen].bounds.size.width-30,ximage.bounds.size.height/2,20,20);
-    ximage.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin ;
+  ximage.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin ;
 
     
     
-    
+  
     UIButton * button = [[UIButton alloc] initWithFrame:view.frame];
+//    UIButton * button = [[UIButton alloc] init];
+
+  
+    
+
     button.tag = section;
     button.accessibilityLabel = [self.arrHeader objectAtIndex:section];
     [button addTarget:self action:@selector(sectionHeaderSelected:) forControlEvents:UIControlEventTouchUpInside];
-    button.backgroundColor = [UIColor clearColor
-                              ];
+    button.backgroundColor = [UIColor clearColor];
     
-    button.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin ;
+//    button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin ;
+    button.translatesAutoresizingMaskIntoConstraints = NO;
 
+    [view addConstraint:[NSLayoutConstraint
+                                       constraintWithItem:button
+                                       attribute:NSLayoutAttributeLeft
+                                       relatedBy:NSLayoutRelationEqual
+                                       toItem:view
+                                       attribute:NSLayoutAttributeLeft
+                                       multiplier:1.0
+                                       constant:0.0]];
+    
+    [view addConstraint:[NSLayoutConstraint
+                         constraintWithItem:button
+                         attribute:NSLayoutAttributeRight
+                         relatedBy:NSLayoutRelationEqual
+                         toItem:view
+                         attribute:NSLayoutAttributeRight
+                         multiplier:1.0
+                         constant:0.0]];
+    
+    
+    [view addConstraint:[NSLayoutConstraint
+                         constraintWithItem:button
+                         attribute:NSLayoutAttributeTop
+                         relatedBy:NSLayoutRelationEqual
+                         toItem:view
+                         attribute:NSLayoutAttributeTop
+                         multiplier:1.0
+                         constant:0.0]];
+    
+    [view addConstraint:[NSLayoutConstraint
+                         constraintWithItem:button
+                         attribute:NSLayoutAttributeBottom
+                         relatedBy:NSLayoutRelationEqual
+                         toItem:view
+                         attribute:NSLayoutAttributeBottom
+                         multiplier:1.0
+                         constant:0.0]];
+//    NSLayoutConstraint *centreHorizontallyConstraint = [NSLayoutConstraint
+//                                                        constraintWithItem:view
+//                                                        attribute:NSLayoutAttributeLeft
+//                                                        relatedBy:NSLayoutRelationEqual
+//                                                        toItem:button
+//                                                        attribute:NSLayoutAttributeLeft
+//                                                        multiplier:1.0
+//                                                        constant:0];
+//    
+//    [button addConstraint:centreHorizontallyConstraint];
    
     [view addSubview:ximage];
     [view addSubview:headerView];

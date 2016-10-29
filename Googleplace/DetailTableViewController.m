@@ -282,7 +282,7 @@ willDisplayHeaderView:(UIView *)view
     ximage.accessibilityLabel = @"expand-button.png";
 
     //[ximage setCenter:CGPointMake( 300,view.bounds.size.height/2)];
-    ximage.frame = CGRectMake(290,ximage.bounds.size.height/2,20,20);
+    ximage.frame = CGRectMake([UIScreen mainScreen].bounds.size.width-30,ximage.bounds.size.height/2,20,20);
     ximage.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin ;
 
     
@@ -388,7 +388,7 @@ willDisplayHeaderView:(UIView *)view
        
         
         
-        int row  = [self.tempAppResult[key] count] ;
+        int row  = (int)[self.tempAppResult[key] count] ;
         
         for(int i = 0 ; i < row; ++i)
         {
@@ -417,7 +417,7 @@ willDisplayHeaderView:(UIView *)view
         NSLog(@"Expand section %@",self.tempAppResult);
         NSMutableArray* IndexPathArray = [[NSMutableArray alloc] init];
         
-        int row  = [self.tempAppResult[key] count] ;
+        int row  = (int)[self.tempAppResult[key] count] ;
         
         NSLog(@"Row count %d", row);
         

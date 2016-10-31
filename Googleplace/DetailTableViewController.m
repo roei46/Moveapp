@@ -89,20 +89,11 @@ UITableViewDataSource >
    
 }
 
-//-(void)loadView
-//{
-//    self.tableView= [[SLExpandableTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-//    
-//}
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    //  self.tblView.delegate = self;
-    //  self.tblView.dataSource = self;
-    
-    
-    
-    // ServerProtocol *serverprotocol = [[ServerProtocol alloc]init];
+   
     
     NSURLSession *session =
     [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration

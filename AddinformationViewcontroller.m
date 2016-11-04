@@ -337,7 +337,7 @@
                 }
               }
 
-              NSLog(@" second q ");
+              NSLog(@" second q2 ");
                 
 
               PFQuery *query = [PFQuery queryWithClassName:@"Test2"];

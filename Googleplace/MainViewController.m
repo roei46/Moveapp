@@ -50,7 +50,7 @@
     
     _text.editable = NO;
     
-    [[UIBarButtonItem appearanceWhenContainedIn: [UISearchBar class], nil] setTintColor:[UIColor whiteColor]];
+    [[UIBarButtonItem appearanceWhenContainedIn: [UISearchBar class], nil] setTintColor:[UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0]];
     
     
     

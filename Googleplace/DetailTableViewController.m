@@ -329,16 +329,7 @@ willDisplayHeaderView:(UIView *)view
                          attribute:NSLayoutAttributeBottom
                          multiplier:1.0
                          constant:0.0]];
-//    NSLayoutConstraint *centreHorizontallyConstraint = [NSLayoutConstraint
-//                                                        constraintWithItem:view
-//                                                        attribute:NSLayoutAttributeLeft
-//                                                        relatedBy:NSLayoutRelationEqual
-//                                                        toItem:button
-//                                                        attribute:NSLayoutAttributeLeft
-//                                                        multiplier:1.0
-//                                                        constant:0];
-//    
-//    [button addConstraint:centreHorizontallyConstraint];
+
    
     [view addSubview:ximage];
     [view addSubview:headerView];

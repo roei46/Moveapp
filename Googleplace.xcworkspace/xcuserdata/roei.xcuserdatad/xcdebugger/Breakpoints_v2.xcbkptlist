@@ -74,7 +74,7 @@
                   moduleName = "Googleplace"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/roei/Desktop/Project/Move-in-fo/Googleplace/QuickAddViewController.m"
-                  timestampString = "499640033.313882"
+                  timestampString = "499969117.460937"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "544"
@@ -89,7 +89,7 @@
                   moduleName = "Googleplace"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/roei/Desktop/Project/Move-in-fo/Googleplace/QuickAddViewController.m"
-                  timestampString = "499640033.317819"
+                  timestampString = "499969117.465706"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "544"
@@ -192,6 +192,22 @@
             startingLineNumber = "235"
             endingLineNumber = "235"
             landmarkName = "-upload:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Googleplace/DetailTableViewController.m"
+            timestampString = "499969630.551457"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "262"
+            endingLineNumber = "262"
+            landmarkName = "-tableView:viewForHeaderInSection:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

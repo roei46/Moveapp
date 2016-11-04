@@ -81,7 +81,7 @@
    
     
      _searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
-
+[[UIBarButtonItem appearanceWhenContainedIn: [UISearchBar class], nil] setTintColor:[UIColor whiteColor]];
 
 
   self.definesPresentationContext = YES;
@@ -225,7 +225,7 @@ forSearchBarIcon:(UISearchBarIcon)icon
 
                 UIAlertController *alert = [UIAlertController
                     alertControllerWithTitle:nil
-                                     message:@"Do you wand to add this address?"
+                                     message:@"Do you want to add this address?"
                               preferredStyle:UIAlertControllerStyleAlert];
 
                 UIAlertAction *yes =

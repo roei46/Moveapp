@@ -33,6 +33,8 @@ static NSString const *kTerrainType = @"Terrain";
 @property(strong, nonatomic) UISegmentedControl *switcher;
 @property(strong, nonatomic)  GMSMarker *targetMarker;
 @property(nonatomic, strong) NSMutableArray *markersOnTheMap;
+@property(nonatomic, strong) NSMutableDictionary *googleId;
+
 
 
 
@@ -122,7 +124,8 @@ static NSString const *kTerrainType = @"Terrain";
    
 
     
-    
+    self.googleId = [[NSMutableDictionary alloc] init];
+
     
     
     
@@ -166,6 +169,7 @@ static NSString const *kTerrainType = @"Terrain";
                      return;
                    }
                    if (place != nil) {
+
                      GMSMarker *marker = [[GMSMarker alloc] init];
                      marker.position = CLLocationCoordinate2DMake(
                          place.coordinate.latitude, place.coordinate.longitude);
@@ -173,6 +177,9 @@ static NSString const *kTerrainType = @"Terrain";
                      marker.snippet = @"Push to see feedbacks";
                      marker.map = _mapview;
                        [self.markersOnTheMap addObject:marker];
+                       [self.googleId setObject:place.placeID forKey:place.name];
+                       NSLog(@"place details for %@", self.googleId);
+
                    } else {
                      NSLog(@"No place details for %@", placeID);
                    }
@@ -214,9 +221,16 @@ static NSString const *kTerrainType = @"Terrain";
     
   DetailTableViewController *destViewController = [self.storyboard
       instantiateViewControllerWithIdentifier:@"DetailTableViewController"];
-  NSLog(@" Taped on marker : %@", marker.userData);
 
   destViewController.Address = marker.title;
+    NSLog(@" Taped on marker : %@", marker.title);
+    NSArray*keys=[_googleId allKeys];
+    NSLog(@" aLL KEYS : %@", keys);
+
+
+    
+    
+   destViewController.gId =[self.googleId objectForKey:marker.title];
 
   [self.navigationController pushViewController:destViewController
                                        animated:YES];

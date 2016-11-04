@@ -119,7 +119,8 @@ UITableViewDataSource >
     [request setHTTPMethod:@"GET"];
     
     NSLog(@"%@", request);
-    
+    NSLog(@"App result: %@", self.gId);
+
     NSURLSessionDataTask *postdata = [session
                                       dataTaskWithRequest:request
                                       completionHandler:^(NSData *data, NSURLResponse *response,
@@ -134,7 +135,8 @@ UITableViewDataSource >
                                               NSLog(@"result : %@", result);
                                               NSLog(@"test : %@", self.jsonResult2);
                                               for (NSDictionary *addname in self.jsonResult2) {
-                                                  if ([[addname valueForKey:@"Address"] isEqualToString:_Address]) {
+//                                                  if ([[addname valueForKey:@"Address"] isEqualToString:_Address]) {
+                                                   if ([[addname valueForKey:@"googlid"] isEqualToString:_gId]) {
                                                       self.appResult = addname[@"apartmentsDict"];
                                                       
                                                       self.arrHeader = (NSMutableArray *)[self.appResult allKeys];

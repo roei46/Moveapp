@@ -11,6 +11,8 @@
 @interface DetailTableViewController : UITableViewController
 
 @property(nonatomic, strong) NSString *Address;
+@property(nonatomic, strong) NSString *gId;
+
 
 
 

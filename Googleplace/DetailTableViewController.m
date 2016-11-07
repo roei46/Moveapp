@@ -36,16 +36,7 @@ UITableViewDataSource >
 
 
 @implementation DetailTableViewController
-//    GMSMapView *_mapView;
-//    GMSMarker *_Marker;
-//    GMSPlacesClient *placesclient;
-//    UISegmentedControl *_switcher;
-//    NSArray *jsonResult2;
-//    NSDictionary *appResult;
-//    NSMutableDictionary  *tempAppResult;
-//    
-//
-//}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -57,7 +48,6 @@ UITableViewDataSource >
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     
-  //  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
@@ -380,7 +370,7 @@ willDisplayHeaderView:(UIView *)view
     
     AddinformationViewcontroller *destViewController = [self.storyboard
                                                         instantiateViewControllerWithIdentifier:@"AddinformationViewcontroller"];
-    
+    destViewController.googleIdTblview = _gId;
     destViewController.Address = _Address;
     destViewController.working = NO;
     

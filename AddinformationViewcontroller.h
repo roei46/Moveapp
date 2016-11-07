@@ -21,6 +21,8 @@
 @property(strong, nonatomic) IBOutlet UITextField *Apartment;
 @property(strong, nonatomic) IBOutlet UITextField *Feedback;
 @property(weak, nonatomic) IBOutlet UITextView *Feedback2;
+@property(nonatomic, strong) NSString *googleIdTblview;
+
 @property(nonatomic, assign) BOOL working;
 
 @end

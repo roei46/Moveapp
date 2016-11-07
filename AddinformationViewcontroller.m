@@ -149,6 +149,7 @@
                                       @"DetailTableViewController"];
 
                               destViewController.Address = _Address;
+                                destViewController.gId = _googleIdTblview;
                                 _TITLE.text =@"";
                                 _Apartment.text =@"";
                                 
@@ -288,6 +289,8 @@
                                                             destViewController
                                                                 .Address =
                                                                 _Address;
+                                                              destViewController.gId = _googleIdTblview;
+
                                                               _TITLE.text =@"";
                                                               _Apartment.text =@"";
                                                               
@@ -416,6 +419,8 @@
                                                             destViewController
                                                                 .Address =
                                                                 _Address;
+                                                              destViewController.gId = _googleIdTblview;
+
                                                               
                                                               _Apartment.text =@"";
                                                               

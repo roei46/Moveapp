@@ -14,12 +14,17 @@
 @interface QuickAddViewController () <UISearchBarDelegate,
      GMSAutocompleteResultsViewControllerDelegate,
     GMSMapViewDelegate ,UITextFieldDelegate,UITextViewDelegate>
+
 @property(strong, nonatomic) UISearchController *searchController;
 @property(strong, nonatomic)
     GMSAutocompleteResultsViewController *_acViewController;
 @property(strong, nonatomic) NSMutableString *DBid;
 @property(weak, nonatomic)  UILabel *TITLE;
 @property (weak, nonatomic)  UIButton *submit;
+@property(nonatomic, strong) NSMutableDictionary *googleIdDic;
+@property(strong, nonatomic) GMSPlacesClient *placesclient;
+
+
 
 - (IBAction)submit:(id)sender;
 
@@ -30,7 +35,8 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
     
-    
+    self.googleIdDic = [[NSMutableDictionary alloc] init];
+
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 
@@ -108,6 +114,45 @@
     
     
     [self.view addSubview:_searchController.searchBar];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Test2"];
+    [query selectKeys:@[@"googlid"]];
+
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            NSLog(@" objects : %@", objects);
+            for (NSDictionary *dic in objects) {
+                NSString *placeID = [dic valueForKey:@"googlid"];
+                _placesclient = [[GMSPlacesClient alloc] init];
+                
+                [_placesclient
+                 lookUpPlaceID:placeID
+                 callback:^(GMSPlace *place, NSError *error) {
+                     if (error != nil) {
+                         NSLog(@"Place Details error %@",
+                               [error localizedDescription]);
+                         return;
+                     }
+                     if (place != nil) {
+                         
+                         [self.googleIdDic setObject:place.placeID forKey:place.name];
+                         NSLog(@"place details for %@", self.googleIdDic);
+                         
+                     } else {
+                         NSLog(@"No place details for %@", placeID);
+                     }
+                 }];
+            }
+        }
+        else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+        
+        
+        
+    }];
 
 }
 
@@ -379,6 +424,10 @@ preparation before navigation
                               DetailTableViewController *destViewController = [self.storyboard
                                   instantiateViewControllerWithIdentifier:
                                       @"DetailTableViewController"];
+//                                 destViewController.gId = [self.googleIdDic objectForKey:_TITLE.text];
+                                
+                                destViewController.gId = _googleId;
+                                
                                 _Apartment.text =@"";
                                 
                                 _Feedback2.text =@"";
@@ -511,7 +560,7 @@ preparation before navigation
                                                                 [self.storyboard
                                                                     instantiateViewControllerWithIdentifier:
                                                                         @"DetailTableViewController"];
-
+ destViewController.gId = [self.googleIdDic objectForKey:_TITLE.text];
                                                             destViewController
                                                                 .Address =
                                                                 _Address;
@@ -519,6 +568,7 @@ preparation before navigation
                                                               
                                                               _Feedback2.text =@"";
                                                               _TITLE.text = @"";
+                                                             
 
 
                                                             [self.navigationController
@@ -639,7 +689,7 @@ preparation before navigation
                                                                 [self.storyboard
                                                                     instantiateViewControllerWithIdentifier:
                                                                        @"DetailTableViewController"];
-
+ destViewController.gId =[self.googleIdDic objectForKey:_TITLE.text];
                                                             destViewController
                                                                 .Address =
                                                                 _Address;

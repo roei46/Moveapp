@@ -18,7 +18,7 @@ static NSString const *kHybridType = @"Hybrid";
 static NSString const *kTerrainType = @"Terrain";
 
 @interface ViewController () <GMSAutocompleteResultsViewControllerDelegate,
-                              GMSMapViewDelegate ,UISearchControllerDelegate>
+                              GMSMapViewDelegate ,UISearchControllerDelegate ,CLLocationManagerDelegate>
 - (IBAction)mapChange:(id)sender;
 
 @property(weak, nonatomic) IBOutlet GMSMapView *mapview;
@@ -69,7 +69,7 @@ static NSString const *kTerrainType = @"Terrain";
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 
-  self.title = @"Move-in-fo";
+  self.title = @"Moveinfo";
   self.edgesForExtendedLayout =
       UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight;
 
@@ -117,7 +117,14 @@ static NSString const *kTerrainType = @"Terrain";
                forKeyPath:@"_placeholderLabel.textColor"];
  
 }
-
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    
+    
+        if ( status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        [manager startUpdatingLocation];
+            
+    }
+}
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
     
@@ -401,15 +408,11 @@ static NSString const *kTerrainType = @"Terrain";
     _switcher.translatesAutoresizingMaskIntoConstraints = YES;
       float X_Co = (self.view.frame.size.width - 250)/2;
 
-//    _switcher.frame = CGRectMake(50, 50, 250, 30);
       _switcher.frame = CGRectMake(X_Co, 50, 250, 30);
 
 
-
-//    _switcher.tintColor = [UIColor whiteColor];
-//         [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:0.25 green:0.79 blue:0.78 alpha:1.0]} forState:UIControlStateNormal];
       _switcher.tintColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
-      [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]} forState:UIControlStateNormal];
+      [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]} forState:UIControlStateNormal];
 
     [self.mapview addSubview:_switcher];
 

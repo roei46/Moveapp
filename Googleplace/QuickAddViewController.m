@@ -370,7 +370,7 @@ preparation before navigation
                          message:nil
                   preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *failed =
-        [UIAlertAction actionWithTitle:@"You can write  70 notes of review and 4 digit apartment"
+        [UIAlertAction actionWithTitle:@"Write up to 70 and 4 digit"
                                  style:UIAlertActionStyleDefault
                                handler:nil];
     [alert addAction:failed];

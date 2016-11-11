@@ -44,7 +44,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>By accessing your location,this app could help you see feedbacks in your area</string>
+	<string>By accessing your location,this app could help you see reviews in your area</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

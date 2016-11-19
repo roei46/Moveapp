@@ -34,6 +34,8 @@ static NSString const *kTerrainType = @"Terrain";
 @property(strong, nonatomic)  GMSMarker *targetMarker;
 @property(nonatomic, strong) NSMutableArray *markersOnTheMap;
 @property(nonatomic, strong) NSMutableDictionary *googleId;
+@property(nonatomic, strong) CLLocationManager *locationManager;
+
 
 
 
@@ -121,9 +123,24 @@ static NSString const *kTerrainType = @"Terrain";
     
     
         if ( status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+            
         [manager startUpdatingLocation];
+      
+            
             
     }
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
+    
+    GMSCameraPosition *camera = [GMSCameraPosition
+                                 cameraWithLatitude:self.locationManager.location.coordinate.latitude
+                                 longitude:self.locationManager.location.coordinate.longitude
+                                 zoom:10];
+    self.mapview.camera = camera;
+    
+    [manager stopUpdatingLocation];
+    
 }
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
@@ -137,16 +154,18 @@ static NSString const *kTerrainType = @"Terrain";
     
     
   _mapview.myLocationEnabled = YES;
+    self.locationManager.delegate = self;
+    [self.locationManager requestWhenInUseAuthorization];
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
 
-  CLLocationManager *locationManager;
-  locationManager = [[CLLocationManager alloc] init];
-  locationManager.distanceFilter = kCLDistanceFilterNone;
-  locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-  [locationManager startUpdatingLocation];
+  self.locationManager.distanceFilter = kCLDistanceFilterNone;
+  self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+  [self.locationManager startUpdatingLocation];
 
   GMSCameraPosition *camera = [GMSCameraPosition
-      cameraWithLatitude:locationManager.location.coordinate.latitude
-               longitude:locationManager.location.coordinate.longitude
+      cameraWithLatitude:self.locationManager.location.coordinate.latitude
+               longitude:self.locationManager.location.coordinate.longitude
                     zoom:10];
   self.mapview.camera = camera;
   self.mapview.padding = UIEdgeInsetsMake(0, 0, 15, 0);

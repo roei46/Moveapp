@@ -52,7 +52,7 @@
     NSForegroundColorAttributeName : [UIColor whiteColor],
     NSFontAttributeName : [UIFont fontWithName:@"AppleSDGothicNeo-Bold" size:21]
   };
-  self.title = @"Move-in-fo";
+  self.title = @"Moveinfo";
   self.edgesForExtendedLayout =
       UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight;
 

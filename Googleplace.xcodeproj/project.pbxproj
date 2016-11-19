@@ -27,7 +27,6 @@
 		C475C1421DAAE42400B5A008 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = C475C1411DAAE42400B5A008 /* home.png */; };
 		C475C1461DAAEB6D00B5A008 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = C475C1451DAAEB6D00B5A008 /* add.png */; };
 		C48321571D6DDEBC00008B32 /* cover.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C48321561D6DDEBC00008B32 /* cover.jpeg */; };
-		C4B0A3411DC20F96003FD7C0 /* customCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B0A3401DC20F96003FD7C0 /* customCell.m */; };
 		C4D703721DBFEEAB0078B0B6 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4D703711DBFEEAB0078B0B6 /* MessageUI.framework */; };
 		C4F14E081D554348003F182F /* AddinformationViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F14E071D554348003F182F /* AddinformationViewcontroller.m */; };
 		C4F4EDCF1D9AC32C0035B067 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F4EDCD1D9AC32C0035B067 /* Fabric.framework */; };
@@ -87,8 +86,6 @@
 		C475C1411DAAE42400B5A008 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		C475C1451DAAEB6D00B5A008 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		C48321561D6DDEBC00008B32 /* cover.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cover.jpeg; sourceTree = "<group>"; };
-		C4B0A3401DC20F96003FD7C0 /* customCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = customCell.m; path = ../../../../.Trash/customCell.m; sourceTree = "<group>"; };
-		C4B0A3421DC20FA1003FD7C0 /* customCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = customCell.h; path = ../../../../.Trash/customCell.h; sourceTree = "<group>"; };
 		C4D703711DBFEEAB0078B0B6 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		C4F14E061D554348003F182F /* AddinformationViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddinformationViewcontroller.h; path = ../AddinformationViewcontroller.h; sourceTree = "<group>"; };
 		C4F14E071D554348003F182F /* AddinformationViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddinformationViewcontroller.m; path = ../AddinformationViewcontroller.m; sourceTree = "<group>"; };
@@ -172,8 +169,6 @@
 				C435CDC01D4691F6002F9095 /* Assets.xcassets */,
 				C4031EC31D8ACBD7003C8033 /* Main.storyboard */,
 				C435CDC21D4691F6002F9095 /* LaunchScreen.storyboard */,
-				C4B0A3421DC20FA1003FD7C0 /* customCell.h */,
-				C4B0A3401DC20F96003FD7C0 /* customCell.m */,
 				C4F14E061D554348003F182F /* AddinformationViewcontroller.h */,
 				C4F14E071D554348003F182F /* AddinformationViewcontroller.m */,
 				C435CDB51D4691F6002F9095 /* main.m */,
@@ -433,7 +428,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4B0A3411DC20F96003FD7C0 /* customCell.m in Sources */,
 				C4031ECB1D916DC5003C8033 /* QuickAddViewController.m in Sources */,
 				C4031EC81D8AD1F1003C8033 /* MainViewController.m in Sources */,
 				C4031EC21D89FE6D003C8033 /* DetailTableViewController.m in Sources */,

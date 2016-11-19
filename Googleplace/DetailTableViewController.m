@@ -13,7 +13,7 @@
 #import "ViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
-#import "customCell.h"
+//#import "customCell.h"
 
 @interface DetailTableViewController ()<GMSMapViewDelegate, UITableViewDelegate,
 UITableViewDataSource >
@@ -177,12 +177,12 @@ UITableViewDataSource >
  
  
  static NSString *CellIdentifier = @"cell";
- customCell * customcell =
+ UITableViewCell  * customcell =
  [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
  
  
  if (customcell== nil) {
- customcell = [[customCell alloc] initWithStyle:UITableViewCellStyleDefault
+ customcell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
  reuseIdentifier:CellIdentifier];
  
  }
@@ -201,7 +201,7 @@ UITableViewDataSource >
  
  
  
- [customcell.cellLabel sizeToFit];
+ [customcell.textLabel sizeToFit];
  
  customcell.preservesSuperviewLayoutMargins = false;
  customcell.separatorInset = UIEdgeInsetsZero;

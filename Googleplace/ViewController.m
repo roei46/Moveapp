@@ -71,7 +71,7 @@ static NSString const *kTerrainType = @"Terrain";
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 
-  self.title = @"Moveinfo";
+  self.title = @"Map";
   self.edgesForExtendedLayout =
       UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight;
 
@@ -335,9 +335,8 @@ static NSString const *kTerrainType = @"Terrain";
                                   [self.storyboard
                                       instantiateViewControllerWithIdentifier:
                                           @"AddinformationViewcontroller"];
-
                               destViewController.Address = place.name;
-                              destViewController.googleId = place.placeID;
+                              destViewController.googleIdTblview = place.placeID;
                               destViewController.working = YES;
 
                               [self.navigationController

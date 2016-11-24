@@ -131,7 +131,7 @@
 
         [databaseManager
             addPlace:_Address
-             placeId:_googleId
+             placeId:_googleIdTblview
             callback:^(BOOL found) {
               if (found) {
 

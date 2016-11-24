@@ -13,6 +13,7 @@
 #import "ViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
+#import "SessionRequest.h"
 //#import "customCell.h"
 
 @interface DetailTableViewController ()<GMSMapViewDelegate, UITableViewDelegate,
@@ -78,87 +79,180 @@ UITableViewDataSource >
     
    
 }
-
+//-(NSURLSession *)createSession{
+//    
+//    NSURLSession *session =
+//    [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration
+//                                            defaultSessionConfiguration]
+//                                  delegate:nil
+//                             delegateQueue:nil];
+//    
+//    return session;
+//}
+//
+//-(NSMutableURLRequest *)createRequest {
+//    
+//    NSMutableURLRequest *request = [NSMutableURLRequest
+//                                    requestWithURL:
+//                                    [NSURL
+//                                     URLWithString:@"https://movex.herokuapp.com/parse/classes/Test2"]
+//                                    cachePolicy:NSURLRequestUseProtocolCachePolicy
+//                                    timeoutInterval:60.0];
+//    
+//    // use only in SET
+//    //  NSError *error;
+//    //    NSData *jsondata;
+//    
+//    [request addValue:@"application/json" forHTTPHeaderField:@"Content-type"];
+//    [request addValue:@"movexroei" forHTTPHeaderField:@"X-Parse-Application-Id"];
+//    
+//    // use only in SET
+//    //    [request setHTTPBody:jsondata];
+//    [request setHTTPMethod:@"GET"];
+//    
+//    NSLog(@"%@", request);
+//    
+//    return request;
+//    
+//}
 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
    
     
-    NSURLSession *session =
-    [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration
-                                            defaultSessionConfiguration]
-                                  delegate:nil
-                             delegateQueue:nil];
-    NSMutableURLRequest *request = [NSMutableURLRequest
-                                    requestWithURL:
-                                    [NSURL
-                                     URLWithString:@"https://movex.herokuapp.com/parse/classes/Test2"]
-                                    cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                    timeoutInterval:60.0];
+//    NSURLSession *session =
+//    [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration
+//                                            defaultSessionConfiguration]
+//                                  delegate:nil
+//                             delegateQueue:nil];
+//    NSMutableURLRequest *request = [NSMutableURLRequest
+//                                    requestWithURL:
+//                                    [NSURL
+//                                     URLWithString:@"https://movex.herokuapp.com/parse/classes/Test2"]
+//                                    cachePolicy:NSURLRequestUseProtocolCachePolicy
+//                                    timeoutInterval:60.0];
+//    
+//    // use only in SET
+//    //  NSError *error;
+//    //    NSData *jsondata;
+//    
+//    [request addValue:@"application/json" forHTTPHeaderField:@"Content-type"];
+//    [request addValue:@"movexroei" forHTTPHeaderField:@"X-Parse-Application-Id"];
+//    
+//    // use only in SET
+//    //    [request setHTTPBody:jsondata];
+//    [request setHTTPMethod:@"GET"];
+//    
+//    NSLog(@"%@", request);
     
-    // use only in SET
-    //  NSError *error;
-    //    NSData *jsondata;
     
-    [request addValue:@"application/json" forHTTPHeaderField:@"Content-type"];
-    [request addValue:@"movexroei" forHTTPHeaderField:@"X-Parse-Application-Id"];
-    
-    // use only in SET
-    //    [request setHTTPBody:jsondata];
-    [request setHTTPMethod:@"GET"];
-    
-    NSLog(@"%@", request);
     NSLog(@"App result: %@", self.gId);
-
-    NSURLSessionDataTask *postdata = [session
-                                      dataTaskWithRequest:request
-                                      completionHandler:^(NSData *data, NSURLResponse *response,
-                                                          NSError *error) {
-                                          if (error == nil) {
-                                              
-                                              NSDictionary *result =
-                                              [NSJSONSerialization JSONObjectWithData:data
-                                                                              options:kNilOptions
-                                                                                error:&error];
-                                              self.jsonResult2 = [result objectForKey:@"results"];
-                                              NSLog(@"result : %@", result);
-                                              NSLog(@"test : %@", self.jsonResult2);
-                                              for (NSDictionary *addname in self.jsonResult2) {
-//                                                  if ([[addname valueForKey:@"Address"] isEqualToString:_Address]) {
-                                                   if ([[addname valueForKey:@"googlid"] isEqualToString:_gId]) {
-                                                      self.appResult = addname[@"apartmentsDict"];
-                                                      
-                                                      self.arrHeader = (NSMutableArray *)[self.appResult allKeys];
-                                                      NSLog(@"not sortd :%@", _arrHeader);
-                                                      
-                       
-                                                      self.arrHeader  = (NSMutableArray *)[self.arrHeader sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-                                                          return [obj1 compare:obj2 options:NSNumericSearch];
-                                                      }];
-                                                      
-                                                      
-                                                      NSLog(@" sortd :%@", self.arrHeader );
-
-                                                      dispatch_async(dispatch_get_main_queue(), ^{
-                                                          self.tempAppResult = [[NSMutableDictionary alloc] init];
-                                                          [self.appResult enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-                                                              
-                                                              [self.tempAppResult setValue:[[NSArray alloc] init] forKey:key] ;
-                                                          }];
-                                                         
-                                                          [self.tableView reloadData];
-                                                          NSLog(@"App result: %@", self.appResult);
-                                                          NSLog(@"Temp App result: %@", self.tempAppResult);
-                                                      });
-                                                      
-                                                      break;
-                                                  }
-                                              }
-                                          }
-                                      }];
+    SessionRequest *session = [[SessionRequest alloc]init];
     
-    [postdata resume];
+  [session DataTask:^(BOOL ok) {
+      
+      if (ok) {
+          {
+              NSError *e = nil;
+
+              NSDictionary *result =
+              [NSJSONSerialization JSONObjectWithData:[session DateFromSession]
+                                              options:kNilOptions
+                                                error:&e];
+              
+              self.jsonResult2 = [result objectForKey:@"results"];
+              NSLog(@"result : %@", result);
+              NSLog(@"test : %@", self.jsonResult2);
+              for (NSDictionary *addname in self.jsonResult2) {
+                  //                                                  if ([[addname valueForKey:@"Address"] isEqualToString:_Address]) {
+                  if ([[addname valueForKey:@"googlid"] isEqualToString:_gId]) {
+                      self.appResult = addname[@"apartmentsDict"];
+                      
+                      self.arrHeader = (NSMutableArray *)[self.appResult allKeys];
+                      NSLog(@"not sortd :%@", _arrHeader);
+                      
+                      
+                      self.arrHeader  = (NSMutableArray *)[self.arrHeader sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+                          return [obj1 compare:obj2 options:NSNumericSearch];
+                      }];
+                      
+                      
+                      NSLog(@" sortd :%@", self.arrHeader );
+                      
+                      dispatch_async(dispatch_get_main_queue(), ^{
+                          self.tempAppResult = [[NSMutableDictionary alloc] init];
+                          [self.appResult enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                              
+                              [self.tempAppResult setValue:[[NSArray alloc] init] forKey:key] ;
+                          }];
+                          
+                          [self.tableView reloadData];
+                          NSLog(@"App result: %@", self.appResult);
+                          NSLog(@"Temp App result: %@", self.tempAppResult);
+                      });
+                      
+                      break;
+                  }
+              }
+          }
+      }
+      
+      
+      
+  }];
+    
+    
+
+
+//    NSURLSessionDataTask *postdata = [[self createSession]
+//                                      dataTaskWithRequest:[self createRequest]
+//                                      completionHandler:^(NSData *data, NSURLResponse *response,
+//                                                          NSError *error) {
+//                                          if (error == nil) {
+//                                              
+//                                              NSDictionary *result =
+//                                              [NSJSONSerialization JSONObjectWithData:data
+//                                                                              options:kNilOptions
+//                                                                                error:&error];
+//                                              self.jsonResult2 = [result objectForKey:@"results"];
+//                                              NSLog(@"result : %@", result);
+//                                              NSLog(@"test : %@", self.jsonResult2);
+//                                              for (NSDictionary *addname in self.jsonResult2) {
+////                                                  if ([[addname valueForKey:@"Address"] isEqualToString:_Address]) {
+//                                                   if ([[addname valueForKey:@"googlid"] isEqualToString:_gId]) {
+//                                                      self.appResult = addname[@"apartmentsDict"];
+//                                                      
+//                                                      self.arrHeader = (NSMutableArray *)[self.appResult allKeys];
+//                                                      NSLog(@"not sortd :%@", _arrHeader);
+//                                                      
+//                       
+//                                                      self.arrHeader  = (NSMutableArray *)[self.arrHeader sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+//                                                          return [obj1 compare:obj2 options:NSNumericSearch];
+//                                                      }];
+//                                                      
+//                                                      
+//                                                      NSLog(@" sortd :%@", self.arrHeader );
+//
+//                                                      dispatch_async(dispatch_get_main_queue(), ^{
+//                                                          self.tempAppResult = [[NSMutableDictionary alloc] init];
+//                                                          [self.appResult enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+//                                                              
+//                                                              [self.tempAppResult setValue:[[NSArray alloc] init] forKey:key] ;
+//                                                          }];
+//                                                         
+//                                                          [self.tableView reloadData];
+//                                                          NSLog(@"App result: %@", self.appResult);
+//                                                          NSLog(@"Temp App result: %@", self.tempAppResult);
+//                                                      });
+//                                                      
+//                                                      break;
+//                                                  }
+//                                              }
+//                                          }
+//                                      }];
+//    
+//    [postdata resume];
 }
 
 

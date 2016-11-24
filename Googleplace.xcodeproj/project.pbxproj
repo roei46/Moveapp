@@ -27,6 +27,7 @@
 		C475C1421DAAE42400B5A008 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = C475C1411DAAE42400B5A008 /* home.png */; };
 		C475C1461DAAEB6D00B5A008 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = C475C1451DAAEB6D00B5A008 /* add.png */; };
 		C48321571D6DDEBC00008B32 /* cover.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C48321561D6DDEBC00008B32 /* cover.jpeg */; };
+		C4A4EFB51DE4E9B000B38245 /* SessionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A4EFB41DE4E9AF00B38245 /* SessionRequest.m */; };
 		C4D703721DBFEEAB0078B0B6 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4D703711DBFEEAB0078B0B6 /* MessageUI.framework */; };
 		C4F14E081D554348003F182F /* AddinformationViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F14E071D554348003F182F /* AddinformationViewcontroller.m */; };
 		C4F4EDCF1D9AC32C0035B067 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F4EDCD1D9AC32C0035B067 /* Fabric.framework */; };
@@ -86,6 +87,8 @@
 		C475C1411DAAE42400B5A008 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		C475C1451DAAEB6D00B5A008 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		C48321561D6DDEBC00008B32 /* cover.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cover.jpeg; sourceTree = "<group>"; };
+		C4A4EFB31DE4E9AF00B38245 /* SessionRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionRequest.h; path = ../SessionRequest.h; sourceTree = "<group>"; };
+		C4A4EFB41DE4E9AF00B38245 /* SessionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionRequest.m; path = ../SessionRequest.m; sourceTree = "<group>"; };
 		C4D703711DBFEEAB0078B0B6 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		C4F14E061D554348003F182F /* AddinformationViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddinformationViewcontroller.h; path = ../AddinformationViewcontroller.h; sourceTree = "<group>"; };
 		C4F14E071D554348003F182F /* AddinformationViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddinformationViewcontroller.m; path = ../AddinformationViewcontroller.m; sourceTree = "<group>"; };
@@ -160,6 +163,8 @@
 			children = (
 				C435CDB71D4691F6002F9095 /* AppDelegate.h */,
 				C435CDB81D4691F6002F9095 /* AppDelegate.m */,
+				C4A4EFB31DE4E9AF00B38245 /* SessionRequest.h */,
+				C4A4EFB41DE4E9AF00B38245 /* SessionRequest.m */,
 				C435CDBA1D4691F6002F9095 /* ViewController.h */,
 				C435CDBB1D4691F6002F9095 /* ViewController.m */,
 				C4031EC61D8AD1F1003C8033 /* MainViewController.h */,
@@ -436,6 +441,7 @@
 				C4F14E081D554348003F182F /* AddinformationViewcontroller.m in Sources */,
 				C435CDB91D4691F6002F9095 /* AppDelegate.m in Sources */,
 				C437F6921D5127F500FAC6D2 /* DatabaseManager.m in Sources */,
+				C4A4EFB51DE4E9B000B38245 /* SessionRequest.m in Sources */,
 				C435CDB61D4691F6002F9095 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

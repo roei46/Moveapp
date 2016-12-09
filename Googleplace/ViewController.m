@@ -71,7 +71,7 @@ static NSString const *kTerrainType = @"Terrain";
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 
-  self.title = @"Map";
+  self.navigationItem.title = @"Map";
   self.edgesForExtendedLayout =
       UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight;
 

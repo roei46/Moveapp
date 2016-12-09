@@ -40,7 +40,7 @@
                                                                     NSForegroundColorAttributeName : [UIColor whiteColor],
                                                                     NSFontAttributeName : [UIFont fontWithName:@"AppleSDGothicNeo-Bold" size:21]
                                                                     };
-    self.title = @"Moveinfo";
+    self.navigationItem.title = @"Moveinfo";
     self.edgesForExtendedLayout =
     UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight;
     

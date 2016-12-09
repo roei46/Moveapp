@@ -278,19 +278,10 @@ forSearchBarIcon:(UISearchBarIcon)icon
                                              style:UIAlertActionStyleDefault
                                            handler:^(UIAlertAction *action) {
 
-                                             //                                           AddinformationViewcontroller *destViewController =
-                                             //                                           [self.storyboard
-                                             //                                            instantiateViewControllerWithIdentifier:
-                                             //                                            @"AddinformationViewcontroller"];
-                                             //
                                              _Address = place.name;
                                              _googleId = place.placeID;
                                              _working = YES;
-
-                                             //                                           [self.navigationController
-                                             //                                            pushViewController:destViewController
-                                             //                                            animated:YES];
-
+                                    
                                            }];
 
                 [alert addAction:yes];
@@ -424,7 +415,6 @@ preparation before navigation
                               DetailTableViewController *destViewController = [self.storyboard
                                   instantiateViewControllerWithIdentifier:
                                       @"DetailTableViewController"];
-//                                 destViewController.gId = [self.googleIdDic objectForKey:_TITLE.text];
                                 
                                 destViewController.gId = _googleId;
                                 

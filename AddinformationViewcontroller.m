@@ -25,12 +25,11 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
- 
     
     _upload.backgroundColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
   _streetImage.image = [UIImage imageNamed:@"cover.jpeg"];
-
-  self.navigationItem.rightBarButtonItem =
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.rightBarButtonItem =
       [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
                                        style:UIBarButtonItemStylePlain
                                       target:self
@@ -63,6 +62,7 @@
 
   ViewController *destViewController = [self.storyboard
       instantiateViewControllerWithIdentifier:@"ViewController"];
+    destViewController.didComeFromAddInformation = YES;
 
   [self.navigationController pushViewController:destViewController
                                        animated:YES];

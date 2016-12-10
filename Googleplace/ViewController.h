@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
+@property (assign, nonatomic)BOOL didComeFromAddInformation;
 
 
 @end

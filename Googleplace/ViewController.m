@@ -10,6 +10,7 @@
 #import "DatabaseManager.h"
 #import "ServerProtocol.h"
 #import "ViewController.h"
+#import "MainViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
 static NSString const *kNormalType = @"Normal";
@@ -47,18 +48,33 @@ static NSString const *kTerrainType = @"Terrain";
 - (void)viewDidLoad {
   [super viewDidLoad];
     
+
+    if (self.didComeFromAddInformation) {
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backToManue:)];
+        NSLog(@"yes yes yes yes");
+
+    }
+    else{
+       self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+        NSLog(@"no no no no");
+
+    }
+    
     self.markersOnTheMap = [NSMutableArray new]; //Instantiate and allocate memory for the first time
 
   _showSegmant = YES;
 
   self.navigationController.navigationBar.barTintColor =
     [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
+    
     self.navigationController.navigationBar.titleTextAttributes = @{
     NSForegroundColorAttributeName : [UIColor whiteColor],
     NSFontAttributeName : [UIFont fontWithName:@"AppleSDGothicNeo-Bold" size:21]
   };
     
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+//    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+//    self.navigationItem.leftBarButtonItem =self.navigationItem.backBarButtonItem;
+    
     
     [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil]
      setTitleTextAttributes:
@@ -119,6 +135,14 @@ static NSString const *kTerrainType = @"Terrain";
                forKeyPath:@"_placeholderLabel.textColor"];
  
 }
+
+- (void)backToManue:(id)sender {
+    MainViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
+    
+    [self.navigationController pushViewController:destViewController
+                                         animated:YES];
+}
+
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     
     

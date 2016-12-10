@@ -216,7 +216,6 @@ forSearchBarIcon:(UISearchBarIcon)icon
     _Apartment.text =@"";
     
     _Feedback2.text =@"";
-    
 
   MainViewController *destViewController = [self.storyboard
       instantiateViewControllerWithIdentifier:@"MainViewController"];

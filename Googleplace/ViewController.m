@@ -19,7 +19,7 @@ static NSString const *kHybridType = @"Hybrid";
 static NSString const *kTerrainType = @"Terrain";
 
 @interface ViewController () <GMSAutocompleteResultsViewControllerDelegate,
-                              GMSMapViewDelegate ,UISearchControllerDelegate ,CLLocationManagerDelegate>
+                              GMSMapViewDelegate ,UISearchControllerDelegate ,CLLocationManagerDelegate , UINavigationControllerDelegate>
 - (IBAction)mapChange:(id)sender;
 
 @property(weak, nonatomic) IBOutlet GMSMapView *mapview;
@@ -47,16 +47,13 @@ static NSString const *kTerrainType = @"Terrain";
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-    
+    UIBarButtonItem *backButton =[[UIBarButtonItem alloc] initWithTitle:@"Manu" style:UIBarButtonItemStylePlain target:self action:@selector(backToManue:)];
 
     if (self.didComeFromAddInformation) {
-        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backToManue:)];
-        NSLog(@"yes yes yes yes");
-
+        self.navigationItem.leftBarButtonItem = backButton;
     }
     else{
-       self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
-        NSLog(@"no no no no");
+        self.navigationController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back please" style:UIBarButtonItemStylePlain target:self action:nil];
 
     }
     
@@ -71,9 +68,6 @@ static NSString const *kTerrainType = @"Terrain";
     NSForegroundColorAttributeName : [UIColor whiteColor],
     NSFontAttributeName : [UIFont fontWithName:@"AppleSDGothicNeo-Bold" size:21]
   };
-    
-//    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
-//    self.navigationItem.leftBarButtonItem =self.navigationItem.backBarButtonItem;
     
     
     [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil]
@@ -168,9 +162,6 @@ static NSString const *kTerrainType = @"Terrain";
 }
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-    
-   
-
     
     self.googleId = [[NSMutableDictionary alloc] init];
 

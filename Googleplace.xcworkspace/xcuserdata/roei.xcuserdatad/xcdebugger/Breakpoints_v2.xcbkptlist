@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Googleplace/ViewController.m"
-            timestampString = "503097911.38918"
+            timestampString = "503099978.610573"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
             landmarkName = "-mapView:didTapInfoWindowOfMarker:"
             landmarkType = "7">
          </BreakpointContent>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Googleplace/ViewController.m"
-            timestampString = "503097911.38918"
+            timestampString = "503099978.610573"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "363"
-            endingLineNumber = "363"
+            startingLineNumber = "354"
+            endingLineNumber = "354"
             landmarkName = "-resultsController:didAutocompleteWithPlace:"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Googleplace/ViewController.m"
-            timestampString = "503097911.38918"
+            timestampString = "503099978.610573"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "-backToManue:"
             landmarkType = "7">
          </BreakpointContent>

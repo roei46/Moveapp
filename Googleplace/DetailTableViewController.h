@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface DetailTableViewController : UITableViewController
 
 @property(nonatomic, strong) NSString *Address;

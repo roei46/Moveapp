@@ -11,7 +11,8 @@
 #import "DatabaseManager.h"
 #import "ServerProtocol.h"
 #import "ViewController.h"
-#import <GoogleMaps/GoogleMaps.h>
+//#import <GoogleMaps/GoogleMaps.h>
+#import <GooglePlaces/GooglePlaces.h>
 #import <Parse/Parse.h>
 #import "SessionRequest.h"
 //#import "customCell.h"

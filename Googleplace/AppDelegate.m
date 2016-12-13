@@ -14,6 +14,7 @@
 
 
 @import GoogleMaps;
+@import GooglePlaces;
 
 @interface AppDelegate ()
 
@@ -25,6 +26,8 @@
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   // Override point for customization after application launch.
   [GMSServices provideAPIKey:@"AIzaSyBW_bbdxlbwNtQOfeC8WQ519QA9nxs3A80"];
+    [GMSPlacesClient provideAPIKey:@"AIzaSyBW_bbdxlbwNtQOfeC8WQ519QA9nxs3A80"];
+
   ParseClientConfiguration *parscon = [ParseClientConfiguration
       configurationWithBlock:^(
           id<ParseMutableClientConfiguration> _Nonnull configuration) {

@@ -11,7 +11,7 @@
 #import "ServerProtocol.h"
 #import "ViewController.h"
 #import "MainViewController.h"
-#import <GoogleMaps/GoogleMaps.h>
+#import <GooglePlaces/GooglePlaces.h>
 #import <Parse/Parse.h>
 static NSString const *kNormalType = @"Normal";
 static NSString const *kSatelliteType = @"Satellite";
@@ -192,12 +192,23 @@ static NSString const *kTerrainType = @"Terrain";
   PFQuery *query = [PFQuery queryWithClassName:@"Test2"];
     [query selectKeys:@[@"googlid"]];
  
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    spinner.center = self.view.center;
+    spinner.color = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
+    [self.view addSubview:spinner];
+    [spinner startAnimating];
 
+    
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        [spinner startAnimating];
+
     if (!error) {
       NSLog(@" objects : %@", objects);
+
+
       for (NSDictionary *dic in objects) {
+
         NSString *placeID = [dic valueForKey:@"googlid"];
         _placesclient = [[GMSPlacesClient alloc] init];
 
@@ -210,6 +221,7 @@ static NSString const *kTerrainType = @"Terrain";
                      return;
                    }
                    if (place != nil) {
+                      
 
                      GMSMarker *marker = [[GMSMarker alloc] init];
                      marker.position = CLLocationCoordinate2DMake(
@@ -225,16 +237,24 @@ static NSString const *kTerrainType = @"Terrain";
                      NSLog(@"No place details for %@", placeID);
                    }
                  }];
+
       }
+        [spinner stopAnimating];
+
+
     }
       else {
         // Log details of the failure
         NSLog(@"Error: %@ %@", error, [error userInfo]);
+          [spinner stopAnimating];
+
       }
-   
-    
+
+
         
     }];
+
+
 }
 
 - (void)mapView:(GMSMapView *)mapView

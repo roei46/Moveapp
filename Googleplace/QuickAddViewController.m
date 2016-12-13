@@ -8,6 +8,7 @@
 #import "DetailTableViewController.h"
 #import "QuickAddViewController.h"
 #import <UITextView+Placeholder/UITextView+Placeholder.h>
+#import <GooglePlaces/GooglePlaces.h>
 
 #define TestTable @"https://movex.herokuapp.com/parse/classes/Test2"
 

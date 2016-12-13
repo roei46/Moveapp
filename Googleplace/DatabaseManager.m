@@ -8,7 +8,8 @@
 
 #import "AddinformationViewcontroller.h"
 #import "DatabaseManager.h"
-#import <GoogleMaps/GoogleMaps.h>
+//#import <GoogleMaps/GoogleMaps.h>
+#import <GooglePlaces/GooglePlaces.h>
 #import <Parse/Parse.h>
 @implementation DatabaseManager
 

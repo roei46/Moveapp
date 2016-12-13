@@ -12,9 +12,10 @@
 #import "DatabaseManager.h"
 #import "ServerProtocol.h"
 #import "ViewController.h"
-#import <GoogleMaps/GoogleMaps.h>
+//#import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
 #import "MainViewController.h"
+#import <GooglePlaces/GooglePlaces.h>
 
 
 @interface QuickAddViewController : UIViewController

@@ -6,9 +6,10 @@
 //  Copyright © 2016 Roei Baruch. All rights reserved.
 //
 
-#import <GoogleMaps/GoogleMaps.h>
+//#import <GoogleMaps/GoogleMaps.h>
 #import "DatabaseManager.h"
 #import "ServerProtocol.h"
+#import <GooglePlaces/GooglePlaces.h>
 
 #define TestTable @"https://movex.herokuapp.com/parse/classes/Test2"
 @interface ServerProtocol ()

@@ -49,7 +49,8 @@
   _Feedback2.placeholder = @"Please add your review here";
     [_Apartment.layer setBorderColor:[[UIColor whiteColor] CGColor]];
 
-
+    GMSPanoramaView *panoView = [[GMSPanoramaView alloc] initWithFrame:CGRectZero];
+    [panoView moveNearCoordinate:CLLocationCoordinate2DMake(-33.732, 150.312)];
 
 }
 
@@ -58,6 +59,7 @@
   [_Feedback2 resignFirstResponder];
   [_Apartment resignFirstResponder];
 }
+
 
 - (void)cancel:(id)sender {
 

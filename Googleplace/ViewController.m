@@ -201,9 +201,10 @@ static NSString const *kTerrainType = @"Terrain";
     
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        [spinner startAnimating];
 
     if (!error) {
+        [spinner stopAnimating];
+
       NSLog(@" objects : %@", objects);
 
 
@@ -250,7 +251,7 @@ static NSString const *kTerrainType = @"Terrain";
 
       }
 
-
+        
         
     }];
 

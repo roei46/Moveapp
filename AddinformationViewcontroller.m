@@ -12,11 +12,12 @@
 
 #define TestTable @"https://movex.herokuapp.com/parse/classes/Test2"
 
-@interface AddinformationViewcontroller () <UITextViewDelegate>
+@interface AddinformationViewcontroller () <UITextViewDelegate , GMSPanoramaViewDelegate>
 @property(strong, nonatomic) NSMutableString *DBid;
 @property(weak, nonatomic) IBOutlet UIImageView *streetImage;
 @property(weak, nonatomic) IBOutlet UILabel *TITLE;
 @property (weak, nonatomic) IBOutlet UIButton *upload;
+@property (weak, nonatomic) IBOutlet UIView *streetView;
 
 - (IBAction)upload:(id)sender;
 
@@ -28,7 +29,7 @@
   [super viewDidLoad];
     
     _upload.backgroundColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
-  _streetImage.image = [UIImage imageNamed:@"cover.jpeg"];
+//  _streetImage.image = [UIImage imageNamed:@"cover.jpeg"];
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.rightBarButtonItem =
       [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
@@ -48,9 +49,15 @@
 
   _Feedback2.placeholder = @"Please add your review here";
     [_Apartment.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    
+    
 
-    GMSPanoramaView *panoView = [[GMSPanoramaView alloc] initWithFrame:CGRectZero];
-    [panoView moveNearCoordinate:CLLocationCoordinate2DMake(-33.732, 150.312)];
+    GMSPanoramaView *panoView = [[GMSPanoramaView alloc] initWithFrame:self.streetView.bounds];
+    [panoView moveNearCoordinate:CLLocationCoordinate2DMake(self.coordinatats.latitude, self.coordinatats.longitude)];
+//   self.view= panoView;
+   [self.streetView addSubview:panoView];
+    NSLog(@"panID: %@" , panoView.panorama.panoramaID);
+
 
 }
 

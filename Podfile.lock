@@ -7,6 +7,7 @@ PODS:
     - GoogleMaps/Base
   - GooglePlaces (2.1.1):
     - GoogleMaps/Base (= 2.1.1)
+  - MBProgressHUD (1.0.0)
   - Parse (1.14.2):
     - Bolts/Tasks (~> 1.8)
   - UITextView+Placeholder (1.2.0)
@@ -14,6 +15,7 @@ PODS:
 DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
+  - MBProgressHUD
   - Parse
   - UITextView+Placeholder (~> 1.2)
 
@@ -21,9 +23,10 @@ SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   GoogleMaps: a5b5bbe47734e2443bde781a6aa64e69fdb6d785
   GooglePlaces: 35636d86e5020cba3856eb988c09a5491de0a65a
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
 
-PODFILE CHECKSUM: b09d6f246e9209e4dfcc11daaf7a58a43b782f81
+PODFILE CHECKSUM: bbb5eef2822da67b5ffae38c78608046119c47a8
 
 COCOAPODS: 1.1.1

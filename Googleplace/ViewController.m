@@ -13,6 +13,7 @@
 #import "MainViewController.h"
 #import <GooglePlaces/GooglePlaces.h>
 #import <Parse/Parse.h>
+#import <MBProgressHUD.h>
 static NSString const *kNormalType = @"Normal";
 static NSString const *kSatelliteType = @"Satellite";
 static NSString const *kHybridType = @"Hybrid";
@@ -47,6 +48,7 @@ static NSString const *kTerrainType = @"Terrain";
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+    
     UIBarButtonItem *backButton =[[UIBarButtonItem alloc] initWithTitle:@"Manu" style:UIBarButtonItemStylePlain target:self action:@selector(backToManue:)];
 
     if (self.didComeFromAddInformation) {
@@ -192,20 +194,26 @@ static NSString const *kTerrainType = @"Terrain";
   PFQuery *query = [PFQuery queryWithClassName:@"Test2"];
     [query selectKeys:@[@"googlid"]];
  
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    spinner.center = self.view.center;
-    spinner.color = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
-    [self.view addSubview:spinner];
-    [spinner startAnimating];
-
+//    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//    spinner.center = self.view.center;
+//    spinner.color = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
+//    [self.view addSubview:spinner];
+//    [spinner startAnimating];
+   MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+    hud.label.text = @"Loading";
+    hud.mode = MBProgressHUDAnimationFade;
+    hud.contentColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
+    hud.bezelView.color = [UIColor clearColor];
+    [self.view addSubview:hud];
     
-
+    
+    [hud showAnimated:YES];
+    
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
 
     if (!error) {
-        [spinner stopAnimating];
-
-      NSLog(@" objects : %@", objects);
+        
+        NSLog(@" objects : %@", objects);
 
 
       for (NSDictionary *dic in objects) {
@@ -222,7 +230,8 @@ static NSString const *kTerrainType = @"Terrain";
                      return;
                    }
                    if (place != nil) {
-                      
+                       [hud hideAnimated:YES];
+
 
                      GMSMarker *marker = [[GMSMarker alloc] init];
                      marker.position = CLLocationCoordinate2DMake(
@@ -240,14 +249,14 @@ static NSString const *kTerrainType = @"Terrain";
                  }];
 
       }
-        [spinner stopAnimating];
+//        [spinner stopAnimating];
 
 
     }
       else {
         // Log details of the failure
         NSLog(@"Error: %@ %@", error, [error userInfo]);
-          [spinner stopAnimating];
+//          [spinner stopAnimating];
 
       }
 
@@ -283,8 +292,8 @@ static NSString const *kTerrainType = @"Terrain";
     
   DetailTableViewController *destViewController = [self.storyboard
       instantiateViewControllerWithIdentifier:@"DetailTableViewController"];
-
-  destViewController.Address = marker.title;
+    destViewController.coordinatats = marker.position;
+    destViewController.Address = marker.title;
     NSLog(@" Taped on marker : %@", marker.title);
     NSArray*keys=[_googleId allKeys];
     NSLog(@" aLL KEYS : %@", keys);

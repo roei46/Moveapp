@@ -11,7 +11,7 @@
 #import "DatabaseManager.h"
 #import "ServerProtocol.h"
 #import "ViewController.h"
-//#import <GoogleMaps/GoogleMaps.h>
+#import <MBProgressHUD.h>
 #import <GooglePlaces/GooglePlaces.h>
 #import <Parse/Parse.h>
 #import "SessionRequest.h"
@@ -42,7 +42,7 @@ UITableViewDataSource >
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.tableView.contentInset = UIEdgeInsetsMake(5, 0, 0, 0);
 
    
@@ -86,11 +86,22 @@ UITableViewDataSource >
     [super viewWillAppear:animated];
     NSLog(@"App result: %@", self.gId);
     SessionRequest *session = [[SessionRequest alloc]init];
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+    hud.label.text = @"Loading";
+    hud.mode = MBProgressHUDAnimationFade;
+    hud.contentColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
+    hud.bezelView.color = [UIColor clearColor];
+    [self.view addSubview:hud];
+    
+    
+    [hud showAnimated:YES];
     
   [session DataTask:^(BOOL ok) {
+
       
       if (ok) {
           {
+
               NSError *e = nil;
 
               NSDictionary *result =
@@ -117,18 +128,21 @@ UITableViewDataSource >
                       NSLog(@" sortd :%@", self.arrHeader );
                       
                       dispatch_async(dispatch_get_main_queue(), ^{
+                          
                           self.tempAppResult = [[NSMutableDictionary alloc] init];
                           [self.appResult enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-                              
+
                               [self.tempAppResult setValue:[[NSArray alloc] init] forKey:key] ;
                           }];
-                          
+                          [hud hideAnimated:YES];
+
                           [self.tableView reloadData];
                           NSLog(@"App result: %@", self.appResult);
                           NSLog(@"Temp App result: %@", self.tempAppResult);
                       });
-                      
+
                       break;
+
                   }
               }
           }
@@ -352,6 +366,7 @@ willDisplayHeaderView:(UIView *)view
     destViewController.googleIdTblview = _gId;
     destViewController.Address = _Address;
     destViewController.working = NO;
+    destViewController.coordinatats = self.coordinatats;
     
     [self.navigationController pushViewController:destViewController
                                          animated:YES];

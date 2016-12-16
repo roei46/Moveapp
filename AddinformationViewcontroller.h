@@ -22,6 +22,8 @@
 @property(strong, nonatomic) IBOutlet UITextField *Feedback;
 @property(weak, nonatomic) IBOutlet UITextView *Feedback2;
 @property(nonatomic, strong) NSString *googleIdTblview;
+@property(nonatomic, readwrite) CLLocationCoordinate2D coordinatats;
+
 
 @property(nonatomic, assign) BOOL working;
 

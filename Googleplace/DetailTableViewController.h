@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <GooglePlaces/GooglePlaces.h>
 
 @interface DetailTableViewController : UITableViewController
 
 @property(nonatomic, strong) NSString *Address;
 @property(nonatomic, strong) NSString *gId;
+@property(nonatomic, readwrite) CLLocationCoordinate2D coordinatats;
+
 
 
 

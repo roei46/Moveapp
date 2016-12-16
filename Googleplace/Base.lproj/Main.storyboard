@@ -23,13 +23,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qjo-Xl-4dn">
-                                <rect key="frame" x="156" y="70" width="63" height="20.5"/>
+                                <rect key="frame" x="156" y="70" width="63" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="agf-Cs-p5u">
-                                <rect key="frame" x="10" y="170.5" width="355" height="405.5"/>
+                                <rect key="frame" x="10" y="171" width="355" height="405"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="ncL-Av-1rh"/>
@@ -38,7 +38,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder=" Apartment number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KDo-Hl-q0e">
-                                <rect key="frame" x="10" y="110.5" width="355" height="30"/>
+                                <rect key="frame" x="10" y="111" width="355" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="fls-Mi-nOf"/>
@@ -87,7 +87,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ajA-X5-3zn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1594.4527736131936" y="324"/>
+            <point key="canvasLocation" x="894" y="419"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="5XR-NN-qQv">
@@ -249,10 +249,10 @@
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="3e4-Js-w4Q">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3e4-Js-w4Q" id="52B-Vr-LpN">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -270,7 +270,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HUa-Jx-qAG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2091.4542728635683" y="8"/>
+            <point key="canvasLocation" x="468" y="-176"/>
         </scene>
         <!--Addinformation Viewcontroller-->
         <scene sceneID="sFe-EO-Q8w">
@@ -329,6 +329,11 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PVA-dL-am0">
+                                <rect key="frame" x="0.0" y="449" width="365" height="218"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="2Im-Uo-xwT" firstAttribute="leading" secondItem="elN-Bt-GkD" secondAttribute="leading" id="29d-Kq-m7w"/>
@@ -361,6 +366,7 @@
                         <outlet property="Feedback2" destination="wKo-y0-EED" id="BPO-Lr-VfH"/>
                         <outlet property="TITLE" destination="vFu-Gy-zSE" id="lj1-PF-yKh"/>
                         <outlet property="streetImage" destination="2Im-Uo-xwT" id="9ml-hk-a6q"/>
+                        <outlet property="streetView" destination="PVA-dL-am0" id="rBs-yr-0ud"/>
                         <outlet property="upload" destination="bOc-FF-ReS" id="hys-gh-Xxt"/>
                     </connections>
                 </viewController>

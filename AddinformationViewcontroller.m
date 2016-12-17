@@ -54,7 +54,9 @@
 
     GMSPanoramaView *panoView = [[GMSPanoramaView alloc] initWithFrame:self.streetView.bounds];
     [panoView moveNearCoordinate:CLLocationCoordinate2DMake(self.coordinatats.latitude, self.coordinatats.longitude)];
-//   self.view= panoView;
+    panoView.delegate = self;
+
+//   self.streetView.frame= panoView.frame;
    [self.streetView addSubview:panoView];
     NSLog(@"panID: %@" , panoView.panorama.panoramaID);
 

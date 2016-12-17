@@ -285,7 +285,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wKo-y0-EED">
-                                <rect key="frame" x="6" y="174" width="359" height="185"/>
+                                <rect key="frame" x="16" y="174" width="343" height="185"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="185" id="paK-mb-8Xy">
@@ -295,9 +295,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Im-Uo-xwT">
-                                <rect key="frame" x="0.0" y="375" width="663" height="0.0"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOc-FF-ReS">
                                 <rect key="frame" x="0.0" y="371" width="375" height="36"/>
                                 <color key="backgroundColor" red="0.19448390408544614" green="0.52347997314529948" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -316,7 +313,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder=" Apartment number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XVP-Vi-an5">
-                                <rect key="frame" x="6" y="130" width="359" height="27"/>
+                                <rect key="frame" x="16" y="130" width="343" height="27"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="yhg-5g-U8H"/>
@@ -329,33 +326,30 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PVA-dL-am0">
-                                <rect key="frame" x="5" y="165" width="365" height="234"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PVA-dL-am0" customClass="GMSPanoramaView">
+                                <rect key="frame" x="3" y="415" width="365" height="127"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="2Im-Uo-xwT" firstAttribute="leading" secondItem="elN-Bt-GkD" secondAttribute="leading" id="29d-Kq-m7w"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="2Im-Uo-xwT" secondAttribute="trailing" constant="-16" id="3nS-Gg-alv"/>
+                            <constraint firstItem="fOf-hj-N65" firstAttribute="top" secondItem="PVA-dL-am0" secondAttribute="bottom" id="6t4-8a-it4"/>
+                            <constraint firstItem="PVA-dL-am0" firstAttribute="top" secondItem="bOc-FF-ReS" secondAttribute="bottom" id="8Td-il-dzd"/>
                             <constraint firstItem="vFu-Gy-zSE" firstAttribute="leading" secondItem="elN-Bt-GkD" secondAttribute="leading" constant="20" symbolic="YES" id="DeC-Jt-Xgk"/>
+                            <constraint firstItem="XVP-Vi-an5" firstAttribute="leading" secondItem="elN-Bt-GkD" secondAttribute="leadingMargin" id="FWd-eM-90D"/>
                             <constraint firstItem="bOc-FF-ReS" firstAttribute="top" secondItem="wKo-y0-EED" secondAttribute="bottom" constant="12" id="Gal-2l-waO"/>
-                            <constraint firstItem="2Im-Uo-xwT" firstAttribute="top" secondItem="wKo-y0-EED" secondAttribute="bottom" constant="48" id="NLD-RY-lqG"/>
                             <constraint firstItem="vFu-Gy-zSE" firstAttribute="top" secondItem="eKt-M5-8cF" secondAttribute="bottom" constant="38" id="R2Q-Po-D4x"/>
                             <constraint firstItem="wKo-y0-EED" firstAttribute="top" secondItem="XVP-Vi-an5" secondAttribute="bottom" constant="17" id="R60-0J-PDt"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="wKo-y0-EED" secondAttribute="trailing" constant="-6" id="SAd-VE-hFh"/>
-                            <constraint firstItem="XVP-Vi-an5" firstAttribute="leading" secondItem="2Im-Uo-xwT" secondAttribute="leading" constant="6" id="YEr-Cp-Dp7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wKo-y0-EED" secondAttribute="trailing" id="SAd-VE-hFh"/>
+                            <constraint firstItem="PVA-dL-am0" firstAttribute="leading" secondItem="elN-Bt-GkD" secondAttribute="leading" id="SKT-g9-NSk"/>
                             <constraint firstItem="wKo-y0-EED" firstAttribute="leading" secondItem="XVP-Vi-an5" secondAttribute="leading" id="a8C-yv-HLY"/>
-                            <constraint firstItem="2Im-Uo-xwT" firstAttribute="top" secondItem="eKt-M5-8cF" secondAttribute="bottom" constant="387" id="cfU-oe-3mr"/>
                             <constraint firstItem="bOc-FF-ReS" firstAttribute="leading" secondItem="elN-Bt-GkD" secondAttribute="leading" id="dFO-lG-lm7"/>
                             <constraint firstAttribute="trailing" secondItem="vFu-Gy-zSE" secondAttribute="trailing" constant="20" symbolic="YES" id="g9Q-NI-qpy"/>
                             <constraint firstItem="vFu-Gy-zSE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eKt-M5-8cF" secondAttribute="bottom" constant="20" id="hJx-3v-Vaa">
                                 <variation key="heightClass=compact-widthClass=compact" constant="10"/>
                             </constraint>
-                            <constraint firstItem="2Im-Uo-xwT" firstAttribute="top" relation="lessThanOrEqual" secondItem="bOc-FF-ReS" secondAttribute="bottom" constant="10" id="mmC-Kl-Dv6"/>
                             <constraint firstAttribute="trailing" secondItem="bOc-FF-ReS" secondAttribute="trailing" id="nDb-Qk-4xH"/>
-                            <constraint firstItem="fOf-hj-N65" firstAttribute="top" secondItem="2Im-Uo-xwT" secondAttribute="bottom" id="nZG-ba-LEO"/>
                             <constraint firstItem="wKo-y0-EED" firstAttribute="trailing" secondItem="XVP-Vi-an5" secondAttribute="trailing" id="v0V-PA-Wtt"/>
+                            <constraint firstAttribute="trailing" secondItem="PVA-dL-am0" secondAttribute="trailing" id="vz5-pk-nLY"/>
                             <constraint firstItem="XVP-Vi-an5" firstAttribute="top" secondItem="vFu-Gy-zSE" secondAttribute="bottom" constant="44" id="wY1-iR-lDU">
                                 <variation key="heightClass=compact-widthClass=compact" constant="34"/>
                             </constraint>
@@ -365,7 +359,6 @@
                         <outlet property="Apartment" destination="XVP-Vi-an5" id="waA-94-G5c"/>
                         <outlet property="Feedback2" destination="wKo-y0-EED" id="BPO-Lr-VfH"/>
                         <outlet property="TITLE" destination="vFu-Gy-zSE" id="lj1-PF-yKh"/>
-                        <outlet property="streetImage" destination="2Im-Uo-xwT" id="9ml-hk-a6q"/>
                         <outlet property="streetView" destination="PVA-dL-am0" id="rBs-yr-0ud"/>
                         <outlet property="upload" destination="bOc-FF-ReS" id="hys-gh-Xxt"/>
                     </connections>
@@ -373,6 +366,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u6o-xH-Ggu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1172" y="-826.23688155922048"/>
+        </scene>
+        <!--Street View Controller-->
+        <scene sceneID="gPh-6f-gaK">
+            <objects>
+                <viewController storyboardIdentifier="StreetViewController" id="fti-FZ-KAx" customClass="StreetViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qWW-8m-8jl"/>
+                        <viewControllerLayoutGuide type="bottom" id="Mtn-oo-Sls"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="i4d-qo-oPd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lth-PB-dTW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1883" y="-807"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="a7e-bp-gEz">

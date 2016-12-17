@@ -7,6 +7,7 @@
 //
 #import "DetailTableViewController.h"
 #import "AddinformationViewcontroller.h"
+#import "StreetViewController.h"
 #import <UITextView+Placeholder/UITextView+Placeholder.h>
 #import <GooglePlaces/GooglePlaces.h>
 
@@ -60,6 +61,18 @@
    [self.streetView addSubview:panoView];
     NSLog(@"panID: %@" , panoView.panorama.panoramaID);
 
+
+}
+
+- (void)panoramaView:(GMSPanoramaView *)panoramaView didTap:(CGPoint)point{
+    StreetViewController *destViewController = [self.storyboard
+                                                     instantiateViewControllerWithIdentifier:@"StreetViewController"];
+    
+    destViewController.coordinatats = self.coordinatats;
+    
+
+    [self.navigationController pushViewController:destViewController
+                                         animated:YES];
 
 }
 

@@ -29,6 +29,7 @@
 		C48321571D6DDEBC00008B32 /* cover.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C48321561D6DDEBC00008B32 /* cover.jpeg */; };
 		C4A4EFB51DE4E9B000B38245 /* SessionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A4EFB41DE4E9AF00B38245 /* SessionRequest.m */; };
 		C4D703721DBFEEAB0078B0B6 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4D703711DBFEEAB0078B0B6 /* MessageUI.framework */; };
+		C4DDD22C1E05BB9D00C940FC /* StreetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DDD22B1E05BB9D00C940FC /* StreetViewController.m */; };
 		C4F14E081D554348003F182F /* AddinformationViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = C4F14E071D554348003F182F /* AddinformationViewcontroller.m */; };
 		C4F4EDCF1D9AC32C0035B067 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F4EDCD1D9AC32C0035B067 /* Fabric.framework */; };
 		C4F4EDD01D9AC32C0035B067 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F4EDCE1D9AC32C0035B067 /* Crashlytics.framework */; };
@@ -90,6 +91,8 @@
 		C4A4EFB31DE4E9AF00B38245 /* SessionRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionRequest.h; path = ../SessionRequest.h; sourceTree = "<group>"; };
 		C4A4EFB41DE4E9AF00B38245 /* SessionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionRequest.m; path = ../SessionRequest.m; sourceTree = "<group>"; };
 		C4D703711DBFEEAB0078B0B6 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		C4DDD22A1E05BB9D00C940FC /* StreetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreetViewController.h; path = ../StreetViewController.h; sourceTree = "<group>"; };
+		C4DDD22B1E05BB9D00C940FC /* StreetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StreetViewController.m; path = ../StreetViewController.m; sourceTree = "<group>"; };
 		C4F14E061D554348003F182F /* AddinformationViewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddinformationViewcontroller.h; path = ../AddinformationViewcontroller.h; sourceTree = "<group>"; };
 		C4F14E071D554348003F182F /* AddinformationViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddinformationViewcontroller.m; path = ../AddinformationViewcontroller.m; sourceTree = "<group>"; };
 		C4F4EDCD1D9AC32C0035B067 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
@@ -176,6 +179,8 @@
 				C435CDC21D4691F6002F9095 /* LaunchScreen.storyboard */,
 				C4F14E061D554348003F182F /* AddinformationViewcontroller.h */,
 				C4F14E071D554348003F182F /* AddinformationViewcontroller.m */,
+				C4DDD22A1E05BB9D00C940FC /* StreetViewController.h */,
+				C4DDD22B1E05BB9D00C940FC /* StreetViewController.m */,
 				C435CDB51D4691F6002F9095 /* main.m */,
 				C437F68D1D51272600FAC6D2 /* ServerProtocol.h */,
 				C437F68E1D51272600FAC6D2 /* ServerProtocol.m */,
@@ -438,6 +443,7 @@
 				C4031EC21D89FE6D003C8033 /* DetailTableViewController.m in Sources */,
 				C437F68F1D51272600FAC6D2 /* ServerProtocol.m in Sources */,
 				C435CDBC1D4691F6002F9095 /* ViewController.m in Sources */,
+				C4DDD22C1E05BB9D00C940FC /* StreetViewController.m in Sources */,
 				C4F14E081D554348003F182F /* AddinformationViewcontroller.m in Sources */,
 				C435CDB91D4691F6002F9095 /* AppDelegate.m in Sources */,
 				C437F6921D5127F500FAC6D2 /* DatabaseManager.m in Sources */,

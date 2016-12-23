@@ -10,5 +10,7 @@ pod 'GooglePlaces'
 pod ‘Parse’
 pod 'UITextView+Placeholder', '~> 1.2'
 pod 'MBProgressHUD'
+pod 'IQKeyboardManager'
+
 
 end

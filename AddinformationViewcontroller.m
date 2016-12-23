@@ -15,10 +15,13 @@
 
 @interface AddinformationViewcontroller () <UITextViewDelegate , GMSPanoramaViewDelegate>
 @property(strong, nonatomic) NSMutableString *DBid;
-@property(weak, nonatomic) IBOutlet UIImageView *streetImage;
+//@property(weak, nonatomic) IBOutlet UIImageView *streetImage;
 @property(weak, nonatomic) IBOutlet UILabel *TITLE;
 @property (weak, nonatomic) IBOutlet UIButton *upload;
-@property (weak, nonatomic) IBOutlet UIView *streetView;
+@property (weak, nonatomic)  UIView *streetView;
+//@property(strong, nonatomic) GMSPanoramaView *panoView;
+@property (retain, nonatomic) IBOutlet GMSPanoramaView *gmsView;
+
 
 - (IBAction)upload:(id)sender;
 
@@ -30,7 +33,7 @@
   [super viewDidLoad];
     
     _upload.backgroundColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
-//  _streetImage.image = [UIImage imageNamed:@"cover.jpeg"];
+//    self.streetImage.image = [UIImage imageNamed:@"cover.jpeg"];
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.rightBarButtonItem =
       [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
@@ -52,16 +55,50 @@
     [_Apartment.layer setBorderColor:[[UIColor whiteColor] CGColor]];
     
     
+    self.gmsView.delegate = self;
+    [self.gmsView moveNearCoordinate:CLLocationCoordinate2DMake(self.coordinatats.latitude, self.coordinatats.longitude)];
+    self.gmsView.streetNamesHidden = true;
+    self.gmsView.navigationLinksHidden = true;
 
-    GMSPanoramaView *panoView = [[GMSPanoramaView alloc] initWithFrame:self.streetView.bounds];
-    [panoView moveNearCoordinate:CLLocationCoordinate2DMake(self.coordinatats.latitude, self.coordinatats.longitude)];
-    panoView.delegate = self;
+    
+    
+    
+    
+//     self.panoView = [[GMSPanoramaView alloc] initWithFrame:self.streetView.bounds];
+//    [self.panoView moveNearCoordinate:CLLocationCoordinate2DMake(self.coordinatats.latitude, self.coordinatats.longitude)];
+////    self.panoView.center = self.streetView.center;
+//    self.panoView.delegate = self;
+//    self.panoView.streetNamesHidden = true;
 
-//   self.streetView.frame= panoView.frame;
-   [self.streetView addSubview:panoView];
-    NSLog(@"panID: %@" , panoView.panorama.panoramaID);
+    
+//   [self.view addSubview:self.streetView];
+//    [self.streetView addSubview:self.panoView];
 
 
+}
+- (void) panoramaView:(GMSPanoramaView *)view didMoveToPanorama:(GMSPanorama *)panorama {
+    
+    NSLog(@"panID: %@" , panorama.panoramaID);
+    if (panorama.panoramaID == NULL) {
+        NSLog(@"null: %@" , panorama.panoramaID);
+
+    }
+
+}
+
+- (void) panoramaView:(GMSPanoramaView *)view error:(nonnull NSError *)error onMoveNearCoordinate:(CLLocationCoordinate2D)coordinate {
+    if (error) {
+        
+        [self.gmsView removeFromSuperview];
+        
+
+        
+        NSLog(@"error: %@" , error);
+
+    }
+    
+    
+    
 }
 
 - (void)panoramaView:(GMSPanoramaView *)panoramaView didTap:(CGPoint)point{

@@ -10,6 +10,7 @@
 #import "StreetViewController.h"
 #import <UITextView+Placeholder/UITextView+Placeholder.h>
 #import <GooglePlaces/GooglePlaces.h>
+#import <IQKeyboardManager.h>
 
 #define TestTable @"https://movex.herokuapp.com/parse/classes/Test2"
 
@@ -31,6 +32,9 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+    
+    [[IQKeyboardManager sharedManager] isEnabled];
+
     
     _upload.backgroundColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
 //    self.streetImage.image = [UIImage imageNamed:@"cover.jpeg"];
@@ -60,19 +64,6 @@
     self.gmsView.streetNamesHidden = true;
     self.gmsView.navigationLinksHidden = true;
 
-    
-    
-    
-    
-//     self.panoView = [[GMSPanoramaView alloc] initWithFrame:self.streetView.bounds];
-//    [self.panoView moveNearCoordinate:CLLocationCoordinate2DMake(self.coordinatats.latitude, self.coordinatats.longitude)];
-////    self.panoView.center = self.streetView.center;
-//    self.panoView.delegate = self;
-//    self.panoView.streetNamesHidden = true;
-
-    
-//   [self.view addSubview:self.streetView];
-//    [self.streetView addSubview:self.panoView];
 
 
 }

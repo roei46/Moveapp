@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GooglePlaces/GooglePlaces.h>
 
-@interface ViewController : UIViewController
+
+@interface ViewController : UIViewController<CLLocationManagerDelegate>
 @property (assign, nonatomic)BOOL didComeFromAddInformation;
+@property(nonatomic, readwrite) CLLocationCoordinate2D coordinatats;
 
 
 @end

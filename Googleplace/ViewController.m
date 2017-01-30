@@ -42,6 +42,7 @@ static NSString const *kTerrainType = @"Terrain";
 
 
 
+
 @end
 
 @implementation ViewController
@@ -49,15 +50,20 @@ static NSString const *kTerrainType = @"Terrain";
 - (void)viewDidLoad {
   [super viewDidLoad];
     
-    UIBarButtonItem *backButton =[[UIBarButtonItem alloc] initWithTitle:@"Manu" style:UIBarButtonItemStylePlain target:self action:@selector(backToManue:)];
+//    UIBarButtonItem *backButton =[[UIBarButtonItem alloc] initWithTitle:@"Manu" style:UIBarButtonItemStylePlain target:self action:@selector(backToManue:)];
+    self.navigationItem.leftBarButtonItem =
+    [[UIBarButtonItem alloc] initWithTitle:@"Manu"
+                                     style:UIBarButtonItemStylePlain
+                                    target:self
+                                    action:@selector(backToManue:)];
 
-    if (self.didComeFromAddInformation) {
-        self.navigationItem.leftBarButtonItem = backButton;
-    }
-    else{
+//    if (self.didComeFromAddInformation) {
+//        self.navigationItem.leftBarButtonItem = backButton;
+//    }
+//    else{
         self.navigationController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back please" style:UIBarButtonItemStylePlain target:self action:nil];
 
-    }
+//    }
     
     self.markersOnTheMap = [NSMutableArray new]; //Instantiate and allocate memory for the first time
 
@@ -140,51 +146,68 @@ static NSString const *kTerrainType = @"Terrain";
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    
-    
         if ( status == kCLAuthorizationStatusAuthorizedWhenInUse) {
-            
-        [manager startUpdatingLocation];
-      
-            
-            
+            [manager startUpdatingLocation];
     }
 }
 
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
-    
-    GMSCameraPosition *camera = [GMSCameraPosition
-                                 cameraWithLatitude:self.locationManager.location.coordinate.latitude
-                                 longitude:self.locationManager.location.coordinate.longitude
-                                 zoom:10];
-    self.mapview.camera = camera;
-    
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)locations{
     [manager stopUpdatingLocation];
+    manager.delegate = nil;
+    CLLocation *newLocation =[[CLLocation alloc]initWithLatitude:self.coordinatats.latitude longitude:self.coordinatats.latitude];
+    double latitude1 = self.coordinatats.latitude;
+    double longitude1 =self.coordinatats.longitude;
+    NSLog(@"didUpdateLocations!!! %@", newLocation);
+    NSLog(@"firsloc!!! %@", locations.firstObject);
+    NSLog(@"last!!! %@", locations.lastObject);
+
     
+    if (latitude1 == 0 && longitude1 == 0) {
+        
+        GMSCameraPosition *camera = [GMSCameraPosition
+                                     cameraWithLatitude:self.locationManager.location.coordinate.latitude
+                                     longitude:self.locationManager.location.coordinate.longitude
+                                     zoom:10];
+        self.mapview.camera = camera;
+        
+
+    }else{
+        NSLog(@"else!!! %f", self.coordinatats.latitude);
+
+        GMSCameraPosition *camera = [GMSCameraPosition
+                                     cameraWithLatitude:self.coordinatats.latitude                                     longitude:self.coordinatats.longitude
+                                     zoom:10];
+        self.mapview.camera = camera;
+
+
+    }
+
+    [manager stopUpdatingLocation];
+
+
+
 }
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
     
     self.googleId = [[NSMutableDictionary alloc] init];
-
+    _mapview.myLocationEnabled = YES;
     
-    
-    
-  _mapview.myLocationEnabled = YES;
-    self.locationManager.delegate = self;
+    if ([CLLocationManager locationServicesEnabled]) {
     [self.locationManager requestWhenInUseAuthorization];
     self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-
-  self.locationManager.distanceFilter = kCLDistanceFilterNone;
-  self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-  [self.locationManager startUpdatingLocation];
-
+        [self.locationManager setDelegate:self];
+    self.locationManager.distanceFilter = kCLDistanceFilterNone;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+    [self.locationManager startUpdatingLocation];
+    }
   GMSCameraPosition *camera = [GMSCameraPosition
-      cameraWithLatitude:self.locationManager.location.coordinate.latitude
-               longitude:self.locationManager.location.coordinate.longitude
+      cameraWithLatitude:self.coordinatats.latitude
+               longitude:self.coordinatats.longitude
                     zoom:10];
   self.mapview.camera = camera;
+
+    NSLog(@"Current coor : %f" , self.coordinatats.latitude);
   self.mapview.padding = UIEdgeInsetsMake(0, 0, 15, 0);
 
   [self.mapview addSubview:_infoLabel];
@@ -279,6 +302,8 @@ static NSString const *kTerrainType = @"Terrain";
   _infoLabel.text = marker.title;
     _infoLabel.textColor =[UIColor whiteColor];
     _infoLabel.backgroundColor =[UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
+    self.coordinatats = marker.position;
+
 
   return YES;
 }
@@ -292,8 +317,11 @@ static NSString const *kTerrainType = @"Terrain";
     
   DetailTableViewController *destViewController = [self.storyboard
       instantiateViewControllerWithIdentifier:@"DetailTableViewController"];
+    self.coordinatats = marker.position;
     destViewController.coordinatats = marker.position;
     destViewController.Address = marker.title;
+    NSLog(@" marker pos : %f", marker.position.latitude);
+
     NSLog(@" Taped on marker : %@", marker.title);
     NSArray*keys=[_googleId allKeys];
     NSLog(@" aLL KEYS : %@", keys);
@@ -380,6 +408,8 @@ static NSString const *kTerrainType = @"Terrain";
                                   [self.storyboard
                                       instantiateViewControllerWithIdentifier:
                                           @"AddinformationViewcontroller"];
+                                destViewController.coordinatats = place.coordinate;
+
                               destViewController.Address = place.name;
                               destViewController.googleIdTblview = place.placeID;
                               destViewController.working = YES;

@@ -16,7 +16,7 @@
 
 @interface AddinformationViewcontroller () <UITextViewDelegate , GMSPanoramaViewDelegate>
 @property(strong, nonatomic) NSMutableString *DBid;
-//@property(weak, nonatomic) IBOutlet UIImageView *streetImage;
+@property(weak, nonatomic) IBOutlet UIImageView *streetImage;
 @property(weak, nonatomic) IBOutlet UILabel *TITLE;
 @property (weak, nonatomic) IBOutlet UIButton *upload;
 @property (weak, nonatomic)  UIView *streetView;
@@ -37,7 +37,6 @@
 
     
     _upload.backgroundColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
-//    self.streetImage.image = [UIImage imageNamed:@"cover.jpeg"];
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.rightBarButtonItem =
       [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
@@ -80,8 +79,8 @@
 - (void) panoramaView:(GMSPanoramaView *)view error:(nonnull NSError *)error onMoveNearCoordinate:(CLLocationCoordinate2D)coordinate {
     if (error) {
         
-        [self.gmsView removeFromSuperview];
-        
+//        [self.gmsView removeFromSuperview];
+            self.streetImage.image = [UIImage imageNamed:@"cover.jpeg"];
 
         
         NSLog(@"error: %@" , error);

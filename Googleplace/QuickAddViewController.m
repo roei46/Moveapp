@@ -277,7 +277,7 @@ forSearchBarIcon:(UISearchBarIcon)icon
                     [UIAlertAction actionWithTitle:@"yes"
                                              style:UIAlertActionStyleDefault
                                            handler:^(UIAlertAction *action) {
-
+                                               
                                              _Address = place.name;
                                              _googleId = place.placeID;
                                              _working = YES;

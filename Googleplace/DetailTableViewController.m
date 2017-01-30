@@ -69,9 +69,8 @@ UITableViewDataSource >
     [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"add.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                                      style:UIBarButtonItemStylePlain target:self action:@selector(addInfo:)];
     
-    
-    self.navigationItem.backBarButtonItem =
-    [[UIBarButtonItem alloc] initWithTitle:@""
+    self.navigationItem.leftBarButtonItem =
+    [[UIBarButtonItem alloc] initWithTitle:@"Map"
                                      style:UIBarButtonItemStylePlain
                                     target:self
                                     action:@selector(back:)];
@@ -345,14 +344,18 @@ willDisplayHeaderView:(UIView *)view
 
 - (void)back:(id)sender {
     
-    self._mapView.selectedMarker = nil;
+//    self._mapView.selectedMarker = nil;
+//    
+//    AddinformationViewcontroller *destViewController = [self.storyboard
+//                                                        instantiateViewControllerWithIdentifier:@"AddinformationViewcontroller"];
+//    
+//    destViewController.Address = _Address;
+//    destViewController.working = NO;
     
-    AddinformationViewcontroller *destViewController = [self.storyboard
-                                                        instantiateViewControllerWithIdentifier:@"AddinformationViewcontroller"];
-    
-    destViewController.Address = _Address;
-    destViewController.working = NO;
-    
+    ViewController *destViewController = [self.storyboard
+                                                                                                                instantiateViewControllerWithIdentifier:@"ViewController"];
+
+    destViewController.coordinatats = self.coordinatats;
     [self.navigationController pushViewController:destViewController
                                          animated:YES];
 }

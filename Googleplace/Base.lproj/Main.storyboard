@@ -330,6 +330,9 @@
                                 <rect key="frame" x="3" y="415" width="365" height="127"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hWN-jE-OAX">
+                                <rect key="frame" x="0.0" y="407" width="375" height="260"/>
+                            </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="fOf-hj-N65" firstAttribute="top" secondItem="PVA-dL-am0" secondAttribute="bottom" id="6t4-8a-it4"/>
@@ -341,13 +344,17 @@
                             <constraint firstItem="wKo-y0-EED" firstAttribute="top" secondItem="XVP-Vi-an5" secondAttribute="bottom" constant="17" id="R60-0J-PDt"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wKo-y0-EED" secondAttribute="trailing" id="SAd-VE-hFh"/>
                             <constraint firstItem="PVA-dL-am0" firstAttribute="leading" secondItem="elN-Bt-GkD" secondAttribute="leading" id="SKT-g9-NSk"/>
+                            <constraint firstItem="hWN-jE-OAX" firstAttribute="top" secondItem="bOc-FF-ReS" secondAttribute="bottom" id="Wxx-Pm-Um9"/>
                             <constraint firstItem="wKo-y0-EED" firstAttribute="leading" secondItem="XVP-Vi-an5" secondAttribute="leading" id="a8C-yv-HLY"/>
                             <constraint firstItem="bOc-FF-ReS" firstAttribute="leading" secondItem="elN-Bt-GkD" secondAttribute="leading" id="dFO-lG-lm7"/>
                             <constraint firstAttribute="trailing" secondItem="vFu-Gy-zSE" secondAttribute="trailing" constant="20" symbolic="YES" id="g9Q-NI-qpy"/>
+                            <constraint firstItem="hWN-jE-OAX" firstAttribute="leading" secondItem="elN-Bt-GkD" secondAttribute="leading" id="gA8-lg-vEg"/>
                             <constraint firstItem="vFu-Gy-zSE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eKt-M5-8cF" secondAttribute="bottom" constant="20" id="hJx-3v-Vaa">
                                 <variation key="heightClass=compact-widthClass=compact" constant="10"/>
                             </constraint>
                             <constraint firstAttribute="trailing" secondItem="bOc-FF-ReS" secondAttribute="trailing" id="nDb-Qk-4xH"/>
+                            <constraint firstAttribute="trailing" secondItem="hWN-jE-OAX" secondAttribute="trailing" id="pGa-Xs-5kW"/>
+                            <constraint firstItem="fOf-hj-N65" firstAttribute="top" secondItem="hWN-jE-OAX" secondAttribute="bottom" id="tjW-TG-Zii"/>
                             <constraint firstItem="wKo-y0-EED" firstAttribute="trailing" secondItem="XVP-Vi-an5" secondAttribute="trailing" id="v0V-PA-Wtt"/>
                             <constraint firstAttribute="trailing" secondItem="PVA-dL-am0" secondAttribute="trailing" id="vz5-pk-nLY"/>
                             <constraint firstItem="XVP-Vi-an5" firstAttribute="top" secondItem="vFu-Gy-zSE" secondAttribute="bottom" constant="44" id="wY1-iR-lDU">
@@ -360,6 +367,7 @@
                         <outlet property="Feedback2" destination="wKo-y0-EED" id="BPO-Lr-VfH"/>
                         <outlet property="TITLE" destination="vFu-Gy-zSE" id="lj1-PF-yKh"/>
                         <outlet property="gmsView" destination="PVA-dL-am0" id="gNW-qp-gpr"/>
+                        <outlet property="streetImage" destination="hWN-jE-OAX" id="tWk-tD-Sey"/>
                         <outlet property="streetView" destination="PVA-dL-am0" id="rBs-yr-0ud"/>
                         <outlet property="upload" destination="bOc-FF-ReS" id="hys-gh-Xxt"/>
                     </connections>
@@ -391,7 +399,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Y3G-Vp-C0B" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="U15-SY-TtX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="U15-SY-TtX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

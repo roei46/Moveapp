@@ -67,9 +67,9 @@ static NSString const *kTerrainType = @"Terrain";
     
     self.markersOnTheMap = [NSMutableArray new]; //Instantiate and allocate memory for the first time
 
-  _showSegmant = YES;
+    self.showSegmant = YES;
 
-  self.navigationController.navigationBar.barTintColor =
+    self.navigationController.navigationBar.barTintColor =
     [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
     
     self.navigationController.navigationBar.titleTextAttributes = @{
@@ -94,36 +94,32 @@ static NSString const *kTerrainType = @"Terrain";
       UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight;
 
 
-  __acViewController = [[GMSAutocompleteResultsViewController alloc] init];
-  __acViewController.delegate = self;
+  self._acViewController = [[GMSAutocompleteResultsViewController alloc] init];
+  self._acViewController.delegate = self;
 
-  _searchController = [[UISearchController alloc]
+  self.searchController = [[UISearchController alloc]
       initWithSearchResultsController:__acViewController];
-
-  _searchController.hidesNavigationBarDuringPresentation = YES;
-  _searchController.dimsBackgroundDuringPresentation = YES;
-
-  _searchController.searchBar.autoresizingMask =
+  self.searchController.hidesNavigationBarDuringPresentation = YES;
+  self.searchController.dimsBackgroundDuringPresentation = YES;
+  self.searchController.searchBar.autoresizingMask =
       UIViewAutoresizingFlexibleWidth;
-  _searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
+  self.searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
+  self.searchController.searchBar.placeholder = @"Search your address";
+    self.searchController.delegate =self;
 
-  _searchController.searchBar.placeholder = @"Search your address";
-    
-    _searchController.delegate =self;
-
-  [_searchController.searchBar sizeToFit];
+  [self.searchController.searchBar sizeToFit];
   self.definesPresentationContext = YES;
-  _searchController.searchResultsUpdater = __acViewController;
+  self.searchController.searchResultsUpdater = self._acViewController;
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    _searchController.modalPresentationStyle = UIModalPresentationPopover;
+    self.searchController.modalPresentationStyle = UIModalPresentationPopover;
   } else {
-    _searchController.modalPresentationStyle = UIModalPresentationFullScreen;
+    self.searchController.modalPresentationStyle = UIModalPresentationFullScreen;
   }
   self.definesPresentationContext = YES;
   [self.view addSubview:_searchController.searchBar];
-  _mapview.delegate = self;
-  _mapview.settings.compassButton = YES;
-  _mapview.settings.myLocationButton = YES;
+  self.mapview.delegate = self;
+  self.mapview.settings.compassButton = YES;
+  self.mapview.settings.myLocationButton = YES;
     
     
     UITextField *searchField = [_searchController.searchBar valueForKey:@"_searchField"];
@@ -196,7 +192,7 @@ static NSString const *kTerrainType = @"Terrain";
     if ([CLLocationManager locationServicesEnabled]) {
     [self.locationManager requestWhenInUseAuthorization];
     self.locationManager = [[CLLocationManager alloc] init];
-        [self.locationManager setDelegate:self];
+    [self.locationManager setDelegate:self];
     self.locationManager.distanceFilter = kCLDistanceFilterNone;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
     [self.locationManager startUpdatingLocation];
@@ -270,24 +266,12 @@ static NSString const *kTerrainType = @"Terrain";
                      NSLog(@"No place details for %@", placeID);
                    }
                  }];
-
-      }
-//        [spinner stopAnimating];
-
-
-    }
-      else {
+                }
+    }else {
         // Log details of the failure
         NSLog(@"Error: %@ %@", error, [error userInfo]);
-//          [spinner stopAnimating];
-
       }
-
-        
-        
     }];
-
-
 }
 
 - (void)mapView:(GMSMapView *)mapView
@@ -326,9 +310,6 @@ static NSString const *kTerrainType = @"Terrain";
     NSArray*keys=[_googleId allKeys];
     NSLog(@" aLL KEYS : %@", keys);
 
-
-    
-    
    destViewController.gId =[self.googleId objectForKey:marker.title];
 
   [self.navigationController pushViewController:destViewController
@@ -340,11 +321,8 @@ static NSString const *kTerrainType = @"Terrain";
     if (gesture) {
         
         		self.targetMarker.icon = [GMSMarker markerImageWithColor:[UIColor clearColor]];
-
     }
-    
 }
-   
 
 #pragma mark - GMSAutocompleteResultsViewControllerDelegate
 
@@ -382,13 +360,9 @@ static NSString const *kTerrainType = @"Terrain";
                   for (_targetMarker in self.markersOnTheMap) {
                       if (_targetMarker.position.latitude == place.coordinate.latitude && _targetMarker.position.longitude == place.coordinate.longitude) {
                           self.targetMarker.icon =  [GMSMarker markerImageWithColor:[UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0]];
-
                           break;
                       }
                   }
-
-                  
-                  
                 [alert addAction:exist];
                 [self presentViewController:alert animated:YES completion:nil];
 
@@ -445,8 +419,7 @@ static NSString const *kTerrainType = @"Terrain";
               [self presentViewController:alert animated:YES completion:nil];
             }
           }];
-
-  [_searchController setActive:NO];
+  [self.searchController setActive:NO];
 }
 
 - (void)resultsController:
@@ -488,37 +461,31 @@ static NSString const *kTerrainType = @"Terrain";
 }
 
 - (IBAction)mapChange:(id)sender {
-  if (_showSegmant) {
+  if (self.showSegmant) {
+    NSArray *types = @[ kNormalType, kSatelliteType, kHybridType, kTerrainType ];
 
-    NSArray *types =
-        @[ kNormalType, kSatelliteType, kHybridType, kTerrainType ];
-
-    _switcher = [[UISegmentedControl alloc] initWithItems:types];
-    _switcher.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin |
+    self.switcher = [[UISegmentedControl alloc] initWithItems:types];
+    self.switcher.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin |
                                  UIViewAutoresizingFlexibleWidth |
                                  UIViewAutoresizingFlexibleBottomMargin;
-    _switcher.selectedSegmentIndex = 0;
-    _switcher.translatesAutoresizingMaskIntoConstraints = YES;
-      float X_Co = (self.view.frame.size.width - 250)/2;
-
-      _switcher.frame = CGRectMake(X_Co, 50, 250, 30);
-
-
-      _switcher.tintColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
+    self.switcher.selectedSegmentIndex = 0;
+    self.switcher.translatesAutoresizingMaskIntoConstraints = YES;
+    float X_Co = (self.view.frame.size.width - 250)/2;
+    self.switcher.frame = CGRectMake(X_Co, 50, 250, 30);
+    self.switcher.tintColor = [UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
       [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]} forState:UIControlStateNormal];
 
     [self.mapview addSubview:_switcher];
 
-    [_switcher addTarget:self
+    [self.switcher addTarget:self
                   action:@selector(didChangeSwitcher)
         forControlEvents:UIControlEventValueChanged];
 
     [self.navigationController setNavigationBarHidden:NO];
-    _showSegmant = NO;
+    self.showSegmant = NO;
   } else {
-
     [self.switcher removeFromSuperview];
-    _showSegmant = YES;
+    self.showSegmant = YES;
   }
 }
 @end

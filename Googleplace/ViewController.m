@@ -231,15 +231,11 @@ static NSString const *kTerrainType = @"Terrain";
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
 
     if (!error) {
-        
         NSLog(@" objects : %@", objects);
-
-
       for (NSDictionary *dic in objects) {
 
         NSString *placeID = [dic valueForKey:@"googlid"];
         _placesclient = [[GMSPlacesClient alloc] init];
-
         [_placesclient
             lookUpPlaceID:placeID
                  callback:^(GMSPlace *place, NSError *error) {
@@ -250,18 +246,15 @@ static NSString const *kTerrainType = @"Terrain";
                    }
                    if (place != nil) {
                        [hud hideAnimated:YES];
-
-
                      GMSMarker *marker = [[GMSMarker alloc] init];
                      marker.position = CLLocationCoordinate2DMake(
-                         place.coordinate.latitude, place.coordinate.longitude);
+                                                                  place.coordinate.latitude, place.coordinate.longitude);
                      marker.title = place.name;
                      marker.snippet = @"Push to see feedbacks";
                      marker.map = _mapview;
                        [self.markersOnTheMap addObject:marker];
                        [self.googleId setObject:place.placeID forKey:place.name];
                        NSLog(@"place details for %@", self.googleId);
-
                    } else {
                      NSLog(@"No place details for %@", placeID);
                    }
@@ -276,20 +269,18 @@ static NSString const *kTerrainType = @"Terrain";
 
 - (void)mapView:(GMSMapView *)mapView
     didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
- _infoLabel.text = nil;
+    _infoLabel.text = nil;
 }
 
 
 
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker {
   [mapView setSelectedMarker:marker];
-  _infoLabel.text = marker.title;
+    _infoLabel.text = marker.title;
     _infoLabel.textColor =[UIColor whiteColor];
     _infoLabel.backgroundColor =[UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0];
     self.coordinatats = marker.position;
-
-
-  return YES;
+    return YES;
 }
 
 - (void)mapView:(GMSMapView *)mapView
@@ -317,9 +308,7 @@ static NSString const *kTerrainType = @"Terrain";
 }
 
 -(void)mapView:(GMSMapView *)mapView willMove:(BOOL)gesture{
-    
     if (gesture) {
-        
         		self.targetMarker.icon = [GMSMarker markerImageWithColor:[UIColor clearColor]];
     }
 }
@@ -333,30 +322,21 @@ static NSString const *kTerrainType = @"Terrain";
   [serverProtocol
       isPlaceExist:place
           callback:^(BOOL exist) {
-
-            if ([place.name
-                    rangeOfCharacterFromSet:[NSCharacterSet
-                                                decimalDigitCharacterSet]]
-                    .location != NSNotFound) {
-
+            if ([place.name rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet]].location != NSNotFound) {
               if (exist) {
                 UIAlertController *alert = [UIAlertController
                     alertControllerWithTitle:nil
                                      message:nil
                               preferredStyle:UIAlertControllerStyleAlert];
-
                 UIAlertAction *exist =
                     [UIAlertAction actionWithTitle:@"Address is already exist"
                                              style:UIAlertActionStyleDefault
                                            handler:nil];
-                  
-                 
-                  GMSCameraPosition *camera = [GMSCameraPosition
+                                    GMSCameraPosition *camera = [GMSCameraPosition
                                                cameraWithLatitude:place.coordinate.latitude
                                                longitude:place.coordinate.longitude
                                                zoom:15];
                   self.mapview.camera = camera;
-                  
                   for (_targetMarker in self.markersOnTheMap) {
                       if (_targetMarker.position.latitude == place.coordinate.latitude && _targetMarker.position.longitude == place.coordinate.longitude) {
                           self.targetMarker.icon =  [GMSMarker markerImageWithColor:[UIColor colorWithRed:0.09 green:0.36 blue:0.41 alpha:1.0]];
@@ -365,7 +345,6 @@ static NSString const *kTerrainType = @"Terrain";
                   }
                 [alert addAction:exist];
                 [self presentViewController:alert animated:YES completion:nil];
-
               } else {
 
                 UIAlertController *alert = [UIAlertController
@@ -377,16 +356,14 @@ static NSString const *kTerrainType = @"Terrain";
                     actionWithTitle:@"yes"
                               style:UIAlertActionStyleDefault
                             handler:^(UIAlertAction *action) {
-
                               AddinformationViewcontroller *destViewController =
                                   [self.storyboard
                                       instantiateViewControllerWithIdentifier:
                                           @"AddinformationViewcontroller"];
                                 destViewController.coordinatats = place.coordinate;
-
-                              destViewController.Address = place.name;
-                              destViewController.googleIdTblview = place.placeID;
-                              destViewController.working = YES;
+                                destViewController.Address = place.name;
+                                destViewController.googleIdTblview = place.placeID;
+                                destViewController.working = YES;
 
                               [self.navigationController
                                   pushViewController:destViewController
@@ -395,16 +372,13 @@ static NSString const *kTerrainType = @"Terrain";
                             }];
 
                 [alert addAction:yes];
-
-                UIAlertAction *cancel =
-                    [UIAlertAction actionWithTitle:@"No"
+                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"No"
                                              style:UIAlertActionStyleDefault
                                            handler:nil];
                 [alert addAction:cancel];
 
                 [self presentViewController:alert animated:YES completion:nil];
               }
-
             } else {
               UIAlertController *alert = [UIAlertController
                   alertControllerWithTitle:nil
